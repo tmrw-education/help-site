@@ -12,16 +12,20 @@ const CONTENT = process.env.CONTENT_DIR ?? '../help';
 const config: Config = {
   title: 'tmrw Help',
   tagline: 'Help and support for the tmrw education platform',
-  favicon: 'img/tmrw-logo-icon-dark.svg',
+  // PNG favicon (not SVG — Safari rasterizes SVG favicons onto a white tile).
+  // Default = light (white) mark, which reads on the typical dark tab strip.
+  favicon: 'img/tmrw-logo-icon-light.png',
 
-  // Theme-aware favicon: dark mark on light browser chrome, light mark on dark.
+  // Theme-aware in Chrome/Firefox/Edge: dark mark on light browser chrome,
+  // light mark on dark. (Safari ignores media-query favicons and uses the
+  // default above.)
   headTags: [
     {
       tagName: 'link',
       attributes: {
         rel: 'icon',
-        type: 'image/svg+xml',
-        href: '/img/tmrw-logo-icon-dark.svg',
+        type: 'image/png',
+        href: '/img/tmrw-logo-icon-dark.png',
         media: '(prefers-color-scheme: light)',
       },
     },
@@ -29,9 +33,16 @@ const config: Config = {
       tagName: 'link',
       attributes: {
         rel: 'icon',
-        type: 'image/svg+xml',
-        href: '/img/tmrw-logo-icon-light.svg',
+        type: 'image/png',
+        href: '/img/tmrw-logo-icon-light.png',
         media: '(prefers-color-scheme: dark)',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        href: '/img/tmrw-logo-icon-light.png',
       },
     },
   ],
