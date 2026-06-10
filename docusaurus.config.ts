@@ -12,7 +12,29 @@ const CONTENT = process.env.CONTENT_DIR ?? '../help';
 const config: Config = {
   title: 'tmrw Help',
   tagline: 'Help and support for the tmrw education platform',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/tmrw-logo-icon-dark.svg',
+
+  // Theme-aware favicon: dark mark on light browser chrome, light mark on dark.
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/img/tmrw-logo-icon-dark.svg',
+        media: '(prefers-color-scheme: light)',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/img/tmrw-logo-icon-light.svg',
+        media: '(prefers-color-scheme: dark)',
+      },
+    },
+  ],
 
   future: {
     v4: true,
