@@ -1,0 +1,383 @@
+/**
+ * tmrw Help — Carbon-styled Docusaurus theme.
+ * Shell restyle: brand tokens, always-dark Carbon header, Carbon doc sidebar.
+ * Brand source: tmrw-theme skill (Carbon foundation, Cool Gray ramp, blue signal).
+ * Fonts via CDN for now (self-host later).
+ */
+
+/* ----- Fonts (CDN) ----- */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('https://cdn.jsdelivr.net/fontsource/fonts/mona-sans:vf@latest/latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+/* =====================================================================
+   Brand tokens → Infima variables (LIGHT)
+   ===================================================================== */
+:root {
+  /* type — H1 = Mona Sans (set below); H2–H6 = IBM Plex per locked L1 */
+  --ifm-font-family-base: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  --ifm-heading-font-weight: 600;
+  --ifm-font-family-monospace: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Carbon type scale (px @ 16px root) — sizes + line-heights from Carbon */
+  --ifm-h1-font-size: 2.625rem; /* Heading 06: 42px */
+  --ifm-h2-font-size: 1.75rem;  /* Heading 04: 28px */
+  --ifm-h3-font-size: 1.25rem;  /* Heading 03: 20px */
+  --ifm-h4-font-size: 1rem;     /* Heading 02: 16px */
+  --ifm-h5-font-size: 0.875rem; /* Heading 01: 14px */
+  --ifm-h6-font-size: 0.875rem;
+  --ifm-line-height-base: 1.5;  /* Body 02: 16/24 */
+  --ifm-heading-line-height: 1.29;
+
+  /* Carbon 8pt rhythm (16px root → 0.5/1/1.5/2/3rem = 8/16/24/32/48) */
+  --ifm-paragraph-margin-bottom: 1rem;
+  --ifm-heading-margin-bottom: 1rem;
+  --ifm-heading-margin-top: 2rem;
+  --ifm-leading: 1.5rem;
+  --ifm-list-item-margin: 0.5rem;
+  --ifm-table-cell-padding: 0.75rem 1rem;
+  --ifm-global-spacing: 1rem;
+
+  /* blue accent — signal */
+  --ifm-color-primary: #0f62fe;
+  --ifm-color-primary-dark: #0b54de;
+  --ifm-color-primary-darker: #0a4fd1;
+  --ifm-color-primary-darkest: #0840ac;
+  --ifm-color-primary-light: #3a7dff;
+  --ifm-color-primary-lighter: #4f89ff;
+  --ifm-color-primary-lightest: #7aa6ff;
+
+  /* neutrals (tmrw / Carbon Cool Gray) */
+  --ifm-background-color: #ffffff;
+  --ifm-background-surface-color: #ffffff;
+  --ifm-font-color-base: #121619;
+  --ifm-heading-color: #121619;
+  --ifm-color-content-secondary: #4d5358;
+  --ifm-toc-border-color: #e0e0e0;
+  --ifm-hr-border-color: #e0e0e0;
+
+  --ifm-code-font-size: 95%;
+  --ifm-code-background: #ECF0F1;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.08);
+
+  /* navbar height (Carbon = 48px; nudged to 56px) */
+  --ifm-navbar-height: 3.5rem;
+  --ifm-navbar-padding-vertical: 0;
+
+  /* sidebar collapse caret = Carbon ChevronDown */
+  --ifm-menu-link-sublist-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='%234d5358'%3E%3Cpath d='M16 22L6 12l1.4-1.4L16 19.2l8.6-8.6L26 12z'/%3E%3C/svg%3E");
+
+  /* tmrw brand role tokens for our own rules */
+  --tmrw-rule: #c1c7cd;
+  --tmrw-surface-2: #dde1e6;
+  --tmrw-text-2: #4d5358;
+
+  /* note / blockquote layer (brand blue-light) */
+  --tmrw-note-bg: #edf4ff;
+  --tmrw-note-border: #a6c8ff;
+
+  /* always-dark header (Cool Gray ramp) */
+  --tmrw-hd-bg: #121619;
+  --tmrw-hd-border: #343a3f;
+  --tmrw-hd-link: #c1c7cd;
+  --tmrw-hd-link-active: #f2f4f8;
+  --tmrw-hd-hover-bg: #21272a;
+  --tmrw-hd-blue: #4589ff;
+}
+
+/* =====================================================================
+   Brand tokens (DARK) — Carbon g100 Cool Gray layering
+   ===================================================================== */
+[data-theme='dark'] {
+  --ifm-color-primary: #4589ff;
+  --ifm-color-primary-dark: #2272ff;
+  --ifm-color-primary-darker: #1267ff;
+  --ifm-color-primary-darkest: #0048d6;
+  --ifm-color-primary-light: #68a0ff;
+  --ifm-color-primary-lighter: #79abff;
+  --ifm-color-primary-lightest: #a9c8ff;
+
+  --ifm-background-color: #121619;        /* CG100 — same as header */
+  --ifm-background-surface-color: #21272a; /* CG90 card */
+  --ifm-font-color-base: #f2f4f8;
+  --ifm-heading-color: #f2f4f8;
+  --ifm-color-content-secondary: #c1c7cd;
+  --ifm-toc-border-color: #343a3f;
+  --ifm-hr-border-color: #343a3f;
+  --ifm-code-background: #21272a;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+
+  --tmrw-rule: #4d5358;
+  --tmrw-surface-2: #343a3f;
+  --tmrw-text-2: #c1c7cd;
+  --tmrw-note-bg: #001d6c;
+  --tmrw-note-border: #4589ff;
+}
+
+/* All main (H1 / display) headers use Mona Sans ExtraBold — brand display face */
+h1, .hero__title {
+  font-family: 'Mona Sans', 'IBM Plex Sans', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* =====================================================================
+   NAVBAR — always-dark Carbon UI Shell header
+   ===================================================================== */
+.navbar {
+  background: var(--tmrw-hd-bg);
+  border-bottom: 1px solid var(--tmrw-hd-border);
+  box-shadow: none;
+  padding: 0;
+}
+.navbar__inner { height: var(--ifm-navbar-height); padding-right: 32px; }
+
+/* logo + short centered divider after it (32px left to align with sidebar + content gutter) */
+.navbar__brand { display: flex; align-items: center; height: var(--ifm-navbar-height); margin: 0; padding: 0 0 0 32px; }
+.navbar__logo { display: flex; align-items: center; height: 16px; margin-right: 0; }
+.navbar__logo img { height: 16px; width: auto; display: block; }
+.navbar__title { display: none; }
+/* divider: 24px centered line, not a full-height border */
+.navbar__brand::after { content: ''; width: 1px; height: 24px; margin-left: 16px; background: var(--tmrw-hd-border); align-self: center; }
+
+/* nav links — full-height Carbon items */
+.navbar__items { height: var(--ifm-navbar-height); }
+.navbar__items .navbar__link {
+  display: flex;
+  align-items: center;
+  height: var(--ifm-navbar-height);
+  padding: 0 18px;
+  font-size: 14px;
+  color: var(--tmrw-hd-link);
+  /* active indicator via inset shadow so it doesn't shift the text up like a border would */
+  box-shadow: inset 0 -3px 0 transparent;
+}
+.navbar__items .navbar__link:hover { background: var(--tmrw-hd-hover-bg); color: var(--tmrw-hd-link-active); }
+.navbar__items .navbar__link--active { color: var(--tmrw-hd-link-active); box-shadow: inset 0 -3px 0 var(--tmrw-hd-blue); }
+
+/* right-side: color-mode toggle + mobile hamburger, light-on-dark */
+.navbar__items--right { height: var(--ifm-navbar-height); }
+.navbar .clean-btn { color: var(--tmrw-hd-link); }
+.navbar .clean-btn:hover { background: var(--tmrw-hd-hover-bg); color: var(--tmrw-hd-link-active); }
+.navbar .clean-btn svg { width: 20px; height: 20px; }
+.navbar__toggle { color: var(--tmrw-hd-link); }
+
+/* search box — pill to match the homepage hero search */
+.navbar__search { display: flex; align-items: center; margin-right: 0; }
+.navbar__search-input {
+  height: 38px;
+  width: 280px;
+  background-color: var(--tmrw-hd-hover-bg);
+  color: var(--tmrw-hd-link-active);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  /* Carbon Search icon, light so it reads on the dark bar */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='%238d8d8d'%3E%3Cpath d='M29 27.586l-7.552-7.552A9.468 9.468 0 0023.5 14 9.5 9.5 0 1014 23.5a9.468 9.468 0 005.998-1.564l7.552 7.552zM6 14a8 8 0 118 8 8.009 8.009 0 01-8-8z'/%3E%3C/svg%3E");
+}
+.navbar__search-input::placeholder { color: #8d8d8d; }
+.navbar__search-input:focus { border-color: var(--tmrw-hd-blue); outline: none; }
+/* remove the ⌘K hint chips */
+.navbar__search [class*='searchHint'] { display: none; }
+
+/* search-RESULTS page input — pill to match the other search bars */
+input[class*='searchQueryInput'] {
+  height: 48px;
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background-color: var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base);
+  font-size: 1rem;
+  padding: 0 1.25rem 0 2.875rem;
+  /* Carbon Search magnifier, inset left */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='%238d8d8d'%3E%3Cpath d='M29 27.586l-7.552-7.552A9.468 9.468 0 0023.5 14 9.5 9.5 0 1014 23.5a9.468 9.468 0 005.998-1.564l7.552 7.552zM6 14a8 8 0 118 8 8.009 8.009 0 01-8-8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 1.125rem center;
+  background-size: 18px 18px;
+}
+input[class*='searchQueryInput']::placeholder { color: var(--ifm-color-content-secondary); }
+input[class*='searchQueryInput']:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ifm-color-primary) 16%, transparent);
+}
+/* replace the native clear button with a Carbon Close icon */
+input[class*='searchQueryInput']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  margin-left: 8px;
+  cursor: pointer;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='%23888888'%3E%3Cpath d='M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* mobile slide-in menu keeps the page theme (not forced dark) */
+
+/* =====================================================================
+   DOC SIDEBAR — Carbon SideNav
+   ===================================================================== */
+.theme-doc-sidebar-container { border-right: 1px solid var(--ifm-toc-border-color); }
+.menu { padding: 16px 0; font-size: 14px; font-weight: 400; }
+.menu__list { margin: 0; }
+.menu__list-item:not(:first-child) { margin-top: 0; }
+
+.menu__link,
+.menu__list-item-collapsible {
+  border-radius: 0;
+  color: var(--tmrw-text-2);
+}
+.menu__link { padding: 0 16px 0 32px; height: 32px; align-items: center; }
+.menu__list-item-collapsible > .menu__link { height: 40px; }
+.menu__list-item-collapsible > .menu__caret { padding-right: 16px; }
+.menu__link:hover,
+.menu__list-item-collapsible:hover { background: var(--tmrw-surface-2); color: var(--ifm-font-color-base); }
+
+/* nested links indent one step deeper than the 32px base */
+.menu__list .menu__list .menu__link { padding-left: 48px; }
+
+/* active page: gray bg + 3px blue left indicator (Carbon) */
+.menu__link--active:not(.menu__link--sublist) {
+  background: var(--tmrw-surface-2);
+  color: var(--ifm-font-color-base);
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 var(--ifm-color-primary);
+}
+.menu__link--active { color: var(--ifm-font-color-base); }
+.menu__caret { border-radius: 0; }
+
+/* =====================================================================
+   CONTENT — type + links (locked L1: signal-blue underline links)
+   ===================================================================== */
+.markdown a:not(.card):not(.button) {
+  color: var(--ifm-font-color-base);
+  text-decoration: underline;
+  text-decoration-color: var(--ifm-color-primary);
+  text-underline-offset: 3px;
+}
+.markdown a:not(.card):not(.button):hover { color: var(--ifm-color-primary); }
+
+/* remove the contributor "Edit this page" link (not for end users) */
+.theme-edit-this-page { display: none; }
+
+/* pagination — neutral text (the card already signals navigation), single arrow by the Prev/Next label */
+.pagination-nav__link { color: var(--ifm-font-color-base); }
+.pagination-nav__link:hover { border-color: var(--ifm-color-primary); }
+.pagination-nav__sublabel { color: var(--ifm-color-content-secondary); }
+.pagination-nav__label { color: var(--ifm-font-color-base); font-weight: 600; }
+/* drop the « » from the page-title label */
+.pagination-nav__label::before,
+.pagination-nav__label::after { content: none !important; }
+/* arrow next to "Previous" / "Next" instead */
+.pagination-nav__link--prev .pagination-nav__sublabel::before { content: '← '; }
+.pagination-nav__link--next .pagination-nav__sublabel::after { content: ' →'; }
+
+/* H1 = Mona Sans display; H2–H6 = IBM Plex (inherited). 8pt vertical rhythm. */
+/* Carbon font-sizes set directly here — Docusaurus overrides --ifm-hX at the .markdown level */
+.markdown h1:first-child,
+.markdown > h1 {
+  font-family: 'Mona Sans', 'IBM Plex Sans', sans-serif;
+  font-size: 2.625rem;          /* 42px */
+  font-weight: 300;             /* Carbon: big display = light */
+  letter-spacing: -0.01em;
+  line-height: 1.19;            /* 50/42 */
+  margin-bottom: 1.5rem;
+}
+/* Carbon EXPRESSIVE weights: 28/20 = Regular 400, 16 = SemiBold 600 */
+.markdown h2 { font-size: 1.75rem; font-weight: 600; line-height: 1.29; margin-top: 3rem; margin-bottom: 1rem; letter-spacing: 0; } /* SemiBold subhead (matches H3 weight; size separates) */
+.markdown h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.4; margin-top: 2rem; margin-bottom: 0.5rem; }   /* 600 to separate 20px H3 from 16px body */
+.markdown h4 { font-size: 1rem; font-weight: 600; line-height: 1.375; margin-top: 1.5rem; margin-bottom: 0.5rem; } /* expressive heading-02 */
+.markdown p { margin-bottom: 1rem; max-width: 75ch; }
+.markdown li { margin-top: 0.5rem; }
+.markdown li > p { max-width: none; }
+
+/* blockquote = note layer — brand blue-light fill + blue border, NO side-stripe */
+.markdown blockquote {
+  border: 1px solid var(--tmrw-note-border);
+  border-radius: 8px;
+  background: var(--tmrw-note-bg);
+  padding: 1rem 1.5rem;
+  margin: 0 0 1.5rem;
+  color: var(--ifm-font-color-base);
+}
+.markdown blockquote > :last-child { margin-bottom: 0; }
+
+/* breadcrumb — Carbon: text links + slash separators, no pills, no home icon */
+.theme-doc-breadcrumbs { margin-bottom: 1.5rem; }
+.breadcrumbs__item { display: inline-flex; align-items: center; }
+.breadcrumbs__link {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  font-size: 0.875rem;
+  color: var(--ifm-color-primary);
+  box-shadow: none;
+}
+.breadcrumbs__link:hover { background: transparent; text-decoration: underline; }
+.breadcrumbs__item--active .breadcrumbs__link {
+  background: transparent;
+  color: var(--ifm-color-content-secondary);
+}
+.breadcrumbs__item:not(:last-child)::after {
+  content: '/';
+  background: none;
+  width: auto;
+  height: auto;
+  margin: 0 0.5rem;
+  opacity: 1;
+  color: var(--ifm-color-content-secondary);
+  filter: none;
+}
+
+/* tables — Carbon DataTable feel */
+/* tables — card-wrapped, clean rows, muted header, row hover */
+.markdown table {
+  display: table;
+  width: 100%;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 28px -14px rgba(0, 0, 0, 0.16);
+  font-size: 0.9375rem;
+}
+.markdown table thead { background: var(--ifm-color-emphasis-100); }
+.markdown table th {
+  font-weight: 600;
+  text-align: left;
+  color: var(--ifm-color-content-secondary);
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.markdown table td {
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+  border-left: none;
+  border-right: none;
+}
+/* drop Infima's zebra striping — clean rows, hover only (ruixen style) */
+.markdown table tbody tr,
+.markdown table tbody tr:nth-child(2n) { background-color: transparent; transition: background-color 0.12s ease; }
+.markdown table tbody tr:hover,
+.markdown table tbody tr:nth-child(2n):hover { background-color: var(--ifm-color-emphasis-100); }
+.markdown table tbody tr:last-child td { border-bottom: none; }
+
+/* images — no blanket frame (docs have broken refs); pad floats off the text */
+.markdown img { max-width: 100%; height: auto; }
+.markdown p > img { margin: 0.5rem 0; }
+.markdown img[align='right'] { margin: 0.25rem 0 1rem 1.5rem; }
+.markdown img[align='left'] { margin: 0.25rem 1.5rem 1rem 0; }
+
+/* ---- doc layout: anchor content+TOC as a left group; whitespace at the far edge ---- */
+[class*='docMainContainer'] .container { max-width: 1000px; margin-left: 0; }
+[class*='docItemCol'] { padding-left: 2rem; padding-right: 2rem; }

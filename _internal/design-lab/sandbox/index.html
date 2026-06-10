@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-variant="A">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>tmrw Help — Layer 1: Foundations sandbox</title>
+
+<!-- CDN fallback fonts. On the user's machine the locally-installed
+     ~/Library/Fonts versions resolve first by family name. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/fontsource/fonts/mona-sans:vf@latest/latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin rel="preload">
+<style>
+@font-face {
+  font-family: 'Mona Sans CDN';
+  src: url('https://cdn.jsdelivr.net/fontsource/fonts/mona-sans:vf@latest/latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 200 900; font-display: swap;
+}
+
+/* ---------- tmrw brand tokens (from tmrw-theme skill) ---------- */
+:root {
+  --font-display: 'Mona Sans', 'Mona Sans CDN', 'IBM Plex Sans', sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --grid: 8px;
+  --radius-subtle: 8px;
+  --radius-rounded: 16px;
+}
+/* Light mode tokens */
+[data-theme='light'] {
+  --bg: #ffffff;
+  --card: #ECF0F1;
+  --surface2: #dde1e6;
+  --text: #121619;
+  --text-2: #4d5358;
+  --text-muted: #697077;
+  --blue: #0f62fe;
+  --blue-light: #edf4ff;
+  --green: #24a148;
+  --green-light: #defbe6;
+  --rule: #c1c7cd;
+}
+/* Dark mode tokens */
+[data-theme='dark'] {
+  --bg: #141A1B;
+  --card: #121619;
+  --surface2: #21272a;
+  --text: #f2f4f8;
+  --text-2: #c1c7cd;
+  --text-muted: #878d96;
+  --blue: #4589ff;
+  --blue-light: #002d9c;
+  --green: #42be65;
+  --green-light: #022d0d;
+  --rule: #525252;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background .2s, color .2s;
+}
+
+/* ---------- sandbox control bar (not part of brand) ---------- */
+.lab-bar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
+  padding: 12px 24px;
+  background: var(--card); border-bottom: 1px solid var(--rule);
+  font-family: var(--font-mono); font-size: 13px;
+}
+.lab-bar strong { font-weight: 500; }
+.lab-bar .group { display: flex; gap: 6px; align-items: center; }
+.lab-bar button {
+  font-family: var(--font-mono); font-size: 12px;
+  padding: 5px 12px; border: 1px solid var(--rule);
+  background: var(--bg); color: var(--text-2);
+  border-radius: 16px; cursor: pointer;
+}
+.lab-bar button[aria-pressed='true'] {
+  background: var(--blue); color: #fff; border-color: var(--blue);
+}
+.lab-note { color: var(--text-muted); margin-left: auto; }
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 48px 24px 120px; }
+section { margin-bottom: 72px; }
+.eyebrow {
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--blue); margin: 0 0 16px;
+}
+h2.lab-h { font-family: var(--font-display); font-weight: 800; font-size: 28px; margin: 0 0 28px; letter-spacing: -.01em; }
+
+/* ---------- palette swatches ---------- */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.sw { border: 1px solid var(--rule); border-radius: var(--radius-subtle); overflow: hidden; }
+.sw .chip { height: 64px; }
+.sw .meta { padding: 8px 10px; font-family: var(--font-mono); font-size: 11px; }
+.sw .meta .role { color: var(--text); display: block; }
+.sw .meta .hex { color: var(--text-muted); }
+
+/* ---------- type specimen ---------- */
+.type-row { border-top: 1px solid var(--rule); padding: 18px 0; display: grid; grid-template-columns: 130px 1fr; gap: 24px; align-items: baseline; }
+.type-row .label { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+.t-hero { font-family: var(--font-display); font-weight: 800; font-size: 52px; line-height: 1.05; letter-spacing: -.02em; }
+.t-h1 { font-family: var(--font-display); font-weight: 800; font-size: 34px; line-height: 1.1; letter-spacing: -.01em; }
+.t-h2 { font-weight: 600; font-size: 24px; }
+.t-h3 { font-weight: 600; font-size: 19px; }
+.t-body { font-size: 16px; }
+.t-mono { font-family: var(--font-mono); font-size: 14px; }
+
+/* ---------- component samples ---------- */
+.samples { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 720px){ .samples{ grid-template-columns:1fr; } .type-row{ grid-template-columns:1fr; gap:6px; } }
+.panel { border: 1px solid var(--rule); border-radius: var(--radius-subtle); padding: 24px; background: var(--bg); }
+.panel h3 { margin: 0 0 6px; font-weight: 600; font-size: 19px; }
+.panel p { color: var(--text-2); margin: 0 0 16px; }
+a.link { color: var(--blue); }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-weight: 500; font-size: 15px;
+  padding: 10px 20px; border-radius: var(--radius-subtle);
+  border: 1px solid var(--blue); background: var(--blue); color: #fff;
+  cursor: pointer; text-decoration: none;
+}
+.btn.secondary { background: transparent; color: var(--blue); }
+code.inline { font-family: var(--font-mono); font-size: .9em; background: var(--surface2); padding: 2px 6px; border-radius: 4px; }
+pre.block { font-family: var(--font-mono); font-size: 13px; background: var(--card); border: 1px solid var(--rule); border-left: 3px solid var(--blue); border-radius: var(--radius-subtle); padding: 16px; overflow:auto; margin: 0; }
+.callout { border-radius: var(--radius-subtle); padding: 14px 18px; font-size: 14px; }
+.callout.note { background: var(--blue-light); border-left: 3px solid var(--blue); }
+.callout.tip { background: var(--green-light); border-left: 3px solid var(--green); margin-top: 12px; }
+[data-theme='dark'] .callout.note { color: #dbe7ff; }
+[data-theme='dark'] .callout.tip { color: #c8f0d2; }
+.tag { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--blue); border: 1px solid var(--blue); padding: 2px 8px; border-radius: 16px; }
+
+/* =====================================================================
+   VARIANT OVERRIDES — only the *application* of tokens changes.
+   ===================================================================== */
+
+/* ---- Variant A "Signal Blue": blue is a signal only ---- */
+[data-variant='A'] a.link { color: var(--text); text-decoration: underline; text-decoration-color: var(--blue); text-underline-offset: 3px; }
+[data-variant='A'] .t-h2, [data-variant='A'] .t-h3 { font-family: var(--font-body); }
+[data-variant='A'] .btn.secondary { color: var(--text); border-color: var(--rule); }
+
+/* ---- Variant B "Carbon Bold": blue-forward product UI ---- */
+[data-variant='B'] body, [data-variant='B'] { --grid: 8px; }
+[data-variant='B'] .t-h1, [data-variant='B'] .t-h2 { font-family: var(--font-display); font-weight: 800; letter-spacing: -.01em; }
+[data-variant='B'] .wrap { max-width: 1000px; }
+[data-variant='B'] section { margin-bottom: 56px; }
+[data-variant='B'] .btn { border-radius: 0; }       /* Carbon square buttons */
+[data-variant='B'] .tag { border-radius: 0; }
+[data-variant='B'] a.link { color: var(--blue); }
+
+/* ---- Variant C "Editorial": type-driven, max whitespace ---- */
+[data-variant='C'] .wrap { max-width: 820px; padding-top: 64px; }
+[data-variant='C'] section { margin-bottom: 96px; }
+[data-variant='C'] body { line-height: 1.72; }
+[data-variant='C'] .t-hero { font-size: 60px; }
+[data-variant='C'] .t-h1, [data-variant='C'] .t-h2, [data-variant='C'] .t-h3 { font-family: var(--font-display); font-weight: 800; letter-spacing: -.015em; }
+[data-variant='C'] a.link { color: var(--text); text-decoration: underline; text-decoration-color: var(--blue); text-underline-offset: 4px; }
+[data-variant='C'] .panel { padding: 32px; }
+</style>
+</head>
+<body>
+
+<div class="lab-bar">
+  <strong>Layer 1 · Foundations</strong>
+  <div class="group">
+    variant:
+    <button data-set-variant="A" aria-pressed="true">A · Signal Blue</button>
+    <button data-set-variant="B" aria-pressed="false">B · Carbon Bold</button>
+    <button data-set-variant="C" aria-pressed="false">C · Editorial</button>
+  </div>
+  <div class="group">
+    theme:
+    <button data-set-theme="light" aria-pressed="true">light</button>
+    <button data-set-theme="dark" aria-pressed="false">dark</button>
+  </div>
+  <span class="lab-note">tmrw Help restyle · throwaway sandbox</span>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <p class="eyebrow">Specimen</p>
+    <h2 class="lab-h">How can we help?</h2>
+    <div class="t-hero">Find answers fast.</div>
+    <p class="t-body" style="max-width:60ch;margin-top:16px;color:var(--text-2)">
+      The quick brown fox jumps over the lazy dog. tmrw connects staff, parents, and
+      learners across one education platform — this is body copy in IBM Plex Sans.
+    </p>
+    <p style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn" href="#">Browse StaffXP <span aria-hidden="true">→</span></a>
+      <a class="btn secondary" href="#">Contact support</a>
+    </p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Color · light + dark</p>
+    <h2 class="lab-h">Palette</h2>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--bg);border-bottom:1px solid var(--rule)"></div><div class="meta"><span class="role">Page bg</span><span class="hex">--bg</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--card)"></div><div class="meta"><span class="role">Card</span><span class="hex">--card</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--surface2)"></div><div class="meta"><span class="role">Surface 2</span><span class="hex">--surface2</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--blue)"></div><div class="meta"><span class="role">Blue accent</span><span class="hex">--blue</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--green)"></div><div class="meta"><span class="role">Green</span><span class="hex">--green</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--text)"></div><div class="meta"><span class="role">Text</span><span class="hex">--text</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--text-muted)"></div><div class="meta"><span class="role">Text muted</span><span class="hex">--text-muted</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--rule)"></div><div class="meta"><span class="role">Rule</span><span class="hex">--rule</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Type · Mona Sans + IBM Plex</p>
+    <h2 class="lab-h">Type scale</h2>
+    <div class="type-row"><span class="label">Hero / display</span><div class="t-hero">Aa Mona Sans</div></div>
+    <div class="type-row"><span class="label">H1</span><div class="t-h1">Getting started with tmrw</div></div>
+    <div class="type-row"><span class="label">H2</span><div class="t-h2">Managing your account</div></div>
+    <div class="type-row"><span class="label">H3</span><div class="t-h3">Reset your password</div></div>
+    <div class="type-row"><span class="label">Body</span><div class="t-body">Body copy in IBM Plex Sans Regular — readable, neutral, Carbon-rooted.</div></div>
+    <div class="type-row"><span class="label">Mono / label</span><div class="t-mono">STEP 01 · IBM Plex Mono</div></div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Components in context</p>
+    <h2 class="lab-h">Sample elements</h2>
+    <div class="samples">
+      <div class="panel">
+        <span class="tag">StaffXP</span>
+        <h3 style="margin-top:12px">Links &amp; buttons</h3>
+        <p>Here is an <a class="link" href="#">inline link</a> inside body text, plus
+           an <code class="inline">inline code</code> token.</p>
+        <p style="display:flex;gap:10px"><a class="btn" href="#">Primary</a><a class="btn secondary" href="#">Secondary</a></p>
+      </div>
+      <div class="panel">
+        <h3>Callouts</h3>
+        <div class="callout note"><strong>Note:</strong> blue is reserved as a signal, not decoration.</div>
+        <div class="callout tip"><strong>Tip:</strong> green marks helpful asides.</div>
+      </div>
+      <div class="panel">
+        <h3>Code block</h3>
+        <pre class="block">$ tmrw login --school greenfield
+✓ Signed in as a.teacher@greenfield.edu</pre>
+      </div>
+      <div class="panel">
+        <h3>Reading sample</h3>
+        <p style="margin:0">To update attendance, open <a class="link" href="#">StaffXP → Register</a>,
+           pick the class, then mark each learner. Changes save automatically.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const root = document.documentElement;
+  document.querySelectorAll('[data-set-variant]').forEach(b => b.addEventListener('click', () => {
+    root.setAttribute('data-variant', b.dataset.setVariant);
+    document.querySelectorAll('[data-set-variant]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  }));
+  document.querySelectorAll('[data-set-theme]').forEach(b => b.addEventListener('click', () => {
+    root.setAttribute('data-theme', b.dataset.setTheme);
+    document.querySelectorAll('[data-set-theme]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  }));
+</script>
+</body>
+</html>

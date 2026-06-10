@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>tmrw Help — Carbon white shell (matches reference)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Mona Sans CDN'; src:url('https://cdn.jsdelivr.net/fontsource/fonts/mona-sans:vf@latest/latin-wght-normal.woff2') format('woff2-variations'); font-weight:200 900; font-display:swap; }
+:root{ --font-display:'Mona Sans','Mona Sans CDN','IBM Plex Sans',sans-serif; --font-body:'IBM Plex Sans',system-ui,sans-serif; --font-mono:'IBM Plex Mono',ui-monospace,monospace; --radius:8px; --prose:72ch; --z-nav:100;
+  /* header is ALWAYS dark, on the brand's Cool Gray ramp (CG100=#121619), regardless of page theme */
+  --hd-bg:#121619; --hd-border:#343a3f; --hd-name:#f2f4f8; --hd-link:#c1c7cd; --hd-link-hover-bg:#21272a; --hd-link-active:#f2f4f8; --hd-divider:#343a3f; --hd-icon:#c1c7cd; --hd-blue:#4589ff;
+}
+
+/* ===== locked L1 tmrw brand palette — one ramp for shell + content ===== */
+[data-theme='light']{
+  --bg:#ffffff; --card:#ECF0F1; --surface2:#dde1e6; --text:#121619; --text-2:#4d5358; --text-muted:#697077; --rule:#c1c7cd; --chrome-border:#e0e0e0; --blue:#0f62fe;
+  /* sidenav maps onto brand tokens; chrome borders softened */
+  --sn-bg:var(--bg); --sn-border:var(--chrome-border); --sn-item:var(--text-2); --sn-hover-bg:var(--surface2); --sn-active-bg:var(--surface2); --sn-active-text:var(--text);
+}
+[data-theme='dark']{
+  --bg:#121619; --card:#21272a; --surface2:#343a3f; --text:#f2f4f8; --text-2:#c1c7cd; --text-muted:#878d96; --rule:#4d5358; --chrome-border:#343a3f; --blue:#4589ff;
+  --sn-bg:var(--bg); --sn-border:var(--chrome-border); --sn-item:var(--text-2); --sn-hover-bg:var(--surface2); --sn-active-bg:var(--surface2); --sn-active-text:var(--text);
+}
+*{box-sizing:border-box;} html,body{margin:0;}
+body{ background:var(--bg); color:var(--text); font-family:var(--font-body); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+
+/* ===== sandbox bar ===== */
+.lab{ position:sticky; top:0; z-index:500; background:#ECF0F1; border-bottom:1px solid #c1c7cd; padding:8px 16px; font-family:var(--font-mono); font-size:12px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; color:#4d5358; }
+[data-theme='dark'] .lab{ background:#121619; border-color:#525252; color:#c1c7cd; }
+.lab label{ display:flex; gap:6px; align-items:center; cursor:pointer; }
+.lab input{ accent-color:#0f62fe; }
+.lab .theme{ margin-left:auto; display:flex; gap:6px; }
+.lab .theme button{ font-family:var(--font-mono); font-size:11px; padding:4px 10px; border:1px solid #c1c7cd; background:#fff; color:#4d5358; border-radius:16px; cursor:pointer; }
+.lab .theme button[aria-pressed='true']{ background:#0f62fe; color:#fff; border-color:#0f62fe; }
+
+/* ============================================================
+   CARBON UI SHELL HEADER — white theme (theme-aware)
+   ============================================================ */
+.cds-header{ position:sticky; top:0; z-index:var(--z-nav); height:48px; background:var(--hd-bg); border-bottom:1px solid var(--hd-border); display:flex; align-items:stretch; }
+.cds-menu{ width:48px; display:none; place-items:center; background:none; border:none; color:var(--hd-icon); cursor:pointer; }
+.cds-menu:hover{ background:var(--hd-link-hover-bg); }
+.cds-name{ display:flex; align-items:center; height:100%; padding:0 16px; text-decoration:none; gap:10px; color:var(--hd-name); white-space:nowrap; }
+.cds-name img{ height:16px; display:block; }
+.cds-name .prod{ font-size:16px; font-weight:600; letter-spacing:.1px; line-height:1; }
+.cds-divider{ width:1px; align-self:center; height:24px; background:var(--hd-divider); margin:0 12px; }
+.cds-nav{ display:flex; height:100%; }
+.cds-nav a{ display:flex; align-items:center; height:100%; padding:0 18px; font-size:15px; color:var(--hd-link); text-decoration:none; border-bottom:2px solid transparent; white-space:nowrap; }
+.cds-nav a:hover{ background:var(--hd-link-hover-bg); color:var(--hd-link-active); }
+.cds-nav a.active{ color:var(--hd-link-active); border-bottom:3px solid var(--hd-blue); }
+.cds-actions{ margin-left:auto; display:flex; }
+.cds-actions button{ width:48px; height:48px; display:grid; place-items:center; background:none; border:none; color:var(--hd-icon); cursor:pointer; }
+.cds-actions button:hover{ background:var(--hd-link-hover-bg); color:var(--hd-link-active); }
+.cds-actions button svg{ width:20px; height:20px; }
+.act-bell{ display:none; }
+[data-p-bell='1'] .act-bell{ display:grid; }
+
+/* ============================================================
+   CARBON SIDE NAV + content (doc layout from reference)
+   ============================================================ */
+.shell{ display:grid; grid-template-columns:256px 1fr; min-height:calc(100vh - 48px - 38px); }
+.sidenav{ background:var(--sn-bg); border-right:1px solid var(--sn-border); padding:16px 0; }
+.sidenav .sn-cat{ display:flex; align-items:center; gap:12px; height:40px; padding:0 16px; color:var(--sn-item); font-size:14px; cursor:pointer; border:none; background:none; width:100%; text-align:left; font-family:var(--font-body); }
+.sidenav .sn-cat:hover{ background:var(--sn-hover-bg); color:var(--sn-active-text); }
+.sidenav .sn-cat .chev{ margin-left:auto; opacity:.7; transition:transform .15s; }
+.sidenav .sn-cat.active{ background:var(--sn-active-bg); color:var(--sn-active-text); font-weight:600; box-shadow:inset 3px 0 0 var(--blue); }
+.sidenav .sn-link{ display:flex; align-items:center; gap:12px; height:32px; padding:0 16px 0 32px; color:var(--sn-item); font-size:14px; text-decoration:none; }
+.sidenav .sn-link:hover{ background:var(--sn-hover-bg); color:var(--sn-active-text); }
+/* optional category icons (placeholder dots) — off by default, text-only like real Docusaurus */
+.sidenav .dot{ display:none; width:16px; height:16px; border-radius:50%; border:1.5px solid currentColor; opacity:.6; flex:0 0 auto; }
+[data-p-icons='1'] .sidenav .dot{ display:inline-block; }
+[data-p-icons='1'] .sidenav .sn-link{ padding-left:16px; }
+
+.content{ padding:56px 48px; }
+.content .inner{ max-width:var(--prose); }
+.content h1{ font-family:var(--font-display); font-weight:800; font-size:44px; line-height:1.08; letter-spacing:-.02em; margin:0 0 28px; color:var(--text); }
+.content p{ color:var(--text-2); font-size:18px; line-height:1.7; margin:0 0 22px; }
+.content a{ color:var(--text); text-decoration:underline; text-decoration-color:var(--blue); text-underline-offset:3px; }
+
+@media (max-width:860px){
+  .cds-menu{ display:grid; }
+  .cds-nav, .cds-divider{ display:none; }
+  .shell{ grid-template-columns:1fr; }
+  .sidenav{ display:none; }
+  .content{ padding:40px 24px; }
+}
+</style>
+</head>
+<body data-p-bell="1">
+
+<div class="lab">
+  <strong style="font-weight:500">Carbon white shell · matches reference</strong>
+  <span style="opacity:.7">waffle + bell dropped</span>
+  <label><input type="checkbox" data-prop="icons"> sidenav category icons</label>
+  <div class="theme">
+    <button data-theme-btn="light" aria-pressed="true">light</button>
+    <button data-theme-btn="dark" aria-pressed="false">dark</button>
+  </div>
+</div>
+
+<!-- ===== Carbon white header ===== -->
+<header class="cds-header">
+  <button class="cds-menu" aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor"><path d="M4 6h24v2H4zM4 15h24v2H4zM4 24h24v2H4z"/></svg></button>
+  <a class="cds-name" href="#"><img src="tmrw-logo-dark.svg" alt="tmrw Help"></a>
+  <span class="cds-divider"></span>
+  <nav class="cds-nav">
+    <a href="#" class="active">StaffXP</a>
+    <a href="#">Employee Self-Service</a>
+    <a href="#">Finance &amp; Operations</a>
+    <a href="#">Parent Experience</a>
+    <a href="#">Learner Experience</a>
+  </nav>
+  <div class="cds-actions">
+    <button aria-label="Search"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M29 27.6l-7.1-7.1c1.6-2 2.6-4.6 2.6-7.4C24.5 6.6 19.4 1.5 13 1.5S1.5 6.6 1.5 13 6.6 24.5 13 24.5c2.8 0 5.4-1 7.4-2.6l7.1 7.1zM3.5 13C3.5 7.8 7.8 3.5 13 3.5S22.5 7.8 22.5 13 18.2 22.5 13 22.5 3.5 18.2 3.5 13z"/></svg></button>
+    <button aria-label="Toggle theme" data-toggle-theme><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 12a4 4 0 11-4 4 4 4 0 014-4m0-2a6 6 0 106 6 6 6 0 00-6-6zM5.4 6.8L6.8 5.4l3.5 3.5-1.4 1.4zM2 15h5v2H2zM5.4 25.2L8.9 21.7l1.4 1.4-3.5 3.5zM15 25h2v5h-2zM21.7 23.1l1.4-1.4 3.5 3.5-1.4 1.4zM25 15h5v2h-5zM21.7 8.9l3.5-3.5 1.4 1.4-3.5 3.5zM15 2h2v5h-2z"/></svg></button>
+  </div>
+</header>
+
+<!-- ===== doc shell: side nav + content ===== -->
+<div class="shell">
+  <aside class="sidenav">
+    <button class="sn-cat"><span class="dot"></span>Getting started<svg class="chev" width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"/></svg></button>
+    <button class="sn-cat"><span class="dot"></span>Accounts &amp; access<svg class="chev" width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"/></svg></button>
+    <button class="sn-cat active"><span class="dot"></span>Attendance<svg class="chev" width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"/></svg></button>
+    <a class="sn-link" href="#"><span class="dot"></span>Mark a register</a>
+    <a class="sn-link" href="#"><span class="dot"></span>Edit past attendance</a>
+    <a class="sn-link" href="#"><span class="dot"></span>Bulk import attendance</a>
+    <a class="sn-link" href="#"><span class="dot"></span>Attendance codes &amp; meanings</a>
+    <a class="sn-link" href="#"><span class="dot"></span>Run an attendance report</a>
+    <button class="sn-cat"><span class="dot"></span>Timetables<svg class="chev" width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"/></svg></button>
+    <button class="sn-cat"><span class="dot"></span>Reports<svg class="chev" width="16" height="16" viewBox="0 0 32 32" fill="currentColor"><path d="M16 22L6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"/></svg></button>
+  </aside>
+  <main class="content">
+    <div class="inner">
+      <h1>Marking attendance</h1>
+      <p>The register is where you record attendance for each class. It is one of the most used tools in StaffXP, designed so you can mark a full class quickly and dependably, then move on.</p>
+      <p>Open <a href="#">StaffXP → Register</a>, choose the class, and mark each learner present, late, or absent. Changes save automatically as you go, and a summary appears at the top once every learner is accounted for.</p>
+      <p>This layout mirrors the Carbon UI shell from the reference: white header with the tmrw name, a divider, product navigation, and search on the right, over a Carbon side navigation. Toggle dark mode above to see the header and side nav follow the theme.</p>
+    </div>
+  </main>
+</div>
+
+<script>
+  const root=document.documentElement, body=document.body;
+  document.querySelectorAll('[data-prop]').forEach(cb=>cb.addEventListener('change',()=>body.setAttribute('data-p-'+cb.dataset.prop, cb.checked?'1':'0')));
+  const setTheme=t=>{ root.setAttribute('data-theme',t); document.querySelectorAll('[data-theme-btn]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.themeBtn===t)); document.querySelectorAll('.logo-light').forEach(i=>i.src = t==='dark' ? 'tmrw-logo-dark.svg' : 'tmrw-logo-light.svg'); };
+  document.querySelectorAll('[data-theme-btn]').forEach(b=>b.onclick=()=>setTheme(b.dataset.themeBtn));
+  document.querySelectorAll('[data-toggle-theme]').forEach(b=>b.onclick=()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark'));
+</script>
+</body>
+</html>

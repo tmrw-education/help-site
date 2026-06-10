@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-nav="N4" data-foot="F1">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>tmrw Help — Layer 2: Shell sandbox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Mona Sans CDN'; src:url('https://cdn.jsdelivr.net/fontsource/fonts/mona-sans:vf@latest/latin-wght-normal.woff2') format('woff2-variations'); font-weight:200 900; font-display:swap; }
+
+/* ============ LOCKED FOUNDATION (L1: A + C graft + fixes) ============ */
+:root{
+  --font-display:'Mona Sans','Mona Sans CDN','IBM Plex Sans',sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --radius:8px; --prose:70ch;
+  --z-nav:100;
+}
+[data-theme='light']{ --bg:#fff; --card:#ECF0F1; --surface2:#dde1e6; --text:#121619; --text-2:#4d5358; --text-muted:#697077; --blue:#0f62fe; --blue-light:#edf4ff; --green:#24a148; --green-light:#defbe6; --rule:#c1c7cd; --nav-bg:#fff; }
+[data-theme='dark']{ --bg:#141A1B; --card:#121619; --surface2:#21272a; --text:#f2f4f8; --text-2:#c1c7cd; --text-muted:#878d96; --blue:#4589ff; --blue-light:#002d9c; --green:#42be65; --green-light:#022d0d; --rule:#525252; --nav-bg:#141A1B; }
+*{box-sizing:border-box;} html,body{margin:0;}
+body{ background:var(--bg); color:var(--text); font-family:var(--font-body); font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased; }
+h1{ font-family:var(--font-display); font-weight:800; letter-spacing:-.02em; line-height:1.05; }
+/* H2/H3 weight+size contrast so hierarchy stays >=1.25 (locked fix) */
+h2{ font-weight:600; font-size:1.6rem; letter-spacing:-.01em; }
+h3{ font-weight:600; font-size:1.2rem; }
+.prose{ max-width:var(--prose); }
+a.link{ color:var(--text); text-decoration:underline; text-decoration-color:var(--blue); text-underline-offset:3px; }
+/* callouts: full border + tint + leading label — NO side-stripe (locked fix) */
+.callout{ border:1px solid var(--rule); border-radius:var(--radius); padding:14px 16px; font-size:14px; margin:12px 0; }
+.callout .lbl{ font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:4px; }
+.callout.note{ background:var(--blue-light); border-color:var(--blue); }
+.callout.note .lbl{ color:var(--blue); }
+[data-theme='dark'] .callout.note{ color:#dbe7ff; }
+
+/* ============ SANDBOX CONTROL BAR ============ */
+.lab-bar{ position:sticky; top:0; z-index:500; display:flex; gap:20px; align-items:center; flex-wrap:wrap; padding:10px 20px; background:var(--card); border-bottom:1px solid var(--rule); font-family:var(--font-mono); font-size:12px; }
+.lab-bar .group{ display:flex; gap:6px; align-items:center; }
+.lab-bar button{ font-family:var(--font-mono); font-size:11px; padding:5px 11px; border:1px solid var(--rule); background:var(--bg); color:var(--text-2); border-radius:16px; cursor:pointer; }
+.lab-bar button[aria-pressed='true']{ background:var(--blue); color:#fff; border-color:var(--blue); }
+.lab-note{ color:var(--text-muted); margin-left:auto; }
+
+/* ============================================================
+   NAVBAR — shared chrome
+   ============================================================ */
+.nav{ position:sticky; top:0; z-index:var(--z-nav); background:var(--nav-bg); border-bottom:1px solid var(--rule); }
+.nav-inner{ max-width:1200px; margin:0 auto; display:flex; align-items:center; gap:24px; padding:0 24px; min-height:56px; }
+.brand{ display:flex; align-items:center; gap:10px; flex:0 0 auto; text-decoration:none; }
+.brand img{ height:22px; width:auto; display:block; }
+.brand .light-logo{ display:block; } .brand .dark-logo{ display:none; }
+[data-theme='dark'] .brand .light-logo{ display:none; } [data-theme='dark'] .brand .dark-logo{ display:block; }
+.nav-links{ display:flex; gap:4px; align-items:center; }
+.nav-links a{ font-size:14px; color:var(--text-2); text-decoration:none; padding:6px 12px; border-radius:var(--radius); white-space:nowrap; }
+.nav-links a:hover{ background:var(--surface2); color:var(--text); }
+.nav-links a.active{ color:var(--text); font-weight:600; box-shadow:inset 0 -2px 0 var(--blue); border-radius:0; }
+.nav-right{ margin-left:auto; display:flex; align-items:center; gap:10px; }
+.search{ display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text-muted); background:var(--surface2); border:1px solid transparent; border-radius:var(--radius); padding:6px 12px; min-width:180px; cursor:text; }
+.search kbd{ font-family:var(--font-mono); font-size:11px; background:var(--bg); border:1px solid var(--rule); border-radius:4px; padding:1px 5px; margin-left:auto; }
+.icon-btn{ width:34px; height:34px; display:grid; place-items:center; border:1px solid var(--rule); background:var(--bg); color:var(--text-2); border-radius:var(--radius); cursor:pointer; font-size:15px; }
+.dropdown{ position:relative; }
+.dropdown > button{ font-size:14px; color:var(--text); background:none; border:none; cursor:pointer; padding:6px 12px; display:flex; gap:6px; align-items:center; font-family:var(--font-body); }
+.dd-menu{ position:absolute; top:calc(100% + 6px); left:0; background:var(--nav-bg); border:1px solid var(--rule); border-radius:var(--radius); box-shadow:0 8px 28px rgba(0,0,0,.12); padding:6px; min-width:240px; }
+.dd-menu a{ display:block; padding:8px 12px; border-radius:6px; font-size:14px; color:var(--text-2); text-decoration:none; }
+.dd-menu a:hover{ background:var(--surface2); color:var(--text); }
+.dd-menu a small{ display:block; color:var(--text-muted); font-size:12px; }
+
+/* tier-2 row for N3 */
+.nav-tier2{ border-top:1px solid var(--rule); background:var(--nav-bg); }
+.nav-tier2 .nav-inner{ min-height:44px; gap:2px; }
+.nav-tier2 a{ font-size:14px; color:var(--text-2); text-decoration:none; padding:11px 14px; white-space:nowrap; }
+.nav-tier2 a.active{ color:var(--text); font-weight:600; box-shadow:inset 0 -2px 0 var(--blue); }
+.nav-tier2 a:hover{ color:var(--text); }
+
+/* N4 · Carbon UI Shell header — dark g100 bar in BOTH themes */
+.cds-header{ position:sticky; top:0; z-index:var(--z-nav); height:48px; background:#161616; border-bottom:1px solid #393939; color:#f4f4f4; }
+.cds-header .nav-inner{ min-height:48px; height:48px; padding:0; gap:0; max-width:none; }
+.cds-header .cds-name{ display:flex; align-items:center; height:100%; padding:0 16px; text-decoration:none; }
+.cds-header .cds-name img{ height:20px; }
+.cds-header nav{ display:flex; height:100%; }
+.cds-header nav a{ display:flex; align-items:center; height:100%; padding:0 16px; font-size:14px; color:#c6c6c6; text-decoration:none; border-bottom:3px solid transparent; white-space:nowrap; }
+.cds-header nav a:hover{ background:#2c2c2c; color:#f4f4f4; }
+.cds-header nav a.active{ color:#f4f4f4; border-bottom-color:#0f62fe; }
+.cds-header .cds-actions{ margin-left:auto; display:flex; height:100%; }
+.cds-header .cds-actions .cds-search{ display:flex; align-items:center; gap:8px; height:100%; padding:0 16px; font-size:13px; color:#8d8d8d; cursor:text; }
+.cds-header .cds-actions .cds-search kbd{ font-family:var(--font-mono); font-size:11px; border:1px solid #525252; border-radius:3px; padding:1px 5px; }
+.cds-header .cds-actions button{ width:48px; height:48px; display:grid; place-items:center; background:none; border:none; color:#c6c6c6; cursor:pointer; font-size:16px; }
+.cds-header .cds-actions button:hover{ background:#2c2c2c; color:#f4f4f4; }
+
+/* show only the selected nav variant */
+.nav-N1,.nav-N2,.nav-N3,.nav-N4{ display:none; }
+[data-nav='N1'] .nav-N1, [data-nav='N2'] .nav-N2, [data-nav='N3'] .nav-N3{ display:block; }
+[data-nav='N4'] .nav-N4{ display:block; }
+
+/* ============ PAGE STUB (context under the shell) ============ */
+.page{ max-width:1200px; margin:0 auto; padding:40px 24px 80px; }
+.eyebrow{ font-family:var(--font-mono); font-size:13px; text-transform:uppercase; letter-spacing:.04em; color:var(--blue); margin:0 0 10px; }
+.page h1{ font-size:42px; margin:0 0 12px; }
+
+/* ============ FOOTER ============ */
+.footer{ margin-top:60px; }
+[data-foot='F2'] .footer-F1{ display:none; } [data-foot='F1'] .footer-F2{ display:none; }
+/* F1 minimal */
+.footer-F1{ border-top:1px solid var(--rule); }
+.footer-F1 .fin{ max-width:1200px; margin:0 auto; padding:24px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.footer-F1 img{ height:18px; }
+.footer-F1 .copy{ color:var(--text-muted); font-size:13px; }
+.footer-F1 .fr{ margin-left:auto; display:flex; gap:18px; }
+.footer-F1 .fr a{ color:var(--text-2); font-size:13px; text-decoration:none; }
+.footer-F1 .fr a:hover{ color:var(--text); text-decoration:underline; text-decoration-color:var(--blue); }
+/* F2 columned (dark) */
+.footer-F2{ background:#121619; color:#c1c7cd; }
+[data-theme='light'] .footer-F2{ background:#121619; }
+.footer-F2 .ftop{ max-width:1200px; margin:0 auto; padding:48px 24px 32px; display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:32px; }
+.footer-F2 h4{ font-family:var(--font-mono); font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:#878d96; margin:0 0 14px; font-weight:500; }
+.footer-F2 a{ display:block; color:#c1c7cd; font-size:14px; text-decoration:none; padding:4px 0; }
+.footer-F2 a:hover{ color:#fff; }
+.footer-F2 img{ height:22px; margin-bottom:14px; }
+.footer-F2 .blurb{ font-size:13px; color:#878d96; max-width:32ch; }
+.footer-F2 .fbottom{ border-top:1px solid #21272a; }
+.footer-F2 .fbottom .fin{ max-width:1200px; margin:0 auto; padding:18px 24px; font-size:12px; color:#697077; }
+@media (max-width:760px){ .footer-F2 .ftop{ grid-template-columns:1fr 1fr; } .search{ display:none; } }
+</style>
+</head>
+<body>
+
+<div class="lab-bar">
+  <strong style="font-weight:500">Layer 2 · Shell</strong>
+  <div class="group">nav:
+    <button data-set-nav="N4" aria-pressed="true">N4 · Carbon shell</button>
+    <button data-set-nav="N1" aria-pressed="false">N1 · Classic bar</button>
+    <button data-set-nav="N2" aria-pressed="false">N2 · Product menu</button>
+    <button data-set-nav="N3" aria-pressed="false">N3 · Two-tier</button>
+  </div>
+  <div class="group">footer:
+    <button data-set-foot="F1" aria-pressed="true">F1 · Minimal</button>
+    <button data-set-foot="F2" aria-pressed="false">F2 · Columns</button>
+  </div>
+  <div class="group">theme:
+    <button data-set-theme="light" aria-pressed="true">light</button>
+    <button data-set-theme="dark" aria-pressed="false">dark</button>
+  </div>
+  <span class="lab-note">on locked L1 foundation</span>
+</div>
+
+<!-- ===================== N4 · Carbon UI Shell header ===================== -->
+<header class="nav nav-N4 cds-header">
+  <div class="nav-inner">
+    <!-- Carbon header is always dark, so always use the light-on-dark logo -->
+    <a class="cds-name" href="#"><img src="tmrw-logo-dark.svg" alt="tmrw Help"></a>
+    <nav>
+      <a href="#" class="active">StaffXP</a>
+      <a href="#">Employee Self-Service</a>
+      <a href="#">Finance &amp; Operations</a>
+      <a href="#">Parent Experience</a>
+      <a href="#">Learner Experience</a>
+    </nav>
+    <div class="cds-actions">
+      <span class="cds-search">Search<kbd>⌘K</kbd></span>
+      <button data-toggle-theme title="Toggle theme" aria-label="Toggle theme">◐</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== N1 · Classic bar ===================== -->
+<header class="nav nav-N1">
+  <div class="nav-inner">
+    <a class="brand" href="#"><img class="light-logo" src="tmrw-logo-light.svg" alt="tmrw"><img class="dark-logo" src="tmrw-logo-dark.svg" alt="tmrw"></a>
+    <nav class="nav-links">
+      <a href="#" class="active">StaffXP</a>
+      <a href="#">Employee Self-Service</a>
+      <a href="#">Finance &amp; Operations</a>
+      <a href="#">Parent Experience</a>
+      <a href="#">Learner Experience</a>
+    </nav>
+    <div class="nav-right">
+      <div class="search">Search<kbd>⌘K</kbd></div>
+      <button class="icon-btn" data-toggle-theme title="Toggle theme">◐</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== N2 · Product menu ===================== -->
+<header class="nav nav-N2">
+  <div class="nav-inner">
+    <a class="brand" href="#"><img class="light-logo" src="tmrw-logo-light.svg" alt="tmrw"><img class="dark-logo" src="tmrw-logo-dark.svg" alt="tmrw"></a>
+    <div class="dropdown">
+      <button id="ddBtn" aria-expanded="false">Products <span aria-hidden="true">▾</span></button>
+      <div class="dd-menu" id="ddMenu" hidden>
+        <a href="#">StaffXP<small>Teachers, admin, school leaders</small></a>
+        <a href="#">Employee Self-Service<small>HR tasks for all staff</small></a>
+        <a href="#">Finance &amp; Operations<small>Billing, fees, finance</small></a>
+        <a href="#">Parent Experience<small>Notices, attendance, comms</small></a>
+        <a href="#">Learner Experience<small>For students</small></a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <div class="search" style="min-width:280px">Search the help center<kbd>⌘K</kbd></div>
+      <button class="icon-btn" data-toggle-theme title="Toggle theme">◐</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== N3 · Two-tier ===================== -->
+<header class="nav nav-N3">
+  <div class="nav-inner">
+    <a class="brand" href="#"><img class="light-logo" src="tmrw-logo-light.svg" alt="tmrw"><img class="dark-logo" src="tmrw-logo-dark.svg" alt="tmrw"></a>
+    <span style="font-family:var(--font-mono);font-size:13px;color:var(--text-muted)">Help center</span>
+    <div class="nav-right">
+      <div class="search" style="min-width:240px">Search<kbd>⌘K</kbd></div>
+      <button class="icon-btn" data-toggle-theme title="Toggle theme">◐</button>
+    </div>
+  </div>
+  <div class="nav-tier2">
+    <nav class="nav-inner">
+      <a href="#" class="active">StaffXP</a>
+      <a href="#">Employee Self-Service</a>
+      <a href="#">Finance &amp; Operations</a>
+      <a href="#">Parent Experience</a>
+      <a href="#">Learner Experience</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== page stub for context ===================== -->
+<main class="page">
+  <p class="eyebrow">StaffXP</p>
+  <h1>Getting started</h1>
+  <p class="prose" style="color:var(--text-2)">This stub sits under the shell so each navbar + footer is judged in real context, on the locked L1 foundation — tmrw tokens, Mona Sans display, IBM Plex body, blue used only as a signal.</p>
+  <div class="callout note prose"><span class="lbl">Note</span>Callouts use a full border + tint + label — no side-stripe (locked fix).</div>
+  <p class="prose">Need billing help? Open <a class="link" href="#">Finance &amp; Operations → Invoices</a> and pick a school.</p>
+</main>
+
+<footer class="footer">
+  <!-- F1 minimal -->
+  <div class="footer-F1">
+    <div class="fin">
+      <img class="light-logo" src="tmrw-logo-light.svg" alt="tmrw" style="display:block"><img class="dark-logo" src="tmrw-logo-dark.svg" alt="tmrw" style="display:none">
+      <span class="copy">© 2026 tmrw education. All rights reserved.</span>
+      <span class="fr"><a href="#">Privacy</a></span>
+    </div>
+  </div>
+  <!-- F2 columned -->
+  <div class="footer-F2">
+    <div class="ftop">
+      <div>
+        <img src="tmrw-logo-dark.svg" alt="tmrw">
+        <p class="blurb">One education platform for staff, parents, and learners.</p>
+      </div>
+      <div><h4>Products</h4><a href="#">StaffXP</a><a href="#">Employee Self-Service</a><a href="#">Finance &amp; Operations</a><a href="#">Parent Experience</a><a href="#">Learner Experience</a></div>
+      <div><h4>Resources</h4><a href="#">Getting started</a><a href="#">Release notes</a><a href="#">System status</a><a href="#">Contact support</a></div>
+      <div><h4>Legal</h4><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div>
+    </div>
+    <div class="fbottom"><div class="fin">© 2026 tmrw education. All rights reserved.</div></div>
+  </div>
+</footer>
+
+<script>
+  const root=document.documentElement;
+  const sync=(attr,val,grp)=>{ root.setAttribute(attr,val); document.querySelectorAll('[data-set-'+grp+']').forEach(x=>x.setAttribute('aria-pressed', x.dataset['set'+grp.charAt(0).toUpperCase()+grp.slice(1)]===val)); };
+  document.querySelectorAll('[data-set-nav]').forEach(b=>b.onclick=()=>sync('data-nav',b.dataset.setNav,'nav'));
+  document.querySelectorAll('[data-set-foot]').forEach(b=>b.onclick=()=>sync('data-foot',b.dataset.setFoot,'foot'));
+  document.querySelectorAll('[data-set-theme]').forEach(b=>b.onclick=()=>sync('data-theme',b.dataset.setTheme,'theme'));
+  document.querySelectorAll('[data-toggle-theme]').forEach(b=>b.onclick=()=>{ const t=root.getAttribute('data-theme')==='dark'?'light':'dark'; sync('data-theme',t,'theme'); });
+  const ddBtn=document.getElementById('ddBtn'), ddMenu=document.getElementById('ddMenu');
+  if(ddBtn){ ddBtn.onclick=()=>{ const open=ddMenu.hasAttribute('hidden'); if(open){ddMenu.removeAttribute('hidden');ddBtn.setAttribute('aria-expanded','true');} else {ddMenu.setAttribute('hidden','');ddBtn.setAttribute('aria-expanded','false');} }; }
+</script>
+</body>
+</html>
