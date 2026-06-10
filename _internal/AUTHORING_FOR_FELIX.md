@@ -18,7 +18,7 @@ don't need to know anything about how the app is built.
 
 Every page you write does double duty:
 
-- It renders as a **public Help article** (the MkDocs site) — exactly as today.
+- It renders as a **public Help article** (the Docusaurus site) — exactly as today.
 - Felix reads the **same page** to answer that question in-app: a short summary,
   then a guided walk-through (your steps + screenshots), then a button into the app.
 
@@ -34,15 +34,14 @@ machine-readable. That's the whole trick.
 a feature in a **folder**; the folder becomes the section in the Help nav.
 
 ```
-notices/
+sxp/                        ← one folder per app section (= a Help nav section)
   create-a-notice.md        ← one task per page
   edit-a-notice.md
   feature-a-notice.md
-wellbeing/
   create-a-wellbeing-note.md
   resolve-a-note.md
-images/
-  create-a-notice-1.png     ← screenshots (see §6)
+  99-Images/                ← all screenshots for this section live here (see §6)
+    create-a-notice-1.png
 ```
 
 **Why one-per-task, not one big page per feature?** Each task gets its own URL
@@ -57,7 +56,7 @@ block so Felix can read it cleanly. One page, one answer.
 ## 3. The frontmatter block (the one new habit)
 
 At the **very top** of each page, between two `---` lines, add this. It's standard
-MkDocs frontmatter — it does **not** show on the rendered page.
+Docusaurus frontmatter — it does **not** show on the rendered page.
 
 ```yaml
 ---
@@ -124,24 +123,24 @@ the step it shows** — not bunched at the end.
 ✅ **Do**
 ```markdown
 1. Click **Notices** in the navigation bar.
-   ![Step 1](../images/create-a-notice-1.png)
+   ![Step 1](./99-Images/create-a-notice-1.png)
 2. Click **Create notice +**.
-   ![Step 2](../images/create-a-notice-2.png)
+   ![Step 2](./99-Images/create-a-notice-2.png)
 ```
 
 ❌ **Don't**
 ```markdown
 1. Click **Notices**.
 2. Click **Create notice +**.
-![](../images/create-a-notice-1.png)
-![](../images/create-a-notice-2.png)   ← Felix can't tell which step each belongs to
+![](./99-Images/create-a-notice-1.png)
+![](./99-Images/create-a-notice-2.png)   ← Felix can't tell which step each belongs to
 ```
 
 **Other image rules**
 - Not every step needs a screenshot. Text-only steps are fine.
 - **PNG**, landscape, cropped to the relevant area.
 - Keep each file **under ~500 KB** where you can (they load inside the app).
-- Use a relative path to your images folder, e.g. `../images/filename.png`.
+- Use a relative path to your section's `99-Images/` folder, e.g. `./99-Images/filename.png`.
 
 ---
 
@@ -179,13 +178,13 @@ video:
 # Edit a notice
 
 1. In the **Notices** tab, click **Manage notices**.
-   ![Step 1](../images/edit-a-notice-1.png)
+   ![Step 1](./99-Images/edit-a-notice-1.png)
 2. Find the notice you want to edit — filter via the **Active** / **Scheduled** tiles.
-   ![Step 2](../images/edit-a-notice-2.png)
+   ![Step 2](./99-Images/edit-a-notice-2.png)
 3. Click the **edit icon** on that notice.
-   ![Step 3](../images/edit-a-notice-3.png)
+   ![Step 3](./99-Images/edit-a-notice-3.png)
 4. Expand the section and make your changes.
-   ![Step 4](../images/edit-a-notice-4.png)
+   ![Step 4](./99-Images/edit-a-notice-4.png)
 5. Click **Save changes**.
 
 > **Note:** You can only edit a notice you created.
