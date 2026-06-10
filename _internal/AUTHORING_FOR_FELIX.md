@@ -35,14 +35,20 @@ a feature in a **folder**; the folder becomes the section in the Help nav.
 
 ```
 sxp/                        ← one folder per app section (= a Help nav section)
-  create-a-notice.md        ← one task per page
-  edit-a-notice.md
-  feature-a-notice.md
-  create-a-wellbeing-note.md
-  resolve-a-note.md
-  99-Images/                ← all screenshots for this section live here (see §6)
-    create-a-notice-1.png
+  Notices/                  ← one folder per feature (= a nav category)
+    create-a-notice.md      ← one task per page
+    edit-a-notice.md
+    feature-a-notice.md
+    images/                 ← this feature's screenshots live here (see §6)
+      create_a_notice_1.png
+  Wellbeing/
+    create-a-wellbeing-note.md
+    resolve-a-note.md
+    images/
 ```
+
+Each feature folder is **self-contained**: its task pages and its `images/` folder
+sit together, so every screenshot path is just `./images/…` — never `../`.
 
 **Why one-per-task, not one big page per feature?** Each task gets its own URL
 (better search + linking), and — most importantly — each gets its own frontmatter
@@ -116,7 +122,7 @@ step's body.
 
    Set **Customer type** to **Student** and select the **Fee and charge interval**.
 
-   ![Fee schedule header …](./99-Images/create-a-fee-schedule-1.png)
+   ![Fee schedule header …](./images/create-a-fee-schedule-1.png)
 ```
 
 Rules:
@@ -159,7 +165,7 @@ filename is not alt text:
 
 ```markdown
 ![Fee schedule header — Customer type ④, Description ⑤, and the Condition toolbar
-button ⑭](./99-Images/create-a-fee-schedule-1.png)
+button ⑭](./images/create-a-fee-schedule-1.png)
 ```
 
 **Quality bar — re-capture only when one of these fails:**
@@ -169,7 +175,7 @@ button ⑭](./99-Images/create-a-fee-schedule-1.png)
 - **PNG**, landscape, **under ~500 KB**.
 - Field labels live in the **Markdown text**, not only in the image (keeps pages
   translatable).
-- Use a path to your section's `99-Images/` folder: `./99-Images/filename.png`.
+- Use the feature folder's `images/` folder: `./images/filename.png` (always `./images/`, never `../`).
 
 ---
 
@@ -211,7 +217,7 @@ video:
    In the **Notices** tab, click **Manage notices**, then filter with the
    **Active** / **Scheduled** tiles to find your notice.
 
-   ![Manage notices — the Active and Scheduled filter tiles ① and the edit icon ②](./99-Images/edit-a-notice-1.png)
+   ![Manage notices — the Active and Scheduled filter tiles ① and the edit icon ②](./images/edit-a-notice-1.png)
 
 2. Edit and save
 
@@ -220,7 +226,7 @@ video:
 
    > **Note:** You can only edit a notice you created.
 
-   ![The notice editor — the expandable section ③ and the Save changes button ④](./99-Images/edit-a-notice-2.png)
+   ![The notice editor — the expandable section ③ and the Save changes button ④](./images/edit-a-notice-2.png)
 ````
 
 That single file is the public "Edit a notice" article **and** Felix's answer.
