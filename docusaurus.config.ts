@@ -2,6 +2,11 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+// Content lives in the sibling `help` repo. Locally we read it directly from
+// ../help (real dir → live reload, and avoids the symlink build break).
+// CI overrides via CONTENT_DIR after checking the content repo out as a sibling.
+const CONTENT = process.env.CONTENT_DIR ?? '../help';
+
 const config: Config = {
   title: 'tmrw Help',
   tagline: 'Help and support for the tmrw education platform',
@@ -50,7 +55,7 @@ const config: Config = {
       {
         // id 'default' (not 'sxp') so @easyops-cn search's version lookup resolves on non-doc pages
         id: 'default',
-        path: 'sxp',
+        path: `${CONTENT}/sxp`,
         routeBasePath: 'sxp',
         sidebarPath: './sidebars.ts',
         exclude: ['**/README.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
@@ -61,7 +66,7 @@ const config: Config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'ess',
-        path: 'hr',
+        path: `${CONTENT}/hr`,
         routeBasePath: 'ess',
         sidebarPath: './sidebars.ts',
         exclude: ['**/README.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
@@ -72,7 +77,7 @@ const config: Config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'fo',
-        path: 'finops',
+        path: `${CONTENT}/finops`,
         routeBasePath: 'fo',
         sidebarPath: './sidebars.ts',
         exclude: ['**/README.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
@@ -83,7 +88,7 @@ const config: Config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'pxp',
-        path: 'pxp',
+        path: `${CONTENT}/pxp`,
         routeBasePath: 'pxp',
         sidebarPath: './sidebars.ts',
         exclude: ['**/README.md', '**/.DS_Store', '**/*.pdf'],
@@ -94,7 +99,7 @@ const config: Config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'lxp',
-        path: 'lxp',
+        path: `${CONTENT}/lxp`,
         routeBasePath: 'lxp',
         sidebarPath: './sidebars.ts',
         exclude: ['**/README.md', '**/.DS_Store', '**/*.pdf'],
@@ -111,7 +116,7 @@ const config: Config = {
         indexDocs: true,
         indexBlog: false,
         docsRouteBasePath: ['sxp', 'ess', 'fo', 'pxp', 'lxp'],
-        docsDir: ['sxp', 'hr', 'finops', 'pxp', 'lxp'],
+        docsDir: [`${CONTENT}/sxp`, `${CONTENT}/hr`, `${CONTENT}/finops`, `${CONTENT}/pxp`, `${CONTENT}/lxp`],
         highlightSearchTermsOnTargetPage: true,
         searchResultLimits: 8,
       },

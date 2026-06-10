@@ -26,14 +26,24 @@ push an empty commit to `help`, or run the **Deploy** workflow manually from
 
 ## Local development
 
-Content folders are not in this repo, so clone both side by side and symlink (or
-copy) the content in before running the dev server:
+Clone both repos **side by side** so `help` sits at `../help`:
+
+```
+parent/
+  help/        ← content repo
+  help-site/   ← this repo
+```
+
+Then:
 
 ```bash
-# from this repo's root, with ../help checked out next to it
-for d in sxp hr finops pxp lxp; do ln -sfn ../help/$d ./$d; done
 npm install
 npm start
 ```
 
-Symlinked content folders are gitignored — never commit them here.
+The site reads content straight from `../help` (set by `CONTENT` in
+`docusaurus.config.ts`) with live reload — edit content in `help`, edit
+theme/feature code here, both hot-reload. **Do not** symlink or copy content into
+this repo: symlinks break the Docusaurus build, and copies go stale.
+
+To point at content elsewhere, set `CONTENT_DIR`, e.g. `CONTENT_DIR=../other npm start`.
