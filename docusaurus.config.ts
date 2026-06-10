@@ -2,6 +2,8 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+import remarkSteps from './src/remark/steps';
+
 // Content lives in the sibling `help` repo. Locally we read it directly from
 // ../help (real dir → live reload, and avoids the symlink build break).
 // CI overrides via CONTENT_DIR after checking the content repo out as a sibling.
@@ -58,6 +60,7 @@ const config: Config = {
         path: `${CONTENT}/sxp`,
         routeBasePath: 'sxp',
         sidebarPath: './sidebars.ts',
+        remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
         editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
@@ -69,6 +72,7 @@ const config: Config = {
         path: `${CONTENT}/hr`,
         routeBasePath: 'ess',
         sidebarPath: './sidebars.ts',
+        remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
         editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
@@ -80,6 +84,7 @@ const config: Config = {
         path: `${CONTENT}/finops`,
         routeBasePath: 'fo',
         sidebarPath: './sidebars.ts',
+        remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
         editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
@@ -91,6 +96,7 @@ const config: Config = {
         path: `${CONTENT}/pxp`,
         routeBasePath: 'pxp',
         sidebarPath: './sidebars.ts',
+        remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/.DS_Store', '**/*.pdf'],
         editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
@@ -102,6 +108,7 @@ const config: Config = {
         path: `${CONTENT}/lxp`,
         routeBasePath: 'lxp',
         sidebarPath: './sidebars.ts',
+        remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/.DS_Store', '**/*.pdf'],
         editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
