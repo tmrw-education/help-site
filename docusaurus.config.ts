@@ -11,8 +11,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://tmrw-education.github.io',
-  baseUrl: '/help/',
+  url: 'https://help.tmrw.education',
+  baseUrl: '/',
   organizationName: 'tmrw-education',
   projectName: 'help',
   trailingSlash: false,
