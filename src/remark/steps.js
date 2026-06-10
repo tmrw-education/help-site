@@ -19,14 +19,19 @@ export default function remarkSteps() {
     for (let i = 0; i < children.length; i++) {
       const node = children[i];
       if (node && node.type === 'list' && node.ordered) {
+        const items = node.children || [];
         children[i] = {
           type: 'mdxJsxFlowElement',
           name: 'Steps',
           attributes: [],
-          children: (node.children || []).map((item) => ({
+          children: items.map((item, idx) => ({
             type: 'mdxJsxFlowElement',
             name: 'Step',
-            attributes: [],
+            // The last step is the result — give it the inverse (filled) marker.
+            attributes:
+              idx === items.length - 1
+                ? [{ type: 'mdxJsxAttribute', name: 'final', value: null }]
+                : [],
             children: item.children || [],
           })),
         };

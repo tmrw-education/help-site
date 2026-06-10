@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, type ComponentProps } from 'react';
 import mediumZoom from 'medium-zoom';
 import type { Zoom } from 'medium-zoom';
+import 'medium-zoom/dist/style.css';
 import { useColorMode } from '@docusaurus/theme-common';
 import styles from './styles.module.css';
 
@@ -14,7 +15,9 @@ export default function ZoomImage(props: ComponentProps<'img'>): React.JSX.Eleme
   useEffect(() => {
     if (!ref.current) return;
     zoomRef.current = mediumZoom(ref.current, { margin: 32 });
-    return () => zoomRef.current?.detach();
+    return () => {
+      zoomRef.current?.detach();
+    };
   }, []);
 
   // Near-black backdrop, matched to the theme.

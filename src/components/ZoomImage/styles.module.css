@@ -16,3 +16,12 @@
   border-color: var(--ifm-color-emphasis-300);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
+
+/* Lift the zoom overlay + zoomed image above Docusaurus chrome (navbar z-index
+   ~200) and the stepper markers, which otherwise render on top of the zoom. */
+:global(.medium-zoom-overlay) {
+  z-index: 9998 !important;
+}
+:global(.medium-zoom-image--opened) {
+  z-index: 9999 !important;
+}
