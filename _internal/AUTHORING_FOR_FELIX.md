@@ -90,57 +90,86 @@ summary always reads better. Write it.
 
 After the frontmatter, write the article as you normally would:
 
-- An **H1 title** — the task, as a user would say it: `# Create a notice`.
+- **One H1 only** — the task, as a user would say it: `# Create a notice`. One page
+  is one task, so you do **not** need `##` sub-headings. Don't add them.
 - A short intro line if it helps.
-- **Numbered steps** (see §5).
+- A **numbered list** of steps (see §5).
 
 ---
 
-## 5. Writing the steps
+## 5. Writing the steps — just a numbered list
 
-- **One action per step.** "Click X" then "Fill in Y" are two steps, not one.
+Write a plain Markdown **numbered list**. The site automatically renders it as a
+**stepper** (a numbered rail) — you don't write any special components.
+
+**The shape of one step:** the **first line** is the step's short title; anything
+you **indent underneath** it (detail, a `> **Note:**`, a screenshot) becomes that
+step's body.
+
+```markdown
+1. Open the fee schedule form
+
+   From the **FNO dashboard**, open **Modules ▸ Academic Management**, then click
+   **All fee schedules** and **New**.
+
+2. Complete the header
+
+   Set **Customer type** to **Student** and select the **Fee and charge interval**.
+
+   ![Fee schedule header …](./99-Images/create-a-fee-schedule-1.png)
+```
+
+Rules:
+
+- **Keep the first line short** — it's the title. Put the detail in the indented body.
 - **Bold the EXACT on-screen label.** Write `**Create notice +**`, not "the create
-  button". Felix shows these bold; users scan for the literal words.
-- **Plain, literal, present tense.** "Click **Save changes**." Not "You'll want to
-  go ahead and save."
-- `> **Note:**` callouts are fine for warnings/tips — use sparingly.
+  button". Users scan for the literal words.
+- **Plain, literal, present tense.** "Click **Save changes**." Not "You'll want to go
+  ahead and save."
+- **Indent the body by 3 spaces** so it stays part of the step. A blank line between
+  the title and the body is fine.
+- `> **Note:**` callouts are fine for warnings/tips — use sparingly, inside the step.
 
 ---
 
-## 6. Screenshots — naming & placement
+## 6. Screenshots — one per screen, callouts matched to steps
 
-**Naming:** `task-name-N.png`, where `N` is the step number.
+A screenshot shows **one screen** of the task, not one step. Most screens are
+annotated with **numbered black-circle callouts** — treat those numbers as **labels
+into the picture**, not step numbers.
 
-```
-create-a-notice-1.png      ← illustrates step 1 of "Create a notice"
-create-a-notice-2.png      ← step 2
-edit-a-notice-3.png        ← step 3 of "Edit a notice"
-```
+**Naming:** `task-name-N.png`, where **N is the screen's order** in the task (1st
+screen, 2nd screen…), e.g. `create-a-fee-schedule-1.png`.
 
-**Placement (the one people get wrong):** put each screenshot **immediately after
-the step it shows** — not bunched at the end.
+**Placement:** group the steps that happen on one screen, and put that screen's
+image **immediately after the last of those steps** (indented as the step body) —
+never bunched at the bottom of the page.
 
-✅ **Do**
+**Tie callouts to steps in the prose.** When a step matches a callout, name the glyph
+in the text — `Set **Customer type** to **Student** (④).` Your steps stay numbered
+1, 2, 3… from the top; the in-image numbers are independent and may not start at 1
+(navigation steps often have no callout). **Don't renumber steps to chase the image**
+— bridge them with the glyph reference instead.
+
+**One image per screen — never one per step.** Don't re-crop a screen into a
+separate picture per field; the single annotated screenshot is the right artifact.
+
+**Alt text is required.** Describe the screen and what the callouts cover — a
+filename is not alt text:
+
 ```markdown
-1. Click **Notices** in the navigation bar.
-   ![Step 1](./99-Images/create-a-notice-1.png)
-2. Click **Create notice +**.
-   ![Step 2](./99-Images/create-a-notice-2.png)
+![Fee schedule header — Customer type ④, Description ⑤, and the Condition toolbar
+button ⑭](./99-Images/create-a-fee-schedule-1.png)
 ```
 
-❌ **Don't**
-```markdown
-1. Click **Notices**.
-2. Click **Create notice +**.
-![](./99-Images/create-a-notice-1.png)
-![](./99-Images/create-a-notice-2.png)   ← Felix can't tell which step each belongs to
-```
-
-**Other image rules**
-- Not every step needs a screenshot. Text-only steps are fine.
-- **PNG**, landscape, cropped to the relevant area.
-- Keep each file **under ~500 KB** where you can (they load inside the app).
-- Use a relative path to your section's `99-Images/` folder, e.g. `./99-Images/filename.png`.
+**Quality bar — re-capture only when one of these fails:**
+- Callouts and field labels are **legible at column width** (readers can click to
+  zoom, but it should read without it). Crop full-screen captures to the relevant area.
+- The shot reads acceptably in **dark mode**.
+- **PNG**, landscape, **under ~500 KB**.
+- Field labels live in the **Markdown text**, not only in the image (keeps pages
+  translatable).
+- Use a path to your section's `99-Images/` folder: `./99-Images/filename.png`.
 
 ---
 
@@ -177,17 +206,21 @@ video:
 
 # Edit a notice
 
-1. In the **Notices** tab, click **Manage notices**.
-   ![Step 1](./99-Images/edit-a-notice-1.png)
-2. Find the notice you want to edit — filter via the **Active** / **Scheduled** tiles.
-   ![Step 2](./99-Images/edit-a-notice-2.png)
-3. Click the **edit icon** on that notice.
-   ![Step 3](./99-Images/edit-a-notice-3.png)
-4. Expand the section and make your changes.
-   ![Step 4](./99-Images/edit-a-notice-4.png)
-5. Click **Save changes**.
+1. Open Manage notices
 
-> **Note:** You can only edit a notice you created.
+   In the **Notices** tab, click **Manage notices**, then filter with the
+   **Active** / **Scheduled** tiles to find your notice.
+
+   ![Manage notices — the Active and Scheduled filter tiles ① and the edit icon ②](./99-Images/edit-a-notice-1.png)
+
+2. Edit and save
+
+   Click the **edit icon** (②), expand the section, make your changes, then click
+   **Save changes**.
+
+   > **Note:** You can only edit a notice you created.
+
+   ![The notice editor — the expandable section ③ and the Save changes button ④](./99-Images/edit-a-notice-2.png)
 ````
 
 That single file is the public "Edit a notice" article **and** Felix's answer.
@@ -198,13 +231,16 @@ That single file is the public "Edit a notice" article **and** Felix's answer.
 
 | ✅ Do | ❌ Don't |
 |---|---|
-| One page per task | One giant page for a whole feature |
+| One page per task, **one H1, no `##` headings** | One giant page; sub-headings |
+| A plain numbered list (renders as the stepper) | Hand-written components or tables |
+| Short step title, detail **indented** under it | Cram everything onto the title line |
 | Bold the **exact** on-screen label | "click the blue button" |
-| One action per step | Cram three actions into one step |
-| Place each image **after its step** | Dump all images at the end |
+| One image **per screen**, after that screen's steps | Dump all images at the end |
+| Real **alt text** describing the screen | `![Step 1]` or a filename |
+| Glyph refs `(④)` — labels into the image | Renumber steps to match the image |
 | Keep `summary` to 3–4 lines | Re-paste the full steps into `summary` |
 | Add real synonyms to `keywords` | Leave `keywords` empty |
-| Name images `task-name-N.png` | `Screenshot 2026-06-08 at 14.32.png` |
+| Name images `task-name-N.png` (N = screen) | `Screenshot 2026-06-08 at 14.32.png` |
 
 ---
 
@@ -214,8 +250,10 @@ That single file is the public "Edit a notice" article **and** Felix's answer.
 - [ ] A `--- … ---` **frontmatter** block at the very top.
 - [ ] `summary` is 3–4 short lines with the **button names bolded**.
 - [ ] `keywords` include how people actually ask.
-- [ ] An **H1** title; steps are one action each with exact labels bolded.
-- [ ] Each screenshot sits **right after its step**, named `task-name-N.png`.
+- [ ] **One H1, no `##` sub-headings.** The body is a plain numbered list.
+- [ ] Steps: short title line, detail indented under it, exact labels bolded.
+- [ ] One screenshot **per screen**, right after that screen's steps, with real
+      **alt text**, named `task-name-N.png`.
 - [ ] Video id pasted (just the id), if you have one.
 
 ---
