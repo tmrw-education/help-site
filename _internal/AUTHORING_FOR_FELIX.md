@@ -138,44 +138,53 @@ Rules:
 
 ---
 
-## 6. Screenshots — one per screen, callouts matched to steps
+## 6. Screenshots — under the step, cropped tight, element marked
 
-A screenshot shows **one screen** of the task, not one step. Most screens are
-annotated with **numbered black-circle callouts** — treat those numbers as **labels
-into the picture**, not step numbers.
+> The rules below come straight from the learning-science + UX evidence. The full
+> reasoning and citations are in **`DOC_FORMAT_RATIONALE.md`** — read it once and
+> these will make sense.
 
-**Naming:** `task-name-N.png`, where **N is the screen's order** in the task (1st
-screen, 2nd screen…), e.g. `create-a-fee-schedule-1.png`.
+**Put the image directly under the step it shows.** This is the single most
+important rule. Indent the screenshot inside its step's body — **never** bunch
+images after a block of steps or at the bottom of the page. (A step and the image
+that explains it must stay together — separating them makes the reader's eye
+ping-pong; *spatial contiguity*, g ≈ 0.63.)
 
-**Placement:** group the steps that happen on one screen, and put that screen's
-image **immediately after the last of those steps** (indented as the step body) —
-never bunched at the bottom of the page.
+**Crop tight to the part that matters.** Show **one focused thing** per image — the
+dialog, the button, the field group you're talking about — not the whole window
+with menus and chrome. (Extra detail lowers learning; *coherence*, d ≈ 0.86.)
 
-**Tie callouts to steps in the prose.** When a step matches a callout, name the glyph
-in the text — `Set **Customer type** to **Student** (④).` Your steps stay numbered
-1, 2, 3… from the top; the in-image numbers are independent and may not start at 1
-(navigation steps often have no callout). **Don't renumber steps to chase the image**
-— bridge them with the glyph reference instead.
+**Mark the exact element.** Put a box, arrow, or numbered callout on the thing the
+reader must click or fill. (Signaled screenshots → more tasks done correctly, in
+eye-tracking tests.)
 
-**One image per screen — never one per step.** Don't re-crop a screen into a
-separate picture per field; the single annotated screenshot is the right artifact.
+**Don't screenshot self-evident steps.** "Click **Next**" or "Click **Save**"
+usually needs no picture. Image the steps a beginner could get stuck on.
 
-**Alt text is required.** Describe the screen and what the callouts cover — a
-filename is not alt text:
+**If a screen has numbered callouts**, treat the numbers as **labels into the
+picture**, not step numbers — name the glyph in the text next to the image:
+`Set **Customer type** to **Student** (④).` Steps stay numbered 1, 2, 3… from the
+top; don't renumber them to match the image.
+
+**Alt text is required.** Describe the action/screen — a filename is not alt text:
 
 ```markdown
-![Fee schedule header — Customer type ④, Description ⑤, and the Condition toolbar
-button ⑭](./images/create-a-fee-schedule-1.png)
+2. Click the **edit icon** on your notice.
+
+   ![The Manage notices list with a row's edit icon highlighted](./images/edit-a-notice-2.png)
 ```
 
-**Quality bar — re-capture only when one of these fails:**
-- Callouts and field labels are **legible at column width** (readers can click to
-  zoom, but it should read without it). Crop full-screen captures to the relevant area.
-- The shot reads acceptably in **dark mode**.
-- **PNG**, landscape, **under ~500 KB**.
-- Field labels live in the **Markdown text**, not only in the image (keeps pages
-  translatable).
-- Use the feature folder's `images/` folder: `./images/filename.png` (always `./images/`, never `../`).
+**Naming:** `task-name-N.png`, where N is the screenshot's order in the task, e.g.
+`create-a-notice-1.png`.
+
+**Quality bar:**
+- **Cropped** to the relevant area — legible at column width without zooming.
+- Reads acceptably in **dark mode**.
+- **PNG**, **under ~500 KB**.
+- The on-screen labels also live in the **Markdown text** (not only in the image),
+  so the page stays scannable and translatable.
+- Lives in the feature folder's `images/`: `./images/filename.png` (always
+  `./images/`, never `../`).
 
 ---
 
@@ -241,12 +250,15 @@ That single file is the public "Edit a notice" article **and** Felix's answer.
 | A plain numbered list (renders as the stepper) | Hand-written components or tables |
 | Short step title, detail **indented** under it | Cram everything onto the title line |
 | Bold the **exact** on-screen label | "click the blue button" |
-| One image **per screen**, after that screen's steps | Dump all images at the end |
-| Real **alt text** describing the screen | `![Step 1]` or a filename |
-| Glyph refs `(④)` — labels into the image | Renumber steps to match the image |
+| Image **directly under the step** it shows | Bunch images after a block of steps |
+| **Crop tight** — one focused thing per image | Full-window shots; whole-task composites |
+| **Mark the element** (box/arrow/callout) | Leave the reader hunting for what to click |
+| Image the steps that **need** it | Screenshot self-evident steps ("click **Next**") |
+| Real **alt text** describing the action | `![Step 1]` or a filename |
+| Bold the **exact** on-screen label | "click the blue button" |
 | Keep `summary` to 3–4 lines | Re-paste the full steps into `summary` |
 | Add real synonyms to `keywords` | Leave `keywords` empty |
-| Name images `task-name-N.png` (N = screen) | `Screenshot 2026-06-08 at 14.32.png` |
+| Name images `task-name-N.png` | `Screenshot 2026-06-08 at 14.32.png` |
 
 ---
 
@@ -258,8 +270,8 @@ That single file is the public "Edit a notice" article **and** Felix's answer.
 - [ ] `keywords` include how people actually ask.
 - [ ] **One H1, no `##` sub-headings.** The body is a plain numbered list.
 - [ ] Steps: short title line, detail indented under it, exact labels bolded.
-- [ ] One screenshot **per screen**, right after that screen's steps, with real
-      **alt text**, named `task-name-N.png`.
+- [ ] Each screenshot is **directly under the step it shows**, **cropped tight**,
+      with the **element marked** and real **alt text**. Skip self-evident steps.
 - [ ] Video id pasted (just the id), if you have one.
 
 ---
