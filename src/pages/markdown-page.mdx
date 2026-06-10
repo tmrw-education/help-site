@@ -1,0 +1,27 @@
+---
+title: Steps component demo
+---
+
+# Steps component demo
+
+A numbered procedure with the connecting rail. Title and body stay visible;
+only `StepDetail` collapses.
+
+<Steps>
+  <Step title="Open the Register">
+    Go to **StaffXP → Register** and choose today's class from the dropdown.
+  </Step>
+  <Step title="Mark each learner">
+    Tap a learner to cycle present, late, or absent. Changes save automatically
+    as you go.
+
+    <StepDetail summary="Keyboard shortcuts (advanced)">
+      Press `P`, `L`, or `A` with a learner selected to mark them without the
+      mouse. Use the arrow keys to move between learners.
+    </StepDetail>
+  </Step>
+  <Step title="Confirm the summary" final>
+    A summary appears at the top once every learner is accounted for. Check the
+    totals, then you're done.
+  </Step>
+</Steps>

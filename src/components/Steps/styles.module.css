@@ -1,0 +1,110 @@
+/* Numbered procedure list with a connecting rail (Carbon-themed). */
+.steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.step {
+  position: relative;
+  counter-increment: step;
+  padding-left: 44px;
+  padding-bottom: 1.75rem;
+}
+.step:last-child { padding-bottom: 0; }
+
+/* numbered marker — monochrome by default (blue is reserved as a signal) */
+.step::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--ifm-background-color);
+  border: 1.5px solid var(--ifm-color-emphasis-400);
+  color: var(--ifm-font-color-base);
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 1;
+}
+/* accent: filled blue — signals an important/critical step */
+.stepAccent::before {
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: #fff;
+}
+/* final: inverse (filled ink) — the end/result step stands out */
+.stepFinal::before {
+  background: var(--ifm-font-color-base);
+  border-color: var(--ifm-font-color-base);
+  color: var(--ifm-background-color);
+}
+
+/* connecting rail between markers */
+.step::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 34px;
+  bottom: 0;
+  width: 2px;
+  background: var(--ifm-color-emphasis-300);
+}
+.step:last-child::after { display: none; }
+
+.stepTitle {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ifm-heading-color);
+}
+.stepBody {
+  margin-top: 0.5rem;
+  color: var(--ifm-font-color-base);
+}
+.stepBody > :last-child { margin-bottom: 0; }
+
+/* ---- StepDetail: opt-in collapsible aside ---- */
+.detail { margin-top: 0.75rem; }
+.detailTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--ifm-color-content-secondary);
+  transition: color 0.15s;
+}
+.detailTrigger:hover { color: var(--ifm-font-color-base); }
+.detailChevron { transition: transform 0.2s ease; flex: 0 0 auto; }
+.detailChevronOpen { transform: rotate(180deg); }
+
+/* grid-rows trick for a smooth, height-animated collapse */
+.detailContent {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+.detailContentOpen { grid-template-rows: 1fr; }
+.detailInner {
+  overflow: hidden;
+  font-size: 0.9375rem;
+}
+.detailContentOpen .detailInner { padding-top: 0.5rem; }
+.detailInner > :last-child { margin-bottom: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .detailContent { transition: none; }
+  .detailChevron { transition: none; }
+}

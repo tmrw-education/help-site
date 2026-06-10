@@ -1,0 +1,26 @@
+# Docusaurus build output
+.docusaurus/
+build/
+
+# CodeGraph generated index
+.codegraph/
+
+# Dependencies
+node_modules/
+
+# macOS
+.DS_Store
+
+# Environment
+.env
+
+# Playwright MCP scratch output
+.playwright-mcp/
+
+# Content folders are symlinked/copied in for local dev — they live in the `help` repo
+/sxp
+/hr
+/finops
+/pxp
+/lxp
+/ce
