@@ -116,6 +116,40 @@ scannable headings and bold labels → video only when motion is essential.**
 
 ---
 
+## Two tiers — match the depth to the interface
+
+The "novices need heavy guidance" finding is really about **UI difficulty**, not the
+reader. Our apps split cleanly:
+
+- **The XP apps (StaffXP, ESS, PXP, LXP)** are intuitive and self-labelling — built
+  that way on purpose. Over-documenting an easy UI *adds* extraneous load (coherence).
+  → **Lean:** concise steps, 1–2 clean screenshots, no markers.
+- **Finance & Operations (Dynamics)** is a heavy, unfamiliar enterprise UI users are
+  forced into. → **Thorough:** explicit steps, a screenshot per meaningful screen,
+  mark the element.
+
+Same evidence, dialled to the interface.
+
+## Image treatment — styled in CSS, not baked into the screenshot
+
+Screenshots are captured **raw and clean**; the site adds all the styling at render
+time — a **per-app brand gradient mat** (StaffXP blue→purple, ESS teal→green, Parent
+cyan→teal, Learner purple→magenta, F&O purple→teal), rounded frame, theme-aware
+light/dark, and click-to-zoom. Because it's **CSS, not pixels**:
+
+- **Restyle once, everything updates** — change a gradient or drop the mat and all
+  screenshots follow. No re-shoots. (Linear *bakes* gradients into each PNG, so a
+  restyle = re-export every image — we're deliberately more future-proof.)
+- The only things baked into a capture are **crop, light theme, 2× resolution, clean
+  state** — so the capture spec locks exactly those (see the authoring guide §6).
+
+**Gradients follow IBM Carbon's rules:** two colours only, palette grades 30–60 that
+"work against both dark and light," blended no more than two grade-steps apart
+(deeper 60–80 grades in dark mode for less glare). Source:
+<https://www.ibm.com/design/language/color> (Gradients).
+
+---
+
 ## Honest caveats (so we don't overclaim)
 
 - **Effect sizes are approximate.** Cite spatial contiguity as **g ≈ 0.63**

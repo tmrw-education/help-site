@@ -12,6 +12,14 @@ places, no extra system.
 You write normal Markdown in your KB repo. You don't touch the app's code, and you
 don't need to know anything about how the app is built.
 
+> **Two tiers — how much to write.** Match the depth to the app:
+> - **XP apps (StaffXP, ESS, PXP, LXP)** are intuitive and self-labelling → keep it
+>   **lean**: concise steps, **1–2 clean screenshots** per task, no markers.
+> - **Finance & Operations (Dynamics)** is a heavy, unfamiliar UI → be **thorough**:
+>   explicit steps, a screenshot per meaningful screen, **mark the element**.
+>
+> Same rules below, dialled to the interface. The *why* is in `DOC_FORMAT_RATIONALE.md`.
+
 ---
 
 ## 1. How it connects
@@ -135,6 +143,10 @@ Rules:
 - **Indent the body by 3 spaces** so it stays part of the step. A blank line between
   the title and the body is fine.
 - `> **Note:**` callouts are fine for warnings/tips — use sparingly, inside the step.
+- **Document the behaviour the screen can't tell you.** Skip narrating obvious
+  clicks, but DO explain non-obvious effects and decisions — e.g. "turning on
+  **RSVP required** also adds the event to the recipient's calendar." That's the
+  value docs add; the toggle is self-evident, what it *does* isn't.
 
 ---
 
@@ -154,9 +166,11 @@ ping-pong; *spatial contiguity*, g ≈ 0.63.)
 dialog, the button, the field group you're talking about — not the whole window
 with menus and chrome. (Extra detail lowers learning; *coherence*, d ≈ 0.86.)
 
-**Mark the exact element.** Put a box, arrow, or numbered callout on the thing the
-reader must click or fill. (Signaled screenshots → more tasks done correctly, in
-eye-tracking tests.)
+**Mark the element only when it isn't obvious.** The test: *could the reader find it
+in ~2 seconds from the bold label alone?* If **yes** (most XP-app screens are
+self-labelling), leave the shot clean — a marker would just add clutter. If **no**
+(a small icon, one control among many, an ambiguous button — common in F&O), put
+**one** clear box/arrow on it. (Signaling helps most when the target is hard to find.)
 
 **Don't screenshot self-evident steps.** "Click **Next**" or "Click **Save**"
 usually needs no picture. Image the steps a beginner could get stuck on.
@@ -179,12 +193,41 @@ top; don't renumber them to match the image.
 
 **Quality bar:**
 - **Cropped** to the relevant area — legible at column width without zooming.
-- Reads acceptably in **dark mode**.
 - **PNG**, **under ~500 KB**.
 - The on-screen labels also live in the **Markdown text** (not only in the image),
   so the page stays scannable and translatable.
 - Lives in the feature folder's `images/`: `./images/filename.png` (always
   `./images/`, never `../`).
+
+### How to capture (the 4-point spec)
+
+The site does all the styling — the **gradient mat (your app's colour), frame,
+rounded corners, dark-mode, and click-to-zoom are added automatically by CSS.** So
+your screenshot is just a **clean, raw capture**. Get these four right and we can
+restyle forever without you re-shooting:
+
+1. **Light theme.** Capture the app in light mode (it reads on the mats in both
+   page modes). Dark only if a screen is dark-by-default.
+2. **2× / Retina resolution.** Check the saved PNG: a full panel should be roughly
+   **2,000–2,600 px wide**. On a **Retina Mac** it's automatic; on **Windows** use a
+   **QHD/4K screen at 200 % Display Scaling** (Settings → Display → Scale — *not*
+   browser zoom). 1080p can't hit true 2×.
+3. **Crop to the relevant panel.** Drop the browser chrome and app sidebar (unless
+   the chrome *is* the thing you're pointing at). Easiest: the region snip —
+   **Win + Shift + S** / **Cmd + Shift + 4** — drag-select just the panel.
+4. **Clean state.** No stray validation errors or unrelated popovers — capture the
+   neutral screen (unless you're documenting that error).
+
+**Tall / scrolling screens** (a long form in a modal): don't try to cram it. Either
+show the **entry point** (the button you click to start), **orient** with the top of
+the form, or — only when the whole layout matters — do a **full-page capture**
+(DevTools ▸ Command Menu ▸ *Capture full size screenshot*, or a one-click extension
+like GoFullPage).
+
+> **Using Claude?** Skip all of the above — just ask it: *"log into the app, open
+> screen X, capture the panel at 2× cropped, save as `task-name-1.png` in the
+> feature's `images/` folder."* It captures on-spec, every time, and can batch a
+> whole feature. (A human signs into the app once; Claude does the rest.)
 
 ---
 

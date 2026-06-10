@@ -1,27 +1,57 @@
-/* Frame doc screenshots so light-mode captures read cleanly on any page background,
-   and signal that they're clickable. */
+/* Linear-style treatment: the screenshot floats on a per-app brand gradient mat.
+   Mat = the <span> wrapper; screenshot = the <img>. App accent is set by route
+   (see index.tsx). Carbon-clean: 2-colour gradients, grades 40–60 in light and
+   deeper 60–80 in dark (Carbon: "blend between darker colours" for dark surfaces). */
+.frame {
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 1.75rem 0;
+  padding: clamp(1.25rem, 4%, 2.5rem);
+  border-radius: 16px;
+}
+
+/* StaffXP — Blue → Purple */
+.sxp { background: linear-gradient(135deg, #0f62fe, #8a3ffc); }
+[data-theme='dark'] .sxp { background: linear-gradient(135deg, #0043ce, #6929c4); }
+/* Employee Self-Service — Teal → Green */
+.ess { background: linear-gradient(135deg, #009d9a, #42be65); }
+[data-theme='dark'] .ess { background: linear-gradient(135deg, #005d5d, #198038); }
+/* Parent Experience — Cyan → Teal */
+.pxp { background: linear-gradient(135deg, #33b1ff, #009d9a); }
+[data-theme='dark'] .pxp { background: linear-gradient(135deg, #00539a, #005d5d); }
+/* Learner Experience — Purple → Magenta */
+.lxp { background: linear-gradient(135deg, #8a3ffc, #ee5396); }
+[data-theme='dark'] .lxp { background: linear-gradient(135deg, #6929c4, #9f1853); }
+/* Finance & Operations — Purple → Teal */
+.fno { background: linear-gradient(135deg, #8a3ffc, #08bdba); }
+[data-theme='dark'] .fno { background: linear-gradient(135deg, #6929c4, #005d5d); }
+
 .zoomImage {
   display: block;
-  max-width: 100%;
+  width: 100%;
   height: auto;
-  margin: 1rem 0;
-  border: 1px solid var(--ifm-toc-border-color);
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18), 0 18px 40px -16px rgba(0, 0, 0, 0.5);
   cursor: zoom-in;
-  background: #fff;
 }
 
-[data-theme='dark'] .zoomImage {
+/* Opt-out: clean frame, no gradient mat (dense / utility pages). */
+.framePlain {
+  display: inline-block;
+  width: 100%;
+  margin: 1.75rem 0;
+}
+.framePlain .zoomImage {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 12px 32px -16px rgba(0, 0, 0, 0.28);
+}
+[data-theme='dark'] .framePlain .zoomImage {
   border-color: var(--ifm-color-emphasis-300);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 14px 34px -16px rgba(0, 0, 0, 0.7);
 }
 
-/* Lift the zoom overlay + zoomed image above Docusaurus chrome (navbar z-index
-   ~200) and the stepper markers, which otherwise render on top of the zoom. */
-:global(.medium-zoom-overlay) {
-  z-index: 9998 !important;
-}
-:global(.medium-zoom-image--opened) {
-  z-index: 9999 !important;
-}
+/* Lift the zoom overlay + zoomed image above Docusaurus chrome + stepper markers. */
+:global(.medium-zoom-overlay) { z-index: 9998 !important; }
+:global(.medium-zoom-image--opened) { z-index: 9999 !important; }
