@@ -25,6 +25,20 @@ export type StepProps = {
 };
 
 export function Step({ title, accent, final, children, className }: StepProps): JSX.Element {
+  // Auto-convert path (plain markdown numbered list): no explicit title is
+  // passed, so lift the item's first block (its first line) into the title and
+  // keep the rest as the body. Explicit <Step title="…"> bypasses this.
+  let titleContent = title;
+  let bodyContent: ReactNode = children;
+  if (titleContent == null && children != null) {
+    const items = React.Children.toArray(children);
+    titleContent = items[0];
+    bodyContent = items.slice(1);
+  }
+  const hasBody = Array.isArray(bodyContent)
+    ? bodyContent.length > 0
+    : bodyContent != null;
+
   return (
     <li
       className={clsx(
@@ -34,8 +48,8 @@ export function Step({ title, accent, final, children, className }: StepProps): 
         className,
       )}
     >
-      <div className={styles.stepTitle}>{title}</div>
-      {children ? <div className={styles.stepBody}>{children}</div> : null}
+      <div className={styles.stepTitle}>{titleContent}</div>
+      {hasBody ? <div className={styles.stepBody}>{bodyContent}</div> : null}
     </li>
   );
 }
