@@ -240,6 +240,16 @@ restyle forever without you re-shooting:
 4. **Clean state.** No stray validation errors or unrelated popovers — capture the
    neutral screen (unless you're documenting that error).
 
+**Two more when they apply:**
+
+- **Role fidelity.** If the app shows different things to different roles (teacher
+  vs leader vs admin), capture the screen **as the role your article is written
+  for** — a leader's view of a page often differs from a teacher's.
+- **Shoot a safe build; hide dev chrome.** Where an app has a demo/showcase build
+  on **mock data** (e.g. StaffXP's showcase app), capture there — consistent, and
+  no real student data. Hide any developer-only chrome (role switchers, debug
+  panels, assistant overlays) before you snip.
+
 **Tall / scrolling screens** (a long form in a modal): don't try to cram it. Either
 show the **entry point** (the button you click to start), **orient** with the top of
 the form, or — only when the whole layout matters — do a **full-page capture**

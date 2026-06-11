@@ -2,7 +2,8 @@
 
 **Internal only** (lives in `help-site/_internal/`, never published to the site).
 **For:** the training team taking over StaffXP help maintenance.
-**As of:** 2026-06-11 · branch `sxp-hero` · last commit `d332e27`.
+**As of:** 2026-06-11 · **shipped:** merged to `main` and live at
+<https://help.tmrw.education> (GitHub release `v1.1.0`).
 
 ---
 
@@ -15,42 +16,39 @@ The whole **StaffXP** help section was reformatted and illustrated:
   + shared images). Replaces the old one-big-page-per-topic monoliths.
 - **116 screenshots** captured and embedded — every page that needed a shot has
   one. 0 missing-image markers except the single placeholder in §4.
-- Titles tightened so the sidebar reads clean (see commit `d332e27`).
+- Titles tightened so the sidebar reads clean.
+- **Shipped:** merged to `main` (PR #73, superseding the Notices pilot #72) and
+  auto-deployed. Live routes are `/sxp/<Topic>/<id>`.
 
-## 2. Deploying replaces the old SXP help — originals are backed up
+## 2. How it deploys — and where the originals are
 
-Deploy (`gh workflow run deploy.yml --repo tmrw-education/help`) builds the
-current branch and **overwrites the live SXP help**. The previous content is
-**not lost** — three copies exist:
+**Every push to `main` auto-rebuilds and publishes** (`deploy.yml`; ~1–2 min).
+`main` is the source of truth and equals what's live — no branch tricks needed.
+This release replaced the old SXP help, but the **previous content is not lost**:
 
-- **`main` branch** — untouched pre-hero baseline.
-- **Tag `notices-pre-hero`** — bookmark of pre-change main.
+- **Tag `notices-pre-hero`** — the pre-hero baseline.
+- **GitHub release `v1.0.0`** — initial-scaffold snapshot (downloadable zip).
 - **Local folder** `~/Documents/sxp-original-backup-main-2026-06-11/` (Ginno's machine).
 
-To compare old vs new: `git diff main sxp-hero -- sxp/`.
+To compare old vs current: `git diff notices-pre-hero main -- sxp/`.
 
-## 3. Screenshots — where they come from & how to reshoot
+## 3. Screenshots — SXP reshoot specifics
 
-**Source = the showcase app** `https://tmrw-sxp-showcase.azurewebsites.net`
-(Microsoft SSO). It runs on **mock data** — the student names, dates, and figures
-in every shot are fake, **not production**. If the real app's UI changes, the
-shots must be reshot from the showcase (or production once it's safe to).
+The **capture spec and all the evergreen rules** (light theme, 2×, crop tight,
+clean state, role fidelity, hide dev chrome, mat-is-CSS-so-never-reshoot-for-looks)
+live in **`AUTHORING_FOR_FELIX.md` §6**. Read that first. The StaffXP-only
+operational details:
 
-**Capture spec (match it when reshooting):**
-- Light theme, **2× / Retina**, cropped tight, clean state (no half-filled forms).
-- Hide dev chrome before shooting: the dev **role switcher**, the **Felix** panel,
-  and the left **side-nav** drawer.
-- **Role fidelity matters.** Staff and leader/coordinator/admin views differ
-  (e.g. "Your requests" vs "All requests"; the Emergency button is leader-only).
-  Use the **dev role switcher** (Teacher / Leader / Admin) to match what the
-  article describes before you shoot.
-
-**Where they live:** each topic's own `images/` folder, named by the article's
-**`id`** (e.g. `sxp/03-Attendance/images/take-attendance-roll-2.png`).
-
-**The wash/border behind each shot is CSS** (the `ZoomImage` component), derived
-per-app from the icon gradient. Restyling the frame is a CSS change — **you never
-reshoot just to change the look.**
+- **Source = the showcase app** `https://tmrw-sxp-showcase.azurewebsites.net`
+  (Microsoft SSO), on **mock data** — names/dates/figures are fake, **not
+  production**. Reshoot here if the real app's UI changes.
+- **Dev chrome to hide** before snipping: the **role switcher** (bottom corner),
+  the **Felix** panel, and the left **side-nav** drawer.
+- **Roles** via the dev role switcher: **Teacher / Leader / Admin** — match the
+  article (e.g. "Your requests" is staff, "All requests" + the **Emergency**
+  button are leader/admin).
+- **Files** live in each topic's own `images/` folder, named by the article's
+  **`id`** (e.g. `sxp/03-Attendance/images/take-attendance-roll-2.png`).
 
 ## 4. Outstanding to-dos (please action)
 
@@ -84,20 +82,16 @@ changes again:
   **"Enable waitlist"**.
 - **Wellbeing** landing cards are per **category** (see §4.3).
 
-## 6. Structure & house rules (quick reference)
+## 6. House rules — see the authoring guide
 
-- **One task per page.** Title = a task ("Take the daily roll"), short steps,
-  inline screenshots.
-- **`id` is the slug and is KB-authoritative** (flat kebab, verb-first). It's the
-  Docusaurus URL *and* the key Felix uses — **don't change an `id`** once shipped
-  without checking what links to it. Article **titles** are safe to edit; ids are not.
-- **Note rule:** inline behavioural facts in the step prose; only **box**
-  (`> **Note:**`) a genuinely irreversible consequence (data loss, person
-  contacted, permission block). 0–2 boxed notes per page.
-- Felix help is verbatim/bold-only (no admonitions/MDX), so any must-know fact in
-  a boxed Note must **also** appear in the step prose.
-- Full authoring guidance: **`AUTHORING_FOR_FELIX.md`**. Format rationale:
-  **`DOC_FORMAT_RATIONALE.md`**. Project tracker: **`SXP_ROLLOUT.md`**.
+The format rules (one task per page, the `id`/frontmatter standard, the Note rule,
+Felix bold-only prose) are all in **`AUTHORING_FOR_FELIX.md`** — that's the bible.
+Rationale + evidence: **`DOC_FORMAT_RATIONALE.md`**. Project tracker:
+**`SXP_ROLLOUT.md`**.
+
+The one thing to keep front-of-mind when *editing* shipped SXP pages: an article's
+**`id` is its live URL and the key Felix uses — don't change an `id`** without
+checking what links to it. **Titles are safe to edit; ids are not.**
 
 ## 7. Repo map
 
