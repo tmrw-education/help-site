@@ -180,6 +180,12 @@ Scored ~3.2/4. Fixed: P1 broken-image boxes (Root hides them), P2 doc right-void
 - **Doc-page type hierarchy** (supersedes Session 2): **H2/H3 both → Regular 400** (were 600/600 — every subhead same weight, flat). Now H1 Light 300 / H2 400 / H3 400 / H4 SemiBold 600 → real weight rhythm. **H1 dropped 42px → 34px** (2.125rem): the 42→28 jump was too big and 42px floated oversized on the many h1-only pages. 34/28 = 1.21, gentle step, H1 still dominant.
 - **`<Steps>` rail gap fixed**: rail no longer starts 4px below each circle and stop at the next circle's edge. Now spans **circle-center → next circle-center** (`top:15px; bottom:-15px; z-index:0`); the opaque circles (z-index 1) mask the overlap, so it's geometrically gap-proof at both ends regardless of step height. Rail centered on circles (both at x=15px).
 
+### Session 5 — navbar brand + link underline (2026-06-11)
+
+- **Navbar brand reworked** (Carbon "product" pattern): swapped the **tmrw wordmark → 't' icon mark** (`tmrw-logo-icon-light.svg`, 24px) + added a **"Help" label** (`title: 'Help'`, 18px/500, white). Layout = **[icon · Help] | nav items**: icon and label grouped (10px gap, no divider between), then the 24px divider (`.navbar__brand::after`), then the nav links. (First tried the divider *between* icon and label like the mockup, then moved it after the group per request.)
+- **Divider colour** lightened from `--tmrw-hd-border` (#343a3f, too dark on the bar) → `rgba(255,255,255,0.28)`.
+- **Content links → Carbon style** (supersedes the "signal-blue *underline*" rule): now **blue (`--ifm-color-primary`), no underline at rest**, underline on hover (5px offset). (Briefly tried text-colour + always-on underline; reverted — Carbon links are blue and undecorated until hover.)
+
 ## Deferred / backlog ideas
 
 - "C Editorial" full treatment (Mona Sans on all headings, 60px hero) — parked; revisit if the site wants a more magazine feel later. Watch the eyebrow-on-every-section ban if adopted.

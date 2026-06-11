@@ -137,13 +137,29 @@ h1, .hero__title {
 }
 .navbar__inner { height: var(--ifm-navbar-height); padding-right: 32px; }
 
-/* logo + short centered divider after it (32px left to align with sidebar + content gutter) */
+/* brand = 't' icon mark + centered divider + "Help" wordmark (32px left to align with sidebar + content gutter) */
 .navbar__brand { display: flex; align-items: center; height: var(--ifm-navbar-height); margin: 0; padding: 0 0 0 32px; }
-.navbar__logo { display: flex; align-items: center; height: 16px; margin-right: 0; }
-.navbar__logo img { height: 16px; width: auto; display: block; }
-.navbar__title { display: none; }
-/* divider: 24px centered line, not a full-height border */
-.navbar__brand::after { content: ''; width: 1px; height: 24px; margin-left: 16px; background: var(--tmrw-hd-border); align-self: center; }
+.navbar__logo { display: flex; align-items: center; height: 24px; margin-right: 0; }
+.navbar__logo img { height: 24px; width: auto; display: block; }
+/* "Help" label — sits right next to the icon (no divider between them) */
+.navbar__title {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+  color: var(--tmrw-hd-link-active);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+}
+/* divider: 24px centered line after the [icon + Help] group, before the nav items */
+.navbar__brand::after {
+  content: '';
+  width: 1px;
+  height: 24px;
+  margin-left: 18px;
+  align-self: center;
+  background: rgba(255, 255, 255, 0.28);
+}
 
 /* nav links — full-height Carbon items */
 .navbar__items { height: var(--ifm-navbar-height); }
@@ -262,15 +278,17 @@ input[class*='searchQueryInput']::-webkit-search-cancel-button {
 }
 
 /* =====================================================================
-   CONTENT — type + links (locked L1: signal-blue underline links)
+   CONTENT — type + links (Carbon: blue, no underline; underline on hover)
    ===================================================================== */
 .markdown a:not(.card):not(.button) {
-  color: var(--ifm-font-color-base);
-  text-decoration: underline;
-  text-decoration-color: var(--ifm-color-primary);
-  text-underline-offset: 3px;
+  color: var(--ifm-color-primary);
+  text-decoration: none;
 }
-.markdown a:not(.card):not(.button):hover { color: var(--ifm-color-primary); }
+.markdown a:not(.card):not(.button):hover {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
 
 /* remove the contributor "Edit this page" link (not for end users) */
 .theme-edit-this-page { display: none; }
