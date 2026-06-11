@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tmrw · internal doc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---- tmrw theme tokens (Carbon 8pt grid) ---- */
+:root{
+  --bg:#ffffff; --card:#ECF0F1; --surf2:#dde1e6; --text:#121619; --text2:#4d5358;
+  --muted:#697077; --accent:#0f62fe; --note-bg:#edf4ff; --green:#24a148; --green-bg:#defbe6;
+  --rule:#c1c7cd; --r:8px; --rpill:16px;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+html[data-theme="dark"]{
+  --bg:#141A1B; --card:#121619; --surf2:#21272a; --text:#f2f4f8; --text2:#c1c7cd;
+  --muted:#878d96; --accent:#4589ff; --note-bg:#002d9c; --green:#42be65; --green-bg:#022d0d;
+  --rule:#525252;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+/* reading progress */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:#ffffff;box-shadow:0 0 6px rgba(255,255,255,.6);z-index:50;transition:width .08s linear}
+/* topbar — branded blue gradient bar */
+.topbar{position:sticky;top:0;z-index:40;
+  background:linear-gradient(180deg,#1a1f22 0%,#0c0f11 100%);
+  border-bottom:1px solid #000;box-shadow:0 1px 16px rgba(0,0,0,.45);
+  display:flex;align-items:center;gap:16px;padding:11px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:500;
+  letter-spacing:.02em;color:#fff;text-decoration:none;white-space:nowrap}
+.brand svg{height:24px;width:auto;display:block}
+.brand .sub{color:rgba(255,255,255,.6);font-size:13px}
+.badge{font-family:var(--mono);font-size:11px;color:#fff;border:1px solid rgba(255,255,255,.6);
+  background:rgba(255,255,255,.12);border-radius:var(--rpill);padding:2px 10px;white-space:nowrap}
+.topbar .doctitle{font-weight:600;font-size:14px;color:rgba(255,255,255,.82);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spacer{flex:1}
+.filter{font-family:var(--sans);font-size:14px;color:#fff;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.3);border-radius:var(--r);padding:8px 12px;width:210px;outline:none}
+.filter::placeholder{color:rgba(255,255,255,.7)}
+.filter:focus{border-color:#fff;background:rgba(255,255,255,.22);box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+.iconbtn{font-family:var(--mono);font-size:13px;cursor:pointer;color:#fff;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.3);border-radius:var(--r);padding:8px 12px;display:inline-flex;align-items:center;gap:6px}
+.iconbtn:hover{background:rgba(255,255,255,.26);border-color:#fff}
+/* shell */
+.shell{display:grid;grid-template-columns:264px minmax(0,820px);gap:48px;justify-content:center;
+  max-width:1200px;margin:0 auto;padding:40px 24px 120px}
+aside{position:sticky;top:78px;align-self:start;max-height:calc(100vh - 100px);overflow:auto}
+nav#toc{font-size:13.5px;border-left:2px solid var(--rule);padding-left:0}
+nav#toc a{display:block;color:var(--muted);text-decoration:none;padding:5px 0 5px 16px;margin-left:-2px;
+  border-left:2px solid transparent;line-height:1.35}
+nav#toc a:hover{color:var(--text)}
+nav#toc a.lvl3{padding-left:30px;font-size:12.5px}
+nav#toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+nav#toc a.hide,section.hide,.tochead.hide{display:none}
+.tochead{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);padding:0 0 8px 16px}
+/* content */
+main{min-width:0}
+.hero{margin:0 0 8px}
+.hero h1{font-size:30px;font-weight:600;line-height:1.15;letter-spacing:-.01em;margin:0 0 6px}
+.hero .meta{color:var(--muted);font-size:14px}
+.hero .meta a{color:var(--accent)}
+article h2{font-size:20px;font-weight:600;margin:0;letter-spacing:-.005em}
+/* collapsible section */
+section.sec{border-top:1px solid var(--rule);margin-top:32px}
+section.sec>.sechead{display:flex;align-items:center;gap:10px;cursor:pointer;padding:20px 0 4px;user-select:none}
+section.sec>.sechead .chev{font-family:var(--mono);color:var(--accent);transition:transform .18s ease;font-size:13px}
+section.sec.collapsed>.sechead .chev{transform:rotate(-90deg)}
+section.sec>.secbody{overflow:hidden}
+section.sec.collapsed>.secbody{display:none}
+article h3{font-size:15px;font-weight:600;color:var(--text);margin:24px 0 6px}
+article p{margin:12px 0}
+article a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+article a:hover{border-bottom-color:var(--accent)}
+article ul,article ol{margin:12px 0;padding-left:24px}
+article li{margin:6px 0}
+article li::marker{color:var(--muted)}
+strong{font-weight:600}
+hr{border:none;border-top:1px solid var(--rule);margin:28px 0}
+/* inline + block code */
+code{font-family:var(--mono);font-size:.86em;background:var(--surf2);color:var(--text);
+  padding:.12em .4em;border-radius:6px}
+pre{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);
+  padding:16px 16px;overflow:auto;margin:16px 0}
+pre code{background:none;padding:0;font-size:13px;line-height:1.55;color:var(--text)}
+.copy{position:absolute;top:8px;right:8px;font-family:var(--mono);font-size:11px;cursor:pointer;
+  color:var(--muted);background:var(--bg);border:1px solid var(--rule);border-radius:6px;padding:3px 8px;opacity:0;transition:opacity .15s}
+pre:hover .copy{opacity:1}
+.copy.done{color:var(--green);border-color:var(--green)}
+/* tables */
+.tablewrap{overflow:auto;margin:16px 0;border:1px solid var(--rule);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+thead th{background:var(--surf2);text-align:left;font-weight:600}
+th,td{padding:10px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:color-mix(in srgb,var(--surf2) 45%,transparent)}
+/* blockquote -> note / tip */
+blockquote{background:var(--note-bg);border-left:3px solid var(--accent);border-radius:0 var(--r) var(--r) 0;
+  margin:16px 0;padding:2px 18px;color:var(--text)}
+html[data-theme="dark"] blockquote{color:#dbeafe}
+blockquote.tip{background:var(--green-bg);border-left-color:var(--green)}
+/* misc */
+.emptyfilter{color:var(--muted);font-style:italic;padding:24px 0;display:none}
+::selection{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+@media(max-width:880px){
+  .shell{grid-template-columns:1fr;gap:0;padding:24px 18px 100px}
+  aside{display:none}
+  .filter{width:130px}
+  .topbar .doctitle{display:none}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="tmrw"><svg viewBox="0 0 788 196" role="img" aria-label="tmrw"><g transform="matrix(1,0,0,1,-22178.592857,-12633.970891)"><g transform="matrix(1,0,0,1.954037,0,-11288.168944)"><g transform="matrix(1,0,0,0.853147,-1345,1737.566434)"><g><g transform="matrix(4.86207,0,0,2.916518,23523.592857,12348.857436)"><path d="M0,15.696L0,-12.273L8.851,-12.273L8.851,-1.947L22.658,-1.947L22.658,6.018L8.851,6.018L8.851,15.696C8.851,18.764 10.267,19.708 12.214,19.708C14.161,19.708 15.577,18.764 15.577,15.696L15.577,14.811L24.428,14.811L24.428,15.696C24.428,24.015 19.472,27.969 12.214,27.969C4.956,27.969 0,24.015 0,15.696" style="fill:white;"/></g><g transform="matrix(4.86207,0,0,2.916518,23651.530944,12391.021822)"><path d="M0,-2.892C0,-12.273 5.428,-16.404 12.509,-16.404C16.64,-16.404 20.121,-14.81 22.304,-11.742C24.487,-14.81 27.909,-16.404 32.099,-16.404C39.18,-16.404 44.608,-12.273 44.608,-2.892L44.608,13.512L35.757,13.512L35.757,-2.892C35.757,-6.786 33.869,-8.143 31.214,-8.143C28.617,-8.143 26.729,-6.786 26.729,-2.892L26.729,13.512L17.878,13.512L17.878,-2.892C17.878,-6.786 15.99,-8.143 13.394,-8.143C10.738,-8.143 8.851,-6.786 8.851,-2.892L8.851,13.512L0,13.512L0,-2.892Z" style="fill:white;"/></g><g transform="matrix(4.86207,0,0,2.916518,23882.290269,12391.534838)"><path d="M0,-3.244C0,-12.332 5.311,-16.58 13.099,-16.58C20.888,-16.58 26.14,-12.39 26.198,-3.185L26.198,-3.009L17.348,-3.009L17.348,-3.244C17.348,-7.139 15.577,-8.319 13.099,-8.319C10.621,-8.319 8.851,-7.139 8.851,-3.244L8.851,13.336L0,13.336L0,-3.244Z" style="fill:white;"/></g><g transform="matrix(4.86207,0,0,2.916518,24023.53888,12382.59017)"><path d="M0,2.89L0,-13.513L8.851,-13.513L8.851,2.89C8.851,6.784 10.738,8.141 13.394,8.141C15.99,8.141 17.878,6.784 17.878,2.89L17.878,-13.513L26.729,-13.513L26.729,2.89C26.729,6.784 28.617,8.141 31.214,8.141C33.869,8.141 35.757,6.784 35.757,2.89L35.757,-13.513L44.608,-13.513L44.608,2.89C44.608,12.272 39.18,16.403 32.099,16.403C27.909,16.403 24.487,14.809 22.304,11.741C20.121,14.809 16.64,16.403 12.509,16.403C5.428,16.403 0,12.272 0,2.89" style="fill:white;"/></g></g><g transform="matrix(1,0,0,0.599851,154.298206,5142.840389)"><circle cx="24128.5" cy="12120.5" r="28.5" style="fill:rgb(69,137,255);"/><path d="M24128.5,12092C24144.23,12092 24157,12104.77 24157,12120.5C24157,12136.23 24144.23,12149 24128.5,12149C24112.77,12149 24100,12136.23 24100,12120.5C24100,12104.77 24112.77,12092 24128.5,12092ZM24128.5,12102.417C24118.52,12102.417 24110.417,12110.52 24110.417,12120.5C24110.417,12130.48 24118.52,12138.583 24128.5,12138.583C24138.48,12138.583 24146.583,12130.48 24146.583,12120.5C24146.583,12110.52 24138.48,12102.417 24128.5,12102.417Z" style="fill:rgb(69,137,255);"/></g></g></g></g><span class="sub">docs</span></a>
+  <span class="badge">internal</span>
+  <span class="doctitle" id="doctitle"></span>
+  <span class="spacer"></span>
+  <input class="filter" id="filter" type="search" placeholder="Filter sections…" autocomplete="off">
+  <button class="iconbtn" id="expandBtn" title="Expand / collapse all">⤢ all</button>
+  <button class="iconbtn" id="themeBtn" title="Toggle theme">◐ theme</button>
+</header>
+<div class="shell">
+  <aside><nav id="toc"></nav></aside>
+  <main>
+    <div class="hero" id="hero"></div>
+    <article id="content"></article>
+    <p class="emptyfilter" id="emptyfilter">No sections match your filter.</p>
+  </main>
+</div>
+<script type="text/markdown" id="src">
+# Writing KB pages that connect to Felix
+
+A guide for the training team. Your help pages already become the **public Help
+site**. With three small habits, the **same pages** also power **Felix** — the
+in-app assistant that answers "how do I…?" right inside StaffXP. One source, two
+places, no extra system.
+
+> **The golden rule:** **one page per task**, a tiny **frontmatter block** at the
+> top of each page, and **each screenshot placed right after the step it shows**.
+> Get those three right and Felix just works.
+
+You write normal Markdown in your KB repo. You don't touch the app's code, and you
+don't need to know anything about how the app is built.
+
+> **Two tiers — how much to write.** Match the depth to the app:
+> - **XP apps (StaffXP, ESS, PXP, LXP)** are intuitive and self-labelling → keep it
+>   **lean**: concise steps, **1–2 clean screenshots** per task, no markers.
+> - **Finance & Operations (Dynamics)** is a heavy, unfamiliar UI → be **thorough**:
+>   explicit steps, a screenshot per meaningful screen, **mark the element**.
+>
+> Same rules below, dialled to the interface. The *why* is in `DOC_FORMAT_RATIONALE.md`.
+
+---
+
+## 1. How it connects
+
+Every page you write does double duty:
+
+- It renders as a **public Help article** (the Docusaurus site) — exactly as today.
+- Felix reads the **same page** to answer that question in-app: a short summary,
+  then a guided walk-through (your steps + screenshots), then a button into the app.
+
+The only thing Felix needs that a reader doesn't is a few lines of **frontmatter**
+— metadata at the very top of the page that is **invisible on the site** but
+machine-readable. That's the whole trick.
+
+---
+
+## 2. Page structure — one page per task
+
+**One Markdown page = one task = one thing Felix can answer.** Group the pages for
+a feature in a **folder**; the folder becomes the section in the Help nav.
+
+```
+sxp/                        ← one folder per app section (= a Help nav section)
+  Notices/                  ← one folder per feature (= a nav category)
+    create-a-notice.md      ← one task per page
+    edit-a-notice.md
+    feature-a-notice.md
+    images/                 ← this feature's screenshots live here (see §6)
+      create_a_notice_1.png
+  Wellbeing/
+    create-a-wellbeing-note.md
+    resolve-a-note.md
+    images/
+```
+
+Each feature folder is **self-contained**: its task pages and its `images/` folder
+sit together, so every screenshot path is just `./images/…` — never `../`.
+
+**Why one-per-task, not one big page per feature?** Each task gets its own URL
+(better search + linking), and — most importantly — each gets its own frontmatter
+block so Felix can read it cleanly. One page, one answer.
+
+- **File name** = the task in `kebab-case`: `create-a-notice.md`, `edit-a-notice.md`.
+- Keep your usual folder-per-feature layout; nothing else changes for the Help site.
+
+---
+
+## 3. The frontmatter block (the one new habit)
+
+At the **very top** of each page, between two `---` lines, add this. It's standard
+Docusaurus frontmatter — it does **not** show on the rendered page.
+
+```yaml
+---
+id: create-notice
+summary:
+  - "Short step 1 (bold the **button names**)."
+  - "Short step 2."
+  - "Short step 3."
+keywords: [phrase one, phrase two, a synonym]
+video:
+  youtube: VIDEO_ID
+  bunny:                # optional — leave blank if none yet
+---
+```
+
+| Field | What it is | Tips |
+|---|---|---|
+| `id` | The page's **permanent name tag** Felix uses to find it | **Required.** Flat `kebab-case`, **verb-first**, one task: `create-notice`, `edit-notice`, `rsvp-to-notice`. No app/feature prefix. **Pick once, never rename** (renaming breaks Felix's link). See below. |
+| `summary` | The **3–4 line gist** Felix shows first | Keep it short — point-of-need, not the manual. Bold the **exact** button names. |
+| `keywords` | Phrases people might type | Add synonyms + how people actually ask ("post a notice", "make an announcement"). Helps Felix find the page. |
+| `video.youtube` | The **YouTube video id** (primary) | Just the id from the URL — see §7. |
+| `video.bunny` | A Bunny URL (fallback) | Optional. Leave blank; we add it later. |
+
+If you omit `summary`, Felix falls back to your first few steps — but a hand-written
+summary always reads better. Write it.
+
+> **About `id` — the one field that must never change.** It is the stable key the
+> app uses to pull this exact page (and, later, to deep-link from in-app help icons).
+> Rules: **flat kebab-case, verb-first, one task** (`delete-notice`, not
+> `notices.delete` or `sxp-notice-delete`). It is **the KB page's own id** — the docs
+> are the source of truth; the app matches us. If the app **already** ships a tag for
+> this task (`create-notice`, `edit-notice`, `set-notice-featured` exist today), reuse
+> that **exact** string so nothing breaks. Once published, **treat it as frozen** — to
+> retitle a page, change the H1, not the `id`.
+>
+> You do **not** put the in-app link in here — we handle "Take me there" on our
+> side from the page's name. One less thing for you to track.
+
+---
+
+## 4. The page body
+
+After the frontmatter, write the article as you normally would:
+
+- **One H1 only** — the task, as a user would say it: `# Create a notice`. One page
+  is one task, so you do **not** need `##` sub-headings. Don't add them.
+- A short intro line if it helps.
+- A **numbered list** of steps (see §5).
+
+---
+
+## 5. Writing the steps — just a numbered list
+
+Write a plain Markdown **numbered list**. The site automatically renders it as a
+**stepper** (a numbered rail) — you don't write any special components.
+
+**The shape of one step:** the **first line** is the step's short title; anything
+you **indent underneath** it (detail, a `> **Note:**`, a screenshot) becomes that
+step's body.
+
+```markdown
+1. Open the fee schedule form
+
+   From the **FNO dashboard**, open **Modules ▸ Academic Management**, then click
+   **All fee schedules** and **New**.
+
+2. Complete the header
+
+   Set **Customer type** to **Student** and select the **Fee and charge interval**.
+
+   ![Fee schedule header …](./images/create-a-fee-schedule-1.png)
+```
+
+Rules:
+
+- **Keep the first line short** — it's the title. Put the detail in the indented body.
+- **Bold the EXACT on-screen label.** Write `**Create notice +**`, not "the create
+  button". Users scan for the literal words.
+- **Plain, literal, present tense.** "Click **Save changes**." Not "You'll want to go
+  ahead and save."
+- **Indent the body by 3 spaces** so it stays part of the step. A blank line between
+  the title and the body is fine.
+- **Document the behaviour the screen can't tell you.** Skip narrating obvious
+  clicks, but DO explain non-obvious effects and decisions — e.g. "turning on
+  **RSVP required** also adds the event to the recipient's calendar." That's the
+  value docs add; the toggle is self-evident, what it *does* isn't.
+- **Put those facts INLINE in the step's sentence by default.** Don't reach for a
+  `> **Note:**` box for every one — a page full of callout boxes means none of them
+  signal "pay attention" any more (and Felix can't render blockquotes at all, so a
+  must-know fact buried in a Note never reaches a Felix user — inline is the only
+  place it counts).
+
+> **The Note test — box it only if not knowing it *hurts*.** Use a `> **Note:**`
+> box ONLY when the absence of the fact causes a consequence the reader can't easily
+> undo: **data lost, an irreversible choice, a real person contacted, or the action
+> blocked by permissions.** If the fact just makes the current step smoother, write
+> it inline. Field rules, limits, what-a-control-does, and orientation facts are
+> **always inline**. Zero or one Note per page is normal; two is a lot.
+
+---
+
+## 6. Screenshots — under the step, cropped tight, element marked
+
+> The rules below come straight from the learning-science + UX evidence. The full
+> reasoning and citations are in **`DOC_FORMAT_RATIONALE.md`** — read it once and
+> these will make sense.
+
+**Put the image directly under the step it shows.** This is the single most
+important rule. Indent the screenshot inside its step's body — **never** bunch
+images after a block of steps or at the bottom of the page. (A step and the image
+that explains it must stay together — separating them makes the reader's eye
+ping-pong; *spatial contiguity*, g ≈ 0.63.)
+
+**Crop tight to the part that matters.** Show **one focused thing** per image — the
+dialog, the button, the field group you're talking about — not the whole window
+with menus and chrome. (Extra detail lowers learning; *coherence*, d ≈ 0.86.)
+
+**Mark the element only when it isn't obvious.** The test: *could the reader find it
+in ~2 seconds from the bold label alone?* If **yes** (most XP-app screens are
+self-labelling), leave the shot clean — a marker would just add clutter. If **no**
+(a small icon, one control among many, an ambiguous button — common in F&O), put
+**one** clear box/arrow on it. (Signaling helps most when the target is hard to find.)
+
+**Don't screenshot self-evident steps.** "Click **Next**" or "Click **Save**"
+usually needs no picture. Image the steps a beginner could get stuck on.
+
+**If a screen has numbered callouts**, treat the numbers as **labels into the
+picture**, not step numbers — name the glyph in the text next to the image:
+`Set **Customer type** to **Student** (④).` Steps stay numbered 1, 2, 3… from the
+top; don't renumber them to match the image.
+
+**Alt text is required.** Describe the action/screen — a filename is not alt text:
+
+```markdown
+2. Click the **edit icon** on your notice.
+
+   ![The Manage notices list with a row's edit icon highlighted](./images/edit-a-notice-2.png)
+```
+
+**Naming:** `task-name-N.png`, where N is the screenshot's order in the task, e.g.
+`create-a-notice-1.png`.
+
+**Quality bar:**
+- **Cropped** to the relevant area — legible at column width without zooming.
+- **PNG**, **under ~500 KB**.
+- The on-screen labels also live in the **Markdown text** (not only in the image),
+  so the page stays scannable and translatable.
+- Lives in the feature folder's `images/`: `./images/filename.png` (always
+  `./images/`, never `../`).
+
+### How to capture (the 4-point spec)
+
+The site does all the styling — the **gradient mat (your app's colour), frame,
+rounded corners, dark-mode, and click-to-zoom are added automatically by CSS.** So
+your screenshot is just a **clean, raw capture**. Get these four right and we can
+restyle forever without you re-shooting:
+
+1. **Light theme.** Capture the app in light mode (it reads on the mats in both
+   page modes). Dark only if a screen is dark-by-default.
+2. **2× / Retina resolution.** Check the saved PNG: a full panel should be roughly
+   **2,000–2,600 px wide**. On a **Retina Mac** it's automatic; on **Windows** use a
+   **QHD/4K screen at 200 % Display Scaling** (Settings → Display → Scale — *not*
+   browser zoom). 1080p can't hit true 2×.
+3. **Crop to the relevant panel.** Drop the browser chrome and app sidebar (unless
+   the chrome *is* the thing you're pointing at). Easiest: the region snip —
+   **Win + Shift + S** / **Cmd + Shift + 4** — drag-select just the panel.
+4. **Clean state.** No stray validation errors or unrelated popovers — capture the
+   neutral screen (unless you're documenting that error).
+
+**Two more when they apply:**
+
+- **Role fidelity.** If the app shows different things to different roles (teacher
+  vs leader vs admin), capture the screen **as the role your article is written
+  for** — a leader's view of a page often differs from a teacher's.
+- **Shoot a safe build; hide dev chrome.** Where an app has a demo/showcase build
+  on **mock data** (e.g. StaffXP's showcase app), capture there — consistent, and
+  no real student data. Hide any developer-only chrome (role switchers, debug
+  panels, assistant overlays) before you snip.
+
+**Tall / scrolling screens** (a long form in a modal): don't try to cram it. Either
+show the **entry point** (the button you click to start), **orient** with the top of
+the form, or — only when the whole layout matters — do a **full-page capture**
+(DevTools ▸ Command Menu ▸ *Capture full size screenshot*, or a one-click extension
+like GoFullPage).
+
+> **Using Claude?** Skip all of the above — just ask it: *"log into the app, open
+> screen X, capture the panel at 2× cropped, save as `task-name-1.png` in the
+> feature's `images/` folder."* It captures on-spec, every time, and can batch a
+> whole feature. (A human signs into the app once; Claude does the rest.)
+
+---
+
+## 7. Videos — YouTube first, Bunny as fallback
+
+A short clip is optional but lovely. Felix shows it as the **"Overview"** step at
+the top of the walk-through.
+
+1. Upload the clip to **YouTube** as **Unlisted**.
+2. Copy the **video id** — the part after `v=` (or after `youtu.be/`):
+   `https://www.youtube.com/watch?v=` **`dQw4w9WgXcQ`**
+3. Paste **just the id** into the frontmatter: `youtube: dQw4w9WgXcQ`.
+
+Felix plays the clip **inside the app** (no leaving for YouTube, no suggested
+videos). If a school blocks YouTube, we fall back to a **Bunny** copy — leave
+`bunny:` blank and we'll wire that up; you don't need to.
+
+---
+
+## 8. Full worked example (a complete page)
+
+`notices/edit-a-notice.md`
+
+````markdown
+---
+id: edit-notice
+summary:
+  - "Notices → **Manage notices**."
+  - "Find your notice, click the **edit icon**."
+  - "Expand the section, make changes, then **Save changes**."
+keywords: [edit notice, change notice, update notice, modify notice]
+video:
+  youtube: dQw4w9WgXcQ
+---
+
+# Edit a notice
+
+1. Open Manage notices
+
+   In the **Notices** tab, click **Manage notices**, then filter with the
+   **Active** / **Scheduled** tiles to find your notice.
+
+   ![Manage notices — the Active and Scheduled filter tiles ① and the edit icon ②](./images/edit-a-notice-1.png)
+
+2. Edit and save
+
+   Click the **edit icon** (②), expand the section, make your changes, then click
+   **Save changes**.
+
+   > **Note:** You can only edit a notice you created.
+
+   ![The notice editor — the expandable section ③ and the Save changes button ④](./images/edit-a-notice-2.png)
+````
+
+That single file is the public "Edit a notice" article **and** Felix's answer.
+
+---
+
+## 9. Do / Don't
+
+| ✅ Do | ❌ Don't |
+|---|---|
+| One page per task, **one H1, no `##` headings** | One giant page; sub-headings |
+| A plain numbered list (renders as the stepper) | Hand-written components or tables |
+| Short step title, detail **indented** under it | Cram everything onto the title line |
+| Bold the **exact** on-screen label | "click the blue button" |
+| Image **directly under the step** it shows | Bunch images after a block of steps |
+| **Crop tight** — one focused thing per image | Full-window shots; whole-task composites |
+| **Mark the element** (box/arrow/callout) | Leave the reader hunting for what to click |
+| Image the steps that **need** it | Screenshot self-evident steps ("click **Next**") |
+| Real **alt text** describing the action | `![Step 1]` or a filename |
+| Bold the **exact** on-screen label | "click the blue button" |
+| Keep `summary` to 3–4 lines | Re-paste the full steps into `summary` |
+| Add real synonyms to `keywords` | Leave `keywords` empty |
+| Name images `task-name-N.png` | `Screenshot 2026-06-08 at 14.32.png` |
+
+---
+
+## 10. Before you publish — checklist
+
+- [ ] **One page per task**, named in `kebab-case`, in the right feature folder.
+- [ ] A `--- … ---` **frontmatter** block at the very top.
+- [ ] An `id` — flat **kebab-case, verb-first**, unique, and **never** reused or
+      renamed. Reuse the app's existing tag if one exists for this task.
+- [ ] `summary` is 3–4 short lines with the **button names bolded**.
+- [ ] `keywords` include how people actually ask.
+- [ ] **One H1, no `##` sub-headings.** The body is a plain numbered list.
+- [ ] Steps: short title line, detail indented under it, exact labels bolded.
+- [ ] Each screenshot is **directly under the step it shows**, **cropped tight**,
+      with the **element marked** and real **alt text**. Skip self-evident steps.
+- [ ] Video id pasted (just the id), if you have one.
+
+---
+
+## What we handle (so you don't)
+
+- Matching what a user typed to your page (typos included).
+- Linking **"Take me there"** to the right screen in the app.
+- The look of the answer, the chat, the walk-through, light/dark themes.
+- Playing the video safely inside the app + the Bunny fallback.
+
+Questions? Ping the dev team. Your pages are the whole product — thank you.
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  /* ---- theme ---- */
+  var saved=localStorage.getItem('tmrw-theme');
+  if(saved) root.setAttribute('data-theme',saved);
+  else if(matchMedia('(prefers-color-scheme: dark)').matches) root.setAttribute('data-theme','dark');
+  document.getElementById('themeBtn').onclick=function(){
+    var d=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',d); localStorage.setItem('tmrw-theme',d);
+  };
+  /* ---- render markdown ---- */
+  marked.setOptions({gfm:true,breaks:false,headerIds:false,mangle:false});
+  var src=document.getElementById('src').textContent;
+  var tmp=document.createElement('div');
+  tmp.innerHTML=marked.parse(src);
+  /* hero from first h1 */
+  var article=document.getElementById('content');
+  var h1=tmp.querySelector('h1');
+  var titleText=h1?h1.textContent:'Document';
+  document.title='tmrw · '+titleText;
+  document.getElementById('doctitle').textContent=titleText;
+  var hero=document.getElementById('hero');
+  hero.innerHTML='<h1>'+(h1?h1.innerHTML:titleText)+'</h1>';
+  if(h1) h1.remove();
+  /* move leading meta (everything before first h2) into hero meta */
+  var metaBits=[];
+  while(tmp.firstChild && !(tmp.firstChild.nodeType===1 && tmp.firstChild.tagName==='H2')){
+    var n=tmp.firstChild;
+    if(n.nodeType===1 && n.tagName==='HR'){ tmp.removeChild(n); continue; }
+    metaBits.push(n); tmp.removeChild(n);
+  }
+  if(metaBits.length){
+    var m=document.createElement('div'); m.className='meta';
+    metaBits.forEach(function(b){ m.appendChild(b); }); hero.appendChild(m);
+  }
+  /* slugify + unique ids */
+  var seen={};
+  function slug(t){var s=t.toLowerCase().replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'-');
+    if(seen[s]!=null){seen[s]++;s+='-'+seen[s];}else seen[s]=0;return s;}
+  /* group into collapsible sections by h2 */
+  var nodes=Array.prototype.slice.call(tmp.childNodes);
+  var cur=null;
+  nodes.forEach(function(n){
+    if(n.nodeType===1 && n.tagName==='H2'){
+      var sec=document.createElement('section'); sec.className='sec';
+      var id=slug(n.textContent); sec.id='sec-'+id;
+      var head=document.createElement('div'); head.className='sechead';
+      head.innerHTML='<span class="chev">▾</span>';
+      n.id=id; head.appendChild(n);
+      var body=document.createElement('div'); body.className='secbody';
+      sec.appendChild(head); sec.appendChild(body);
+      head.onclick=function(){ sec.classList.toggle('collapsed'); };
+      article.appendChild(sec); cur=body;
+    } else if(cur){ cur.appendChild(n); }
+    else { article.appendChild(n); }
+  });
+  /* ids for h3 */
+  article.querySelectorAll('h3').forEach(function(h){ h.id=slug(h.textContent); });
+  /* wrap tables for overflow */
+  article.querySelectorAll('table').forEach(function(t){
+    var w=document.createElement('div'); w.className='tablewrap';
+    t.parentNode.insertBefore(w,t); w.appendChild(t);
+  });
+  /* tip blockquotes */
+  article.querySelectorAll('blockquote').forEach(function(b){
+    if(/^\s*(tip|✅)/i.test(b.textContent)) b.classList.add('tip');
+  });
+  /* copy buttons */
+  article.querySelectorAll('pre').forEach(function(pre){
+    var btn=document.createElement('button'); btn.className='copy'; btn.textContent='copy';
+    btn.onclick=function(){ var code=pre.querySelector('code'); var txt=code?code.innerText:pre.innerText;
+      navigator.clipboard.writeText(txt).then(function(){ btn.textContent='copied'; btn.classList.add('done');
+        setTimeout(function(){ btn.textContent='copy'; btn.classList.remove('done'); },1400); }); };
+    pre.appendChild(btn);
+  });
+  /* TOC */
+  var toc=document.getElementById('toc');
+  var head=document.createElement('div'); head.className='tochead'; head.textContent='Contents'; toc.appendChild(head);
+  var links=[];
+  article.querySelectorAll('h2,h3').forEach(function(h){
+    var a=document.createElement('a'); a.href='#'+h.id; a.textContent=h.textContent;
+    if(h.tagName==='H3') a.className='lvl3';
+    a.dataset.target=h.id;
+    a.onclick=function(e){ var sec=h.closest('section.sec'); if(sec) sec.classList.remove('collapsed'); };
+    toc.appendChild(a); links.push(a);
+  });
+  /* scrollspy */
+  var byId={}; links.forEach(function(a){byId[a.dataset.target]=a;});
+  var spy=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){ links.forEach(function(l){l.classList.remove('active');});
+      var a=byId[en.target.id]; if(a)a.classList.add('active'); } });
+  },{rootMargin:'-72px 0px -70% 0px',threshold:0});
+  article.querySelectorAll('h2,h3').forEach(function(h){spy.observe(h);});
+  /* expand/collapse all */
+  var allCollapsed=false;
+  document.getElementById('expandBtn').onclick=function(){
+    allCollapsed=!allCollapsed;
+    article.querySelectorAll('section.sec').forEach(function(s){ s.classList.toggle('collapsed',allCollapsed); });
+    this.textContent=allCollapsed?'⤡ all':'⤢ all';
+  };
+  /* filter */
+  var filter=document.getElementById('filter'), empty=document.getElementById('emptyfilter');
+  filter.oninput=function(){
+    var q=this.value.trim().toLowerCase(); var any=false;
+    article.querySelectorAll('section.sec').forEach(function(s){
+      var match=!q || s.textContent.toLowerCase().indexOf(q)>-1;
+      s.classList.toggle('hide',!match);
+      if(match){ any=true; if(q) s.classList.remove('collapsed'); }
+      var tl=byId[s.querySelector('h2').id]; if(tl) tl.classList.toggle('hide',!match);
+      s.querySelectorAll('h3').forEach(function(h){ var t=byId[h.id]; if(t) t.classList.toggle('hide',!match); });
+    });
+    empty.style.display=(q && !any)?'block':'none';
+  };
+  /* progress bar */
+  var bar=document.getElementById('progress');
+  function prog(){ var h=document.documentElement; var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%'; }
+  addEventListener('scroll',prog,{passive:true}); prog();
+  /* deep link */
+  if(location.hash){ var el=document.querySelector(location.hash); if(el){ var s=el.closest('section.sec');
+    if(s)s.classList.remove('collapsed'); setTimeout(function(){el.scrollIntoView();},60);} }
+})();
+</script>
+</body>
+</html>

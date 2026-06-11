@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tmrw · internal doc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---- tmrw theme tokens (Carbon 8pt grid) ---- */
+:root{
+  --bg:#ffffff; --card:#ECF0F1; --surf2:#dde1e6; --text:#121619; --text2:#4d5358;
+  --muted:#697077; --accent:#0f62fe; --note-bg:#edf4ff; --green:#24a148; --green-bg:#defbe6;
+  --rule:#c1c7cd; --r:8px; --rpill:16px;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+html[data-theme="dark"]{
+  --bg:#141A1B; --card:#121619; --surf2:#21272a; --text:#f2f4f8; --text2:#c1c7cd;
+  --muted:#878d96; --accent:#4589ff; --note-bg:#002d9c; --green:#42be65; --green-bg:#022d0d;
+  --rule:#525252;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+/* reading progress */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:#ffffff;box-shadow:0 0 6px rgba(255,255,255,.6);z-index:50;transition:width .08s linear}
+/* topbar — branded blue gradient bar */
+.topbar{position:sticky;top:0;z-index:40;
+  background:linear-gradient(180deg,#1a1f22 0%,#0c0f11 100%);
+  border-bottom:1px solid #000;box-shadow:0 1px 16px rgba(0,0,0,.45);
+  display:flex;align-items:center;gap:16px;padding:11px 24px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:500;
+  letter-spacing:.02em;color:#fff;text-decoration:none;white-space:nowrap}
+.brand svg{height:24px;width:auto;display:block}
+.brand .sub{color:rgba(255,255,255,.6);font-size:13px}
+.badge{font-family:var(--mono);font-size:11px;color:#fff;border:1px solid rgba(255,255,255,.6);
+  background:rgba(255,255,255,.12);border-radius:var(--rpill);padding:2px 10px;white-space:nowrap}
+.topbar .doctitle{font-weight:600;font-size:14px;color:rgba(255,255,255,.82);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spacer{flex:1}
+.filter{font-family:var(--sans);font-size:14px;color:#fff;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.3);border-radius:var(--r);padding:8px 12px;width:210px;outline:none}
+.filter::placeholder{color:rgba(255,255,255,.7)}
+.filter:focus{border-color:#fff;background:rgba(255,255,255,.22);box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+.iconbtn{font-family:var(--mono);font-size:13px;cursor:pointer;color:#fff;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.3);border-radius:var(--r);padding:8px 12px;display:inline-flex;align-items:center;gap:6px}
+.iconbtn:hover{background:rgba(255,255,255,.26);border-color:#fff}
+/* shell */
+.shell{display:grid;grid-template-columns:264px minmax(0,820px);gap:48px;justify-content:center;
+  max-width:1200px;margin:0 auto;padding:40px 24px 120px}
+aside{position:sticky;top:78px;align-self:start;max-height:calc(100vh - 100px);overflow:auto}
+nav#toc{font-size:13.5px;border-left:2px solid var(--rule);padding-left:0}
+nav#toc a{display:block;color:var(--muted);text-decoration:none;padding:5px 0 5px 16px;margin-left:-2px;
+  border-left:2px solid transparent;line-height:1.35}
+nav#toc a:hover{color:var(--text)}
+nav#toc a.lvl3{padding-left:30px;font-size:12.5px}
+nav#toc a.active{color:var(--accent);border-left-color:var(--accent);font-weight:600}
+nav#toc a.hide,section.hide,.tochead.hide{display:none}
+.tochead{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);padding:0 0 8px 16px}
+/* content */
+main{min-width:0}
+.hero{margin:0 0 8px}
+.hero h1{font-size:30px;font-weight:600;line-height:1.15;letter-spacing:-.01em;margin:0 0 6px}
+.hero .meta{color:var(--muted);font-size:14px}
+.hero .meta a{color:var(--accent)}
+article h2{font-size:20px;font-weight:600;margin:0;letter-spacing:-.005em}
+/* collapsible section */
+section.sec{border-top:1px solid var(--rule);margin-top:32px}
+section.sec>.sechead{display:flex;align-items:center;gap:10px;cursor:pointer;padding:20px 0 4px;user-select:none}
+section.sec>.sechead .chev{font-family:var(--mono);color:var(--accent);transition:transform .18s ease;font-size:13px}
+section.sec.collapsed>.sechead .chev{transform:rotate(-90deg)}
+section.sec>.secbody{overflow:hidden}
+section.sec.collapsed>.secbody{display:none}
+article h3{font-size:15px;font-weight:600;color:var(--text);margin:24px 0 6px}
+article p{margin:12px 0}
+article a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
+article a:hover{border-bottom-color:var(--accent)}
+article ul,article ol{margin:12px 0;padding-left:24px}
+article li{margin:6px 0}
+article li::marker{color:var(--muted)}
+strong{font-weight:600}
+hr{border:none;border-top:1px solid var(--rule);margin:28px 0}
+/* inline + block code */
+code{font-family:var(--mono);font-size:.86em;background:var(--surf2);color:var(--text);
+  padding:.12em .4em;border-radius:6px}
+pre{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);
+  padding:16px 16px;overflow:auto;margin:16px 0}
+pre code{background:none;padding:0;font-size:13px;line-height:1.55;color:var(--text)}
+.copy{position:absolute;top:8px;right:8px;font-family:var(--mono);font-size:11px;cursor:pointer;
+  color:var(--muted);background:var(--bg);border:1px solid var(--rule);border-radius:6px;padding:3px 8px;opacity:0;transition:opacity .15s}
+pre:hover .copy{opacity:1}
+.copy.done{color:var(--green);border-color:var(--green)}
+/* tables */
+.tablewrap{overflow:auto;margin:16px 0;border:1px solid var(--rule);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+thead th{background:var(--surf2);text-align:left;font-weight:600}
+th,td{padding:10px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:color-mix(in srgb,var(--surf2) 45%,transparent)}
+/* blockquote -> note / tip */
+blockquote{background:var(--note-bg);border-left:3px solid var(--accent);border-radius:0 var(--r) var(--r) 0;
+  margin:16px 0;padding:2px 18px;color:var(--text)}
+html[data-theme="dark"] blockquote{color:#dbeafe}
+blockquote.tip{background:var(--green-bg);border-left-color:var(--green)}
+/* misc */
+.emptyfilter{color:var(--muted);font-style:italic;padding:24px 0;display:none}
+::selection{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+@media(max-width:880px){
+  .shell{grid-template-columns:1fr;gap:0;padding:24px 18px 100px}
+  aside{display:none}
+  .filter{width:130px}
+  .topbar .doctitle{display:none}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<header class="topbar">
+  <a class="brand" href="#" aria-label="tmrw"><svg viewBox="0 0 788 196" role="img" aria-label="tmrw"><g transform="matrix(1,0,0,1,-22178.592857,-12633.970891)"><g transform="matrix(1,0,0,1.954037,0,-11288.168944)"><g transform="matrix(1,0,0,0.853147,-1345,1737.566434)"><g><g transform="matrix(4.86207,0,0,2.916518,23523.592857,12348.857436)"><path d="M0,15.696L0,-12.273L8.851,-12.273L8.851,-1.947L22.658,-1.947L22.658,6.018L8.851,6.018L8.851,15.696C8.851,18.764 10.267,19.708 12.214,19.708C14.161,19.708 15.577,18.764 15.577,15.696L15.577,14.811L24.428,14.811L24.428,15.696C24.428,24.015 19.472,27.969 12.214,27.969C4.956,27.969 0,24.015 0,15.696" style="fill:white;"/></g><g transform="matrix(4.86207,0,0,2.916518,23651.530944,12391.021822)"><path d="M0,-2.892C0,-12.273 5.428,-16.404 12.509,-16.404C16.64,-16.404 20.121,-14.81 22.304,-11.742C24.487,-14.81 27.909,-16.404 32.099,-16.404C39.18,-16.404 44.608,-12.273 44.608,-2.892L44.608,13.512L35.757,13.512L35.757,-2.892C35.757,-6.786 33.869,-8.143 31.214,-8.143C28.617,-8.143 26.729,-6.786 26.729,-2.892L26.729,13.512L17.878,13.512L17.878,-2.892C17.878,-6.786 15.99,-8.143 13.394,-8.143C10.738,-8.143 8.851,-6.786 8.851,-2.892L8.851,13.512L0,13.512L0,-2.892Z" style="fill:white;"/></g><g transform="matrix(4.86207,0,0,2.916518,23882.290269,12391.534838)"><path d="M0,-3.244C0,-12.332 5.311,-16.58 13.099,-16.58C20.888,-16.58 26.14,-12.39 26.198,-3.185L26.198,-3.009L17.348,-3.009L17.348,-3.244C17.348,-7.139 15.577,-8.319 13.099,-8.319C10.621,-8.319 8.851,-7.139 8.851,-3.244L8.851,13.336L0,13.336L0,-3.244Z" style="fill:white;"/></g><g transform="matrix(4.86207,0,0,2.916518,24023.53888,12382.59017)"><path d="M0,2.89L0,-13.513L8.851,-13.513L8.851,2.89C8.851,6.784 10.738,8.141 13.394,8.141C15.99,8.141 17.878,6.784 17.878,2.89L17.878,-13.513L26.729,-13.513L26.729,2.89C26.729,6.784 28.617,8.141 31.214,8.141C33.869,8.141 35.757,6.784 35.757,2.89L35.757,-13.513L44.608,-13.513L44.608,2.89C44.608,12.272 39.18,16.403 32.099,16.403C27.909,16.403 24.487,14.809 22.304,11.741C20.121,14.809 16.64,16.403 12.509,16.403C5.428,16.403 0,12.272 0,2.89" style="fill:white;"/></g></g><g transform="matrix(1,0,0,0.599851,154.298206,5142.840389)"><circle cx="24128.5" cy="12120.5" r="28.5" style="fill:rgb(69,137,255);"/><path d="M24128.5,12092C24144.23,12092 24157,12104.77 24157,12120.5C24157,12136.23 24144.23,12149 24128.5,12149C24112.77,12149 24100,12136.23 24100,12120.5C24100,12104.77 24112.77,12092 24128.5,12092ZM24128.5,12102.417C24118.52,12102.417 24110.417,12110.52 24110.417,12120.5C24110.417,12130.48 24118.52,12138.583 24128.5,12138.583C24138.48,12138.583 24146.583,12130.48 24146.583,12120.5C24146.583,12110.52 24138.48,12102.417 24128.5,12102.417Z" style="fill:rgb(69,137,255);"/></g></g></g></g><span class="sub">docs</span></a>
+  <span class="badge">internal</span>
+  <span class="doctitle" id="doctitle"></span>
+  <span class="spacer"></span>
+  <input class="filter" id="filter" type="search" placeholder="Filter sections…" autocomplete="off">
+  <button class="iconbtn" id="expandBtn" title="Expand / collapse all">⤢ all</button>
+  <button class="iconbtn" id="themeBtn" title="Toggle theme">◐ theme</button>
+</header>
+<div class="shell">
+  <aside><nav id="toc"></nav></aside>
+  <main>
+    <div class="hero" id="hero"></div>
+    <article id="content"></article>
+    <p class="emptyfilter" id="emptyfilter">No sections match your filter.</p>
+  </main>
+</div>
+<script type="text/markdown" id="src">
+# SXP help — trainer handover
+
+**Internal only** (lives in `help-site/_internal/`, never published to the site).
+**For:** the training team taking over StaffXP help maintenance.
+**As of:** 2026-06-11 · **shipped:** merged to `main` and live at
+<https://help.tmrw.education> (GitHub release `v1.1.0`).
+
+---
+
+## 1. What shipped this pass
+
+The whole **StaffXP** help section was reformatted and illustrated:
+
+- **89 lean, task-per-page articles** across 9 topics (Navigating, Attendance,
+  Activities, Extra-curricular, Wellbeing, Notifications, Profiles, Notices,
+  + shared images). Replaces the old one-big-page-per-topic monoliths.
+- **116 screenshots** captured and embedded — every page that needed a shot has
+  one. 0 missing-image markers except the single placeholder in §4.
+- Titles tightened so the sidebar reads clean.
+- **Shipped:** merged to `main` (PR #73, superseding the Notices pilot #72) and
+  auto-deployed. Live routes are `/sxp/<Topic>/<id>`.
+
+**Post-launch cleanup (also live):**
+
+- `Notices` folder renamed `04-Notices` for numbering consistency (URL-safe —
+  prefix is stripped, `/sxp/Notices` unchanged).
+- **Landing rebuilt:** `index.md` is now the front door (`/sxp`) — intro, MyDay
+  hero image, browse-by-topic links, Felix nod. The old duplicate `01-Overview`
+  page was folded in and removed.
+- **Removed:** empty `14-FAQs` + `15-Glossary` placeholders, the orphaned
+  `99-Images/` shared folder, and the customer-specific Untis/Markbook/Follett
+  pages (see §4).
+
+## 2. How it deploys — and where the originals are
+
+**Every push to `main` auto-rebuilds and publishes** (`deploy.yml`; ~1–2 min).
+`main` is the source of truth and equals what's live — no branch tricks needed.
+This release replaced the old SXP help, but the **previous content is not lost**:
+
+- **Tag `notices-pre-hero`** — the pre-hero baseline.
+- **GitHub release `v1.0.0`** — initial-scaffold snapshot (downloadable zip).
+- **Local folder** `~/Documents/sxp-original-backup-main-2026-06-11/` (Ginno's machine).
+
+To compare old vs current: `git diff notices-pre-hero main -- sxp/`.
+
+## 3. Screenshots — SXP reshoot specifics
+
+The **capture spec and all the evergreen rules** (light theme, 2×, crop tight,
+clean state, role fidelity, hide dev chrome, mat-is-CSS-so-never-reshoot-for-looks)
+live in **`AUTHORING_FOR_FELIX.md` §6**. Read that first. The StaffXP-only
+operational details:
+
+- **Source = the showcase app** `https://tmrw-sxp-showcase.azurewebsites.net`
+  (Microsoft SSO), on **mock data** — names/dates/figures are fake, **not
+  production**. Reshoot here if the real app's UI changes.
+- **Dev chrome to hide** before snipping: the **role switcher** (bottom corner),
+  the **Felix** panel, and the left **side-nav** drawer.
+- **Roles** via the dev role switcher: **Teacher / Leader / Admin** — match the
+  article (e.g. "Your requests" is staff, "All requests" + the **Emergency**
+  button are leader/admin).
+- **Files** live in each topic's own `images/` folder, named by the article's
+  **`id`** (e.g. `sxp/03-Attendance/images/take-attendance-roll-2.png`).
+
+## 4. Outstanding to-dos (please action)
+
+1. **Extra-curricular `09-2` "Exclude students"** — one `📸 needs image`
+   placeholder in `sxp/06-Extracurricular/09-review-extracurricular-request.md`.
+   The control couldn't be reached in the automated pass. **Also fix the wording
+   in that article:** it says you exclude students "in the Attendees section" of
+   the read-only *Review and submit* summary — but the app shows that summary's
+   section is **"Participants"** with **no exclude control**. The Exclude control
+   actually lives in the **create/edit wizard → Attendees step**, and only after a
+   **Student group** is selected. Capture it there and correct step 2.
+2. **Untis / Markbook / Follett** — **removed** (2026-06-11): customer-specific,
+   so they don't belong in the general help. Fold into the relevant customers'
+   own training guides. Source is in git history + the pre-hero local backup.
+3. **Wellbeing metric cards** — the landing-page cards read **per category**
+   (Mental, Academic, Social…), not per sentiment. The draft's
+   "sentiment drives the cards" claim was dropped and the example aligned to
+   categories. **Confirm with the product/twin** which is correct and finalise.
+
+## 5. Copy corrected to match the live app
+
+Where the draft (written from the twin's reference docs) disagreed with the
+running app, the **app won** and the article was fixed. Watch these if the app
+changes again:
+
+- **Settings** applies changes **live — there is no Save button.**
+- **Attendance** bulk-mark labels are **"All present" / "All absent"** (not
+  "mark all Present/Absent").
+- **Wellbeing** task edit is via the task's **⋮ (options) menu → Edit**, not an
+  inline pencil.
+- **Overseas trip** request fields are **"Max no. of students"** and
+  **"Enable waitlist"**.
+- **Wellbeing** landing cards are per **category** (see §4.3).
+
+## 6. House rules — see the authoring guide
+
+The format rules (one task per page, the `id`/frontmatter standard, the Note rule,
+Felix bold-only prose) are all in **`AUTHORING_FOR_FELIX.md`** — that's the bible.
+Rationale + evidence: **`DOC_FORMAT_RATIONALE.md`**. Project tracker:
+**`SXP_ROLLOUT.md`**.
+
+The one thing to keep front-of-mind when *editing* shipped SXP pages: an article's
+**`id` is its live URL and the key Felix uses — don't change an `id`** without
+checking what links to it. **Titles are safe to edit; ids are not.**
+
+## 7. Repo map
+
+- **`help`** repo (`sxp-hero`) — the content trainers edit (`sxp/<topic>/*.md`
+  + each topic's `images/`).
+- **`help-site`** repo (`main`) — Docusaurus tooling that renders `../help`.
+  These `_internal/` docs live here.
+- Local dev: `cd help-site && npm start -- --port 3001 --no-open` → reads `../help`
+  live with hot reload.
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  /* ---- theme ---- */
+  var saved=localStorage.getItem('tmrw-theme');
+  if(saved) root.setAttribute('data-theme',saved);
+  else if(matchMedia('(prefers-color-scheme: dark)').matches) root.setAttribute('data-theme','dark');
+  document.getElementById('themeBtn').onclick=function(){
+    var d=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    root.setAttribute('data-theme',d); localStorage.setItem('tmrw-theme',d);
+  };
+  /* ---- render markdown ---- */
+  marked.setOptions({gfm:true,breaks:false,headerIds:false,mangle:false});
+  var src=document.getElementById('src').textContent;
+  var tmp=document.createElement('div');
+  tmp.innerHTML=marked.parse(src);
+  /* hero from first h1 */
+  var article=document.getElementById('content');
+  var h1=tmp.querySelector('h1');
+  var titleText=h1?h1.textContent:'Document';
+  document.title='tmrw · '+titleText;
+  document.getElementById('doctitle').textContent=titleText;
+  var hero=document.getElementById('hero');
+  hero.innerHTML='<h1>'+(h1?h1.innerHTML:titleText)+'</h1>';
+  if(h1) h1.remove();
+  /* move leading meta (everything before first h2) into hero meta */
+  var metaBits=[];
+  while(tmp.firstChild && !(tmp.firstChild.nodeType===1 && tmp.firstChild.tagName==='H2')){
+    var n=tmp.firstChild;
+    if(n.nodeType===1 && n.tagName==='HR'){ tmp.removeChild(n); continue; }
+    metaBits.push(n); tmp.removeChild(n);
+  }
+  if(metaBits.length){
+    var m=document.createElement('div'); m.className='meta';
+    metaBits.forEach(function(b){ m.appendChild(b); }); hero.appendChild(m);
+  }
+  /* slugify + unique ids */
+  var seen={};
+  function slug(t){var s=t.toLowerCase().replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'-');
+    if(seen[s]!=null){seen[s]++;s+='-'+seen[s];}else seen[s]=0;return s;}
+  /* group into collapsible sections by h2 */
+  var nodes=Array.prototype.slice.call(tmp.childNodes);
+  var cur=null;
+  nodes.forEach(function(n){
+    if(n.nodeType===1 && n.tagName==='H2'){
+      var sec=document.createElement('section'); sec.className='sec';
+      var id=slug(n.textContent); sec.id='sec-'+id;
+      var head=document.createElement('div'); head.className='sechead';
+      head.innerHTML='<span class="chev">▾</span>';
+      n.id=id; head.appendChild(n);
+      var body=document.createElement('div'); body.className='secbody';
+      sec.appendChild(head); sec.appendChild(body);
+      head.onclick=function(){ sec.classList.toggle('collapsed'); };
+      article.appendChild(sec); cur=body;
+    } else if(cur){ cur.appendChild(n); }
+    else { article.appendChild(n); }
+  });
+  /* ids for h3 */
+  article.querySelectorAll('h3').forEach(function(h){ h.id=slug(h.textContent); });
+  /* wrap tables for overflow */
+  article.querySelectorAll('table').forEach(function(t){
+    var w=document.createElement('div'); w.className='tablewrap';
+    t.parentNode.insertBefore(w,t); w.appendChild(t);
+  });
+  /* tip blockquotes */
+  article.querySelectorAll('blockquote').forEach(function(b){
+    if(/^\s*(tip|✅)/i.test(b.textContent)) b.classList.add('tip');
+  });
+  /* copy buttons */
+  article.querySelectorAll('pre').forEach(function(pre){
+    var btn=document.createElement('button'); btn.className='copy'; btn.textContent='copy';
+    btn.onclick=function(){ var code=pre.querySelector('code'); var txt=code?code.innerText:pre.innerText;
+      navigator.clipboard.writeText(txt).then(function(){ btn.textContent='copied'; btn.classList.add('done');
+        setTimeout(function(){ btn.textContent='copy'; btn.classList.remove('done'); },1400); }); };
+    pre.appendChild(btn);
+  });
+  /* TOC */
+  var toc=document.getElementById('toc');
+  var head=document.createElement('div'); head.className='tochead'; head.textContent='Contents'; toc.appendChild(head);
+  var links=[];
+  article.querySelectorAll('h2,h3').forEach(function(h){
+    var a=document.createElement('a'); a.href='#'+h.id; a.textContent=h.textContent;
+    if(h.tagName==='H3') a.className='lvl3';
+    a.dataset.target=h.id;
+    a.onclick=function(e){ var sec=h.closest('section.sec'); if(sec) sec.classList.remove('collapsed'); };
+    toc.appendChild(a); links.push(a);
+  });
+  /* scrollspy */
+  var byId={}; links.forEach(function(a){byId[a.dataset.target]=a;});
+  var spy=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){ links.forEach(function(l){l.classList.remove('active');});
+      var a=byId[en.target.id]; if(a)a.classList.add('active'); } });
+  },{rootMargin:'-72px 0px -70% 0px',threshold:0});
+  article.querySelectorAll('h2,h3').forEach(function(h){spy.observe(h);});
+  /* expand/collapse all */
+  var allCollapsed=false;
+  document.getElementById('expandBtn').onclick=function(){
+    allCollapsed=!allCollapsed;
+    article.querySelectorAll('section.sec').forEach(function(s){ s.classList.toggle('collapsed',allCollapsed); });
+    this.textContent=allCollapsed?'⤡ all':'⤢ all';
+  };
+  /* filter */
+  var filter=document.getElementById('filter'), empty=document.getElementById('emptyfilter');
+  filter.oninput=function(){
+    var q=this.value.trim().toLowerCase(); var any=false;
+    article.querySelectorAll('section.sec').forEach(function(s){
+      var match=!q || s.textContent.toLowerCase().indexOf(q)>-1;
+      s.classList.toggle('hide',!match);
+      if(match){ any=true; if(q) s.classList.remove('collapsed'); }
+      var tl=byId[s.querySelector('h2').id]; if(tl) tl.classList.toggle('hide',!match);
+      s.querySelectorAll('h3').forEach(function(h){ var t=byId[h.id]; if(t) t.classList.toggle('hide',!match); });
+    });
+    empty.style.display=(q && !any)?'block':'none';
+  };
+  /* progress bar */
+  var bar=document.getElementById('progress');
+  function prog(){ var h=document.documentElement; var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%'; }
+  addEventListener('scroll',prog,{passive:true}); prog();
+  /* deep link */
+  if(location.hash){ var el=document.querySelector(location.hash); if(el){ var s=el.closest('section.sec');
+    if(s)s.classList.remove('collapsed'); setTimeout(function(){el.scrollIntoView();},60);} }
+})();
+</script>
+</body>
+</html>
