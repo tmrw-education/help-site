@@ -45,15 +45,17 @@
   color: var(--ifm-background-color);
 }
 
-/* connecting rail between markers */
+/* connecting rail between markers — runs center-to-center; the opaque circles
+   (z-index 1) mask the overlap, so the rail can never visibly gap. */
 .step::after {
   content: '';
   position: absolute;
   left: 14px;
-  top: 34px;
-  bottom: 0;
+  top: 15px;          /* this circle's center */
+  bottom: -15px;      /* next circle's center */
   width: 2px;
   background: var(--ifm-color-emphasis-300);
+  z-index: 0;
 }
 .step:last-child::after { display: none; }
 

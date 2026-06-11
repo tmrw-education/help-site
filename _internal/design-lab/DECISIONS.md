@@ -171,6 +171,16 @@ Scored ~3.2/4. Fixed: P1 broken-image boxes (Root hides them), P2 doc right-void
 - **Homepage inverted to search-first**: search is the hero (large pill + Popular quick-search chips); 5 products demoted to compact **horizontal** tiles under "Or browse by product". Carbon **icons** (not pictograms — those need 48px+) at 28px: UserMultiple / UserProfile / **Money** / Chat / Education.
 - **Tables** restyled to the ruixen "contributors-overview" look: card-wrapped (subtle border + soft shadow), **subtle gray header bar** + muted header text, **no zebra** (clean rows + hover only), whisper-thin row dividers (emphasis-100), no vertical cell borders, no th double-border. Simple markdown tables only (no badge/total/caption components — not needed).
 
+### Session 4 — cosmetic pass (2026-06-11)
+
+- **Sidebar collapse caret**: now points **right (›) when collapsed**, down (∨) when expanded (was rotating to point left). Override on `.menu__list-item--collapsed … { transform: rotateZ(-90deg) }`. Caret also **shrunk 2rem → 1.25rem** background-size — smaller/lighter to match mockup.
+- **Homepage product cards**: dropped the diagonal gradient + resting shadow → **flat fill**. Iterated the gray: tried `#f2f5f6` (hardcoded, read as a different gray family from the rest of the page) → `--ifm-color-emphasis-200` (matched the hero-search pill) → **`--ifm-color-emphasis-100`** (final: matches the Popular chips). Same token light + dark. Hover keeps lift+tilt + neutral border only (no shadow).
+- **Card links fixed** — were `/help/<app>` (dead; `baseUrl` is `/`, no `/help` prefix). Now `/sxp /pxp /lxp /ess /fo`, verified against `.docusaurus/routes.js`.
+- **Navbar reordered + renamed**: StaffXP · ParentXP · LearnerXP · Employee Self-Service · Finance & Operations. PXP "Parent Experience"→**ParentXP**, LXP "Learner Experience"→**LearnerXP** (product-name style, matches StaffXP). Home cards still read "Parent/Learner Experience" — left as-is unless we unify later.
+- **Doc-page type hierarchy** (supersedes Session 2): **H2/H3 both → Regular 400** (were 600/600 — every subhead same weight, flat). Now H1 Light 300 / H2 400 / H3 400 / H4 SemiBold 600 → real weight rhythm. **H1 dropped 42px → 34px** (2.125rem): the 42→28 jump was too big and 42px floated oversized on the many h1-only pages. 34/28 = 1.21, gentle step, H1 still dominant.
+- **`<Steps>` rail gap fixed**: rail no longer starts 4px below each circle and stop at the next circle's edge. Now spans **circle-center → next circle-center** (`top:15px; bottom:-15px; z-index:0`); the opaque circles (z-index 1) mask the overlap, so it's geometrically gap-proof at both ends regardless of step height. Rail centered on circles (both at x=15px).
+
 ## Deferred / backlog ideas
 
 - "C Editorial" full treatment (Mona Sans on all headings, 60px hero) — parked; revisit if the site wants a more magazine feel later. Watch the eyebrow-on-every-section ban if adopted.
+- **Unify card labels with navbar** (ParentXP/LearnerXP on the homepage tiles) — deferred this session.
