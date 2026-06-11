@@ -74,6 +74,7 @@ Docusaurus frontmatter — it does **not** show on the rendered page.
 
 ```yaml
 ---
+id: create-notice
 summary:
   - "Short step 1 (bold the **button names**)."
   - "Short step 2."
@@ -87,6 +88,7 @@ video:
 
 | Field | What it is | Tips |
 |---|---|---|
+| `id` | The page's **permanent name tag** Felix uses to find it | **Required.** Flat `kebab-case`, **verb-first**, one task: `create-notice`, `edit-notice`, `rsvp-to-notice`. No app/feature prefix. **Pick once, never rename** (renaming breaks Felix's link). See below. |
 | `summary` | The **3–4 line gist** Felix shows first | Keep it short — point-of-need, not the manual. Bold the **exact** button names. |
 | `keywords` | Phrases people might type | Add synonyms + how people actually ask ("post a notice", "make an announcement"). Helps Felix find the page. |
 | `video.youtube` | The **YouTube video id** (primary) | Just the id from the URL — see §7. |
@@ -95,6 +97,15 @@ video:
 If you omit `summary`, Felix falls back to your first few steps — but a hand-written
 summary always reads better. Write it.
 
+> **About `id` — the one field that must never change.** It is the stable key the
+> app uses to pull this exact page (and, later, to deep-link from in-app help icons).
+> Rules: **flat kebab-case, verb-first, one task** (`delete-notice`, not
+> `notices.delete` or `sxp-notice-delete`). It is **the KB page's own id** — the docs
+> are the source of truth; the app matches us. If the app **already** ships a tag for
+> this task (`create-notice`, `edit-notice`, `set-notice-featured` exist today), reuse
+> that **exact** string so nothing breaks. Once published, **treat it as frozen** — to
+> retitle a page, change the H1, not the `id`.
+>
 > You do **not** put the in-app link in here — we handle "Take me there" on our
 > side from the page's name. One less thing for you to track.
 
@@ -142,11 +153,22 @@ Rules:
   ahead and save."
 - **Indent the body by 3 spaces** so it stays part of the step. A blank line between
   the title and the body is fine.
-- `> **Note:**` callouts are fine for warnings/tips — use sparingly, inside the step.
 - **Document the behaviour the screen can't tell you.** Skip narrating obvious
   clicks, but DO explain non-obvious effects and decisions — e.g. "turning on
   **RSVP required** also adds the event to the recipient's calendar." That's the
   value docs add; the toggle is self-evident, what it *does* isn't.
+- **Put those facts INLINE in the step's sentence by default.** Don't reach for a
+  `> **Note:**` box for every one — a page full of callout boxes means none of them
+  signal "pay attention" any more (and Felix can't render blockquotes at all, so a
+  must-know fact buried in a Note never reaches a Felix user — inline is the only
+  place it counts).
+
+> **The Note test — box it only if not knowing it *hurts*.** Use a `> **Note:**`
+> box ONLY when the absence of the fact causes a consequence the reader can't easily
+> undo: **data lost, an irreversible choice, a real person contacted, or the action
+> blocked by permissions.** If the fact just makes the current step smoother, write
+> it inline. Field rules, limits, what-a-control-does, and orientation facts are
+> **always inline**. Zero or one Note per page is normal; two is a lot.
 
 ---
 
@@ -253,6 +275,7 @@ videos). If a school blocks YouTube, we fall back to a **Bunny** copy — leave
 
 ````markdown
 ---
+id: edit-notice
 summary:
   - "Notices → **Manage notices**."
   - "Find your notice, click the **edit icon**."
@@ -309,6 +332,8 @@ That single file is the public "Edit a notice" article **and** Felix's answer.
 
 - [ ] **One page per task**, named in `kebab-case`, in the right feature folder.
 - [ ] A `--- … ---` **frontmatter** block at the very top.
+- [ ] An `id` — flat **kebab-case, verb-first**, unique, and **never** reused or
+      renamed. Reuse the app's existing tag if one exists for this task.
 - [ ] `summary` is 3–4 short lines with the **button names bolded**.
 - [ ] `keywords` include how people actually ask.
 - [ ] **One H1, no `##` sub-headings.** The body is a plain numbered list.

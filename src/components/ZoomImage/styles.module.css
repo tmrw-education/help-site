@@ -1,42 +1,49 @@
-/* Linear-style treatment: the screenshot floats on a per-app brand gradient mat.
-   Mat = the <span> wrapper; screenshot = the <img>. App accent is set by route
-   (see index.tsx). Carbon-clean: 2-colour gradients, grades 40–60 in light and
-   deeper 60–80 in dark (Carbon: "blend between darker colours" for dark surfaces). */
+/* Screenshot mat: each shot floats on a low-chroma wash of its app's brand colour.
+   Mat = the <span> wrapper; screenshot = the <img>. App is set by route (see
+   index.tsx). The wash is a pale (light) / deep (dark) echo of the app ICON
+   gradient, so a page's screenshots quietly carry the app's identity without the
+   saturated mat competing with the UI in the shot. All CSS → restyle, never reshoot. */
 .frame {
   display: inline-block;
   width: 100%;
   box-sizing: border-box;
   margin: 1.75rem 0;
-  padding: clamp(1.25rem, 4%, 2.5rem);
-  border-radius: 16px;
+  padding: clamp(1rem, 3.5%, 2rem);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
 }
+[data-theme='dark'] .frame { border-color: rgba(255, 255, 255, 0.09); }
 
-/* StaffXP — Blue → Purple */
-.sxp { background: linear-gradient(135deg, #0f62fe, #8a3ffc); }
-[data-theme='dark'] .sxp { background: linear-gradient(135deg, #0043ce, #6929c4); }
-/* Employee Self-Service — Teal → Green */
-.ess { background: linear-gradient(135deg, #009d9a, #42be65); }
-[data-theme='dark'] .ess { background: linear-gradient(135deg, #005d5d, #198038); }
-/* Parent Experience — Cyan → Teal */
-.pxp { background: linear-gradient(135deg, #33b1ff, #009d9a); }
-[data-theme='dark'] .pxp { background: linear-gradient(135deg, #00539a, #005d5d); }
-/* Learner Experience — Purple → Magenta */
-.lxp { background: linear-gradient(135deg, #8a3ffc, #ee5396); }
-[data-theme='dark'] .lxp { background: linear-gradient(135deg, #6929c4, #9f1853); }
-/* Finance & Operations — Purple → Teal */
-.fno { background: linear-gradient(135deg, #8a3ffc, #08bdba); }
-[data-theme='dark'] .fno { background: linear-gradient(135deg, #6929c4, #005d5d); }
+/* Per-app wash — derived from the app icon's own gradient (sampled from the mark). */
+/* StaffXP — blue → purple */
+.sxp { background: linear-gradient(135deg, #eaebff, #f1e8ff); }
+[data-theme='dark'] .sxp { background: linear-gradient(135deg, #202443, #2a2043); }
+/* Employee Self-Service — teal → green */
+.ess { background: linear-gradient(135deg, #e3f2ef, #e8f7ed); }
+[data-theme='dark'] .ess { background: linear-gradient(135deg, #182d2e, #1f342b); }
+/* Parent Experience — cyan → blue */
+.pxp { background: linear-gradient(135deg, #e0f4f9, #e2edff); }
+[data-theme='dark'] .pxp { background: linear-gradient(135deg, #14313c, #162643); }
+/* Learner Experience — purple → magenta */
+.lxp { background: linear-gradient(135deg, #f4eafb, #fdeaf2); }
+[data-theme='dark'] .lxp { background: linear-gradient(135deg, #2f223f, #3a2333); }
+/* Finance & Operations — indigo → teal */
+.fno { background: linear-gradient(135deg, #ececf8, #e1f7f7); }
+[data-theme='dark'] .fno { background: linear-gradient(135deg, #24253a, #153439); }
 
 .zoomImage {
   display: block;
   width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18), 0 18px 40px -16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 12px 30px -18px rgba(0, 0, 0, 0.3);
   cursor: zoom-in;
 }
+[data-theme='dark'] .zoomImage {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 36px -18px rgba(0, 0, 0, 0.7);
+}
 
-/* Opt-out: clean frame, no gradient mat (dense / utility pages). */
+/* Opt-out: clean frame, no wash (e.g. dense / utility pages). */
 .framePlain {
   display: inline-block;
   width: 100%;
@@ -52,6 +59,7 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 14px 34px -16px rgba(0, 0, 0, 0.7);
 }
 
-/* Lift the zoom overlay + zoomed image above Docusaurus chrome + stepper markers. */
+/* Lift the zoom overlay + zoomed image above Docusaurus chrome + stepper markers.
+   medium-zoom is a full-screen library overlay, so it sits at the top of the stack. */
 :global(.medium-zoom-overlay) { z-index: 9998 !important; }
 :global(.medium-zoom-image--opened) { z-index: 9999 !important; }
