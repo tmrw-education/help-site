@@ -60,8 +60,9 @@ operational details:
    section is **"Participants"** with **no exclude control**. The Exclude control
    actually lives in the **create/edit wizard → Attendees step**, and only after a
    **Student group** is selected. Capture it there and correct step 2.
-2. **Integration stubs (Untis / Markbook / Follett)** — currently external-link
-   placeholders; they need **3 real URLs**.
+2. **Untis / Markbook / Follett** — **removed** (2026-06-11): customer-specific,
+   so they don't belong in the general help. Fold into the relevant customers'
+   own training guides. Source is in git history + the pre-hero local backup.
 3. **Wellbeing metric cards** — the landing-page cards read **per category**
    (Mental, Academic, Social…), not per sentiment. The draft's
    "sentiment drives the cards" claim was dropped and the example aligned to

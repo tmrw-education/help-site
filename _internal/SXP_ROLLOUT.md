@@ -45,13 +45,12 @@ twin reference doc → workflow maps tasks + drafts lean articles → serial cap
 | 10-AI & Felix | light reformat (conceptual) | ⬜ |
 | 14-FAQs | stub — gather Qs or placeholder | ⬜ |
 
-## C. Integrations — R1 = external link only (full docs deferred to R2)
-| Topic | R1 approach | Status |
-|---|---|---|
-| 11-Untis | one short page: what it's for + external link to the app | ⬜ |
-| 12-Markbook Integration | external-link stub | ⬜ |
-| 13-Follett | external-link stub | ⬜ |
-> R2: replace stubs with full task docs once deeper integration ships. No screenshots needed for R1.
+## C. Integrations — REMOVED from the shared help (2026-06-11)
+
+Untis, Markbook, and Follett are **customer-specific** — not relevant to the
+general customer base. The stub pages were **removed** from StaffXP help (commit
+`4a117bb`); this content belongs in the **customer-specific training guides**
+instead. Source remains in git history + the pre-hero local backup.
 
 ## Commission to the twin (in order)
 ATTENDANCE → WELLBEING → NOTIFICATIONS → ACTIVITIES → EXTRACURRICULAR → PROFILES.
