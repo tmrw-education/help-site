@@ -183,6 +183,18 @@ const config: Config = {
           activeBaseRegex: '/sxp',
         },
         {
+          to: '/pxp',
+          label: 'ParentXP',
+          position: 'left',
+          activeBaseRegex: '/pxp',
+        },
+        {
+          to: '/lxp',
+          label: 'LearnerXP',
+          position: 'left',
+          activeBaseRegex: '/lxp',
+        },
+        {
           to: '/ess',
           label: 'Employee Self-Service',
           position: 'left',
@@ -193,18 +205,6 @@ const config: Config = {
           label: 'Finance & Operations',
           position: 'left',
           activeBaseRegex: '/fo',
-        },
-        {
-          to: '/pxp',
-          label: 'Parent Experience',
-          position: 'left',
-          activeBaseRegex: '/pxp',
-        },
-        {
-          to: '/lxp',
-          label: 'Learner Experience',
-          position: 'left',
-          activeBaseRegex: '/lxp',
         },
       ],
     },
