@@ -1,4 +1,4 @@
-# help-site
+# Help-site
 
 Docusaurus tooling for the **tmrw Help** site — live at
 **[help.tmrw.education](https://help.tmrw.education)**.
