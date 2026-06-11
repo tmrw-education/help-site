@@ -20,6 +20,17 @@ The whole **StaffXP** help section was reformatted and illustrated:
 - **Shipped:** merged to `main` (PR #73, superseding the Notices pilot #72) and
   auto-deployed. Live routes are `/sxp/<Topic>/<id>`.
 
+**Post-launch cleanup (also live):**
+
+- `Notices` folder renamed `04-Notices` for numbering consistency (URL-safe —
+  prefix is stripped, `/sxp/Notices` unchanged).
+- **Landing rebuilt:** `index.md` is now the front door (`/sxp`) — intro, MyDay
+  hero image, browse-by-topic links, Felix nod. The old duplicate `01-Overview`
+  page was folded in and removed.
+- **Removed:** empty `14-FAQs` + `15-Glossary` placeholders, the orphaned
+  `99-Images/` shared folder, and the customer-specific Untis/Markbook/Follett
+  pages (see §4).
+
 ## 2. How it deploys — and where the originals are
 
 **Every push to `main` auto-rebuilds and publishes** (`deploy.yml`; ~1–2 min).

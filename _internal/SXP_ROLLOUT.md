@@ -40,10 +40,10 @@ twin reference doc → workflow maps tasks + drafts lean articles → serial cap
 ## B. Orientation — no twin doc; can start now
 | Topic | Approach | Status |
 |---|---|---|
-| 02-Navigating the Platform | reformat + fresh shots | 🟡 **4/5 shots** — `01-sign-in` deferred (signed-out screen) |
-| 01-Overview | light reformat (section intro, prose) | ⬜ |
-| 10-AI & Felix | light reformat (conceptual) | ⬜ |
-| 14-FAQs | stub — gather Qs or placeholder | ⬜ |
+| 02-Navigating the Platform | reformat + fresh shots | ✅ **DONE — 5 shots** (sign-in captured 2026-06-11) |
+| Landing (`index.md`) | rich front door: intro + MyDay hero + browse-by-topic | ✅ **DONE** — folded in the old `01-Overview`, which was removed |
+| 10-AI & Felix | light reformat (conceptual) | ⬜ still a monolith |
+| 14-FAQs / 15-Glossary | — | ❌ **removed** (empty placeholders; add real ones later if needed) |
 
 ## C. Integrations — REMOVED from the shared help (2026-06-11)
 
