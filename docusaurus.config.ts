@@ -169,11 +169,12 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
+      title: 'Help',
       logo: {
         alt: 'tmrw Help',
-        src: 'img/tmrw-logo.svg',
-        // header is always dark, so the same light-on-dark logo serves both color modes
-        srcDark: 'img/tmrw-logo.svg',
+        // 't' icon mark (not the wordmark); light-on-dark serves both modes since the header is always dark
+        src: 'img/tmrw-logo-icon-light.svg',
+        srcDark: 'img/tmrw-logo-icon-light.svg',
       },
       items: [
         {
