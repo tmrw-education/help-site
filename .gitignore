@@ -24,3 +24,6 @@ node_modules/
 /pxp
 /lxp
 /ce
+
+# Internal authoring/handover docs — local only, never in the public repo
+/_internal/
