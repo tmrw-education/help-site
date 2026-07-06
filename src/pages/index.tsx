@@ -12,6 +12,8 @@ import {
   Money,
   Chat,
   Education,
+  UserAdmin,
+  DeliveryTruck,
 } from '@carbon/icons-react';
 import styles from './index.module.css';
 
@@ -50,6 +52,20 @@ const apps = [
     description: 'Help for students using the tmrw learner platform.',
     href: '/lxp',
     Icon: Education,
+  },
+  {
+    id: 'hr',
+    name: 'Human Resources',
+    description: 'D365 HR administration for HR professionals, business partners, and system admins.',
+    href: '/hr',
+    Icon: UserAdmin,
+  },
+  {
+    id: 'scm',
+    name: 'Supply Chain Management',
+    description: 'Vendor registration, contracts, and sourcing for procurement teams.',
+    href: '/scm',
+    Icon: DeliveryTruck,
   },
 ];
 
