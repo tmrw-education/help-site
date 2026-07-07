@@ -30,6 +30,12 @@
 /* Finance & Operations — indigo → teal */
 .fno { background: linear-gradient(135deg, #ececf8, #e1f7f7); }
 [data-theme='dark'] .fno { background: linear-gradient(135deg, #24253a, #153439); }
+/* Human Resources — amber → orange */
+.hr { background: linear-gradient(135deg, #fdf3e3, #fdece3); }
+[data-theme='dark'] .hr { background: linear-gradient(135deg, #3a2e18, #3a2318); }
+/* Supply Chain Management — slate → steel blue */
+.scm { background: linear-gradient(135deg, #eef1f5, #e6eef5); }
+[data-theme='dark'] .scm { background: linear-gradient(135deg, #232830, #1e2a35); }
 
 .zoomImage {
   display: block;

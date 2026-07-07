@@ -8,7 +8,7 @@ All site-chrome code: the homepage, global brand CSS, and any custom React pages
 
 ## Ownership
 
-- `src/pages/index.tsx` + `index.module.css` — homepage (app-picker landing). Currently a basic card grid over the five product surfaces.
+- `src/pages/index.tsx` + `index.module.css` — homepage (app-picker landing). Currently a basic card grid over the seven product surfaces.
 - `src/css/custom.css` — global theme. Infima variable overrides + brand tokens. **Primary lever for the rebrand.**
 - `src/pages/markdown-page.mdx` — stray default sample page; safe to remove.
 

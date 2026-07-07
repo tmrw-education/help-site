@@ -7,12 +7,14 @@ import { useLocation } from '@docusaurus/router';
 import styles from './styles.module.css';
 
 // The gradient mat accent follows the app (by route): /sxp, /ess→ESS, /fo→F&O,
-// /pxp, /lxp. So every screenshot is automatically tinted to its app's brand.
-function appFromPath(pathname: string): 'sxp' | 'ess' | 'fno' | 'pxp' | 'lxp' {
+// /pxp, /lxp, /hr, /scm. So every screenshot is automatically tinted to its app's brand.
+function appFromPath(pathname: string): 'sxp' | 'ess' | 'fno' | 'pxp' | 'lxp' | 'hr' | 'scm' {
   if (pathname.startsWith('/ess')) return 'ess';
   if (pathname.startsWith('/fo')) return 'fno';
   if (pathname.startsWith('/pxp')) return 'pxp';
   if (pathname.startsWith('/lxp')) return 'lxp';
+  if (pathname.startsWith('/hr')) return 'hr';
+  if (pathname.startsWith('/scm')) return 'scm';
   return 'sxp';
 }
 
