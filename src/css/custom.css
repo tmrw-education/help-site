@@ -248,7 +248,7 @@ input[class*='searchQueryInput']::-webkit-search-cancel-button {
   border-radius: 0;
   color: var(--tmrw-text-2);
 }
-.menu__link { padding: 0 16px 0 32px; height: 32px; align-items: center; }
+.menu__link { padding: 5px 16px 5px 32px; min-height: 32px; line-height: 1.35; align-items: center; }
 .menu__list-item-collapsible > .menu__link { height: 40px; }
 .menu__list-item-collapsible > .menu__caret { padding-right: 16px; }
 .menu__link:hover,
