@@ -1,0 +1,21 @@
+name: Trigger site deploy
+
+# Site tooling lives here, but the build/publish workflow lives in the content
+# repo (tmrw-education/help). A push here can't reach that workflow with the
+# built-in GITHUB_TOKEN (it's scoped to this repo), so we use a PAT to kick it.
+#
+# Setup (one time): create a fine-grained PAT with Actions: read+write on the
+# `help` repo, then add it here as the secret DEPLOY_PAT.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kick the deploy in the content repo
+        env:
+          GH_TOKEN: ${{ secrets.DEPLOY_PAT }}
+        run: gh workflow run "Deploy to GitHub Pages" --repo tmrw-education/help
