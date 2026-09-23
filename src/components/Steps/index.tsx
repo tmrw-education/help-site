@@ -10,7 +10,7 @@ export type StepsProps = {
 
 // Numbered, rail-connected procedure list. Step title + body are always
 // visible (help-center default per uncle); only <StepDetail> collapses.
-export function Steps({ children, className }: StepsProps): JSX.Element {
+export function Steps({ children, className }: StepsProps): React.JSX.Element {
   return <ol className={clsx(styles.steps, className)}>{children}</ol>;
 }
 
@@ -24,7 +24,7 @@ export type StepProps = {
   className?: string;
 };
 
-export function Step({ title, accent, final, children, className }: StepProps): JSX.Element {
+export function Step({ title, accent, final, children, className }: StepProps): React.JSX.Element {
   // Auto-convert path (plain markdown numbered list): no explicit title is
   // passed, so lift the item's first block (its first line) into the title and
   // keep the rest as the body. Explicit <Step title="…"> bypasses this.
@@ -69,7 +69,7 @@ export function StepDetail({
   defaultOpen = false,
   children,
   className,
-}: StepDetailProps): JSX.Element {
+}: StepDetailProps): React.JSX.Element {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div className={clsx(styles.detail, className)}>

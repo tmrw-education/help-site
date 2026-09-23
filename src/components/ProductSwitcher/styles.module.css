@@ -1,0 +1,77 @@
+.root { position: relative; height: var(--ifm-navbar-height); padding: 0; }
+@media (min-width: 997px) { .root { display: flex; } }
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  padding: 0 16px;
+  border: 0;
+  background: transparent;
+  color: var(--tmrw-hd-link-active);
+  font: 500 0.875rem/1 var(--ifm-font-family-base);
+  cursor: pointer;
+}
+.trigger:hover, .triggerOpen { background: var(--tmrw-hd-hover-bg); }
+.trigger:focus-visible { outline: 2px solid var(--tmrw-hd-blue); outline-offset: -2px; }
+.chevron { color: var(--tmrw-hd-link); transition: transform 0.15s ease; }
+.triggerOpen .chevron { transform: rotate(180deg); }
+
+.panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 30;
+  width: 768px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 24px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-toc-border-color);
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 24px 48px -16px rgba(0, 0, 0, 0.28);
+}
+
+.groupLabel {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ifm-color-content-secondary);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 -8px;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--ifm-font-color-base);
+}
+.item:hover { background: var(--ifm-color-emphasis-100); color: var(--ifm-font-color-base); text-decoration: none; }
+.item:focus-visible { outline: 2px solid var(--ifm-color-primary); outline-offset: 0; }
+.itemActive { background: var(--ifm-color-emphasis-100); }
+.itemMark { display: grid; place-items: center; width: 32px; height: 32px; flex: none; }
+.itemName { display: block; font-size: 0.875rem; font-weight: 600; }
+.itemAudience { display: block; font-size: 0.8125rem; color: var(--ifm-color-content-secondary); }
+
+.foot {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ifm-toc-border-color);
+  font-size: 0.875rem;
+}
+
+/* mobile drawer */
+.drawerGroup {
+  margin: 16px 12px 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ifm-color-content-secondary);
+}
+.drawerLink { display: flex; align-items: center; gap: 12px; min-height: 48px; }
+.drawerList { padding-left: 0 !important; margin: 0 !important; }

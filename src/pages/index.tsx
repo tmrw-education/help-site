@@ -1,173 +1,109 @@
-import { type ReactNode, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 import Link from '@docusaurus/Link';
-import { useHistory } from '@docusaurus/router';
+import Head from '@docusaurus/Head';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import {
-  ArrowRight,
-  Search as SearchIcon,
-  UserMultiple,
-  UserProfile,
-  Money,
-  Chat,
-  Education,
-  UserAdmin,
-  DeliveryTruck,
-} from '@carbon/icons-react';
+import LiveSearch from '@site/src/components/LiveSearch';
+import { ArrowRight, UserMultiple, Chat, Education } from '@carbon/icons-react';
 import styles from './index.module.css';
 
-const apps = [
+// Concept C: search-led homepage for the three everyday audiences. Dynamics 365
+// admin guides (F&O, HR, SCM) sit behind one band → /admin, and in the navbar switcher.
+const AUDIENCES = [
   {
-    id: 'sxp',
-    name: 'StaffXP',
-    description: 'Day-to-day tools for teachers, admin, and school leaders.',
-    href: '/sxp',
+    title: 'School staff',
+    products: 'StaffXP and Employee Self-Service',
     Icon: UserMultiple,
+    links: [
+      { label: 'Take the daily roll', to: '/sxp/Attendance/take-attendance-roll' },
+      { label: 'Submit a leave request', to: '/ess/Leave/submit-a-leave-request' },
+      { label: 'Send a notice to parents', to: '/sxp/Notices/create-notice' },
+    ],
+    all: { label: 'All staff guides', to: '/sxp' },
   },
   {
-    id: 'ess',
-    name: 'Employee Self-Service',
-    description: 'HR tasks for all staff: leave, benefits, documents, and more.',
-    href: '/ess',
-    Icon: UserProfile,
-  },
-  {
-    id: 'fo',
-    name: 'Finance & Operations',
-    description: 'Billing, fees, and financial management for bursars and accountants.',
-    href: '/fo',
-    Icon: Money,
-  },
-  {
-    id: 'pxp',
-    name: 'Parent Experience',
-    description: 'Everything parents need: notices, attendance, and communication.',
-    href: '/pxp',
+    title: 'Parents',
+    products: 'ParentXP',
     Icon: Chat,
+    links: [
+      { label: 'Pay outstanding fees', to: '/pxp/Fees/pay-outstanding-fees' },
+      { label: 'Report an unexpected absence', to: '/pxp/Attendance/unexpected-absence-pxp' },
+      { label: 'Let someone else collect my child', to: '/pxp/Attendance/someone-else-collects-my-child' },
+    ],
+    all: { label: 'All parent guides', to: '/pxp' },
   },
   {
-    id: 'lxp',
-    name: 'Learner Experience',
-    description: 'Help for students using the tmrw learner platform.',
-    href: '/lxp',
+    title: 'Students',
+    products: 'LearnerXP',
     Icon: Education,
-  },
-  {
-    id: 'hr',
-    name: 'Human Resources',
-    description: 'D365 HR administration for HR professionals, business partners, and system admins.',
-    href: '/hr',
-    Icon: UserAdmin,
-  },
-  {
-    id: 'scm',
-    name: 'Supply Chain Management',
-    description: 'Vendor registration, contracts, and sourcing for procurement teams.',
-    href: '/scm',
-    Icon: DeliveryTruck,
+    links: [{ label: 'Getting started with LearnerXP', to: '/lxp' }],
+    soon: 'More guides coming soon',
   },
 ];
 
-const SEARCH_HINTS = [
-  'Search leave requests…',
-  'Search billing & fees…',
-  'How do I mark attendance?',
-  'Reset a password…',
-  'Search StaffXP…',
-];
-
-const POPULAR = ['Reset password', 'Request leave', 'View payslip', 'Mark attendance', 'Pay fees'];
-
-function HeroSearch() {
-  const history = useHistory();
-  const searchBase = useBaseUrl('/search');
-  const [q, setQ] = useState('');
-  const [hint, setHint] = useState(0);
-
-  // cycle placeholder hints while the field is empty
-  useEffect(() => {
-    if (q) return;
-    const id = setInterval(
-      () => setHint((h) => (h + 1) % SEARCH_HINTS.length),
-      2600,
-    );
-    return () => clearInterval(id);
-  }, [q]);
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (q.trim()) history.push(`${searchBase}?q=${encodeURIComponent(q.trim())}`);
-  };
-
-  return (
-    <form className={styles.heroSearch} onSubmit={onSubmit} role="search">
-      <span className={styles.heroSearchBtn} aria-hidden="true">
-        <SearchIcon size={18} />
-      </span>
-      <span className={styles.heroSearchField}>
-        <input
-          className={styles.heroSearchInput}
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          aria-label="Search the help center"
-        />
-        {!q && (
-          <span className={styles.heroHint} key={hint} aria-hidden="true">
-            {SEARCH_HINTS[hint]}
-          </span>
-        )}
-      </span>
-      <button className={styles.heroSubmit} type="submit" aria-label="Search">
-        <ArrowRight size={18} />
-      </button>
-    </form>
-  );
-}
+const POPULAR = ['Reset password', 'Request leave', 'View payslip', 'Take the daily roll', 'Pay fees'];
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
+  const d365 = useBaseUrl('/img/d365/dynamics-365.svg');
 
   return (
     <Layout title="Help" description={siteConfig.tagline}>
+      {/* the hero owns search on this page; custom.css hides the navbar search */}
+      <Head>
+        <html className="page-home" />
+      </Head>
       <main className={styles.main}>
         <div className={styles.hero}>
           <h1 className={styles.title}>How can we help?</h1>
-          <p className={styles.subtitle}>
-            Search across every tmrw product.
-          </p>
-          <HeroSearch />
+          <p className={styles.subtitle}>Search across every tmrw product.</p>
+          <LiveSearch variant="hero" />
           <div className={styles.popular}>
-            <span className={styles.popularLabel}>Popular</span>
+            <span className={styles.popularLabel}>Popular:</span>
             {POPULAR.map((term) => (
-              <Link
-                key={term}
-                to={`/search?q=${encodeURIComponent(term)}`}
-                className={styles.chip}
-              >
+              <Link key={term} to={`/search?q=${encodeURIComponent(term)}`} className={styles.chip}>
                 {term}
               </Link>
             ))}
           </div>
         </div>
 
-        <p className={styles.browseLabel}>Or browse by product</p>
-        <div className={styles.grid}>
-          {apps.map(({ id, name, description, href, Icon }) => (
-            <Link key={id} to={href} className={styles.card}>
-              <span className={styles.cardIcon}>
-                <Icon width={32} height={32} aria-hidden="true" />
-              </span>
-              <span className={styles.cardText}>
-                <h2 className={styles.cardTitle}>{name}</h2>
-                <p className={styles.cardDesc}>{description}</p>
-              </span>
-              <span className={styles.cardArrow} aria-hidden="true">
-                <ArrowRight size={18} />
-              </span>
-            </Link>
+        <div className={styles.audiences}>
+          {AUDIENCES.map(({ title, products, Icon, links, all, soon }) => (
+            <section key={title} className={styles.audience}>
+              <Icon size={32} aria-hidden />
+              <h2 className={styles.audienceTitle}>{title}</h2>
+              <p className={styles.audienceProducts}>{products}</p>
+              <ul className={styles.links}>
+                {links.map((l) => (
+                  <li key={l.to}>
+                    <Link to={l.to}>{l.label}</Link>
+                  </li>
+                ))}
+                {all && (
+                  <li>
+                    <Link to={all.to}>{all.label} →</Link>
+                  </li>
+                )}
+                {soon && <li className={styles.soon}>{soon}</li>}
+              </ul>
+            </section>
           ))}
         </div>
+
+        <aside className={styles.admin}>
+          <img src={d365} width={40} height={40} alt="Dynamics 365" />
+          <div>
+            <p className={styles.adminTitle}>Running the school in Dynamics 365?</p>
+            <p className={styles.adminText}>
+              Admin guides for Finance &amp; Operations, Human Resources and Supply Chain live in their own section.
+            </p>
+          </div>
+          <Link to="/admin" className={styles.adminButton}>
+            Admin guides <ArrowRight size={16} aria-hidden />
+          </Link>
+        </aside>
       </main>
     </Layout>
   );

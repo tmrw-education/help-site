@@ -214,50 +214,17 @@ const config: Config = {
         src: 'img/tmrw-logo-icon-light.svg',
         srcDark: 'img/tmrw-logo-icon-light.svg',
       },
-      items: [
-        {
-          to: '/sxp',
-          label: 'StaffXP',
-          position: 'left',
-          activeBaseRegex: '/sxp',
-        },
-        {
-          to: '/pxp',
-          label: 'ParentXP',
-          position: 'left',
-          activeBaseRegex: '/pxp',
-        },
-        {
-          to: '/lxp',
-          label: 'LearnerXP',
-          position: 'left',
-          activeBaseRegex: '/lxp',
-        },
-        {
-          to: '/ess',
-          label: 'Employee Self-Service',
-          position: 'left',
-          activeBaseRegex: '/ess',
-        },
-        {
-          to: '/fo',
-          label: 'Finance & Operations',
-          position: 'left',
-          activeBaseRegex: '/fo',
-        },
-        {
-          to: '/hr',
-          label: 'Human Resources',
-          position: 'left',
-          activeBaseRegex: '/hr',
-        },
-        {
-          to: '/scm',
-          label: 'Supply Chain Management',
-          position: 'left',
-          activeBaseRegex: '/scm',
-        },
+      // One product switcher (grouped menu) instead of seven links — see src/components/ProductSwitcher.
+      items: [{ type: 'custom-productSwitcher', position: 'left' }],
+    },
+    footer: {
+      style: 'light',
+      links: [
+        { label: 'All help', to: '/' },
+        { label: 'Dynamics 365 admin guides', to: '/admin' },
+        { label: 'tmrw.education', href: 'https://tmrw.education' },
       ],
+      copyright: 'Help for every tmrw product',
     },
     prism: {
       theme: prismThemes.github,

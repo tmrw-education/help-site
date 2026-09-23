@@ -1,22 +1,17 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import { translate } from '@docusaurus/Translate';
+import { useLocation } from '@docusaurus/router';
+import { productFromPath, ProductMark } from '@site/src/data/products';
 
-// Carbon-style breadcrumb: text "Home" link, no icon.
-export default function HomeBreadcrumbItem(): JSX.Element {
-  const homeHref = useBaseUrl('/');
+// First breadcrumb = the product you're in (icon + name → product landing), not "Home".
+export default function HomeBreadcrumbItem(): React.JSX.Element | null {
+  const product = productFromPath(useLocation().pathname);
+  if (!product) return null;
   return (
     <li className="breadcrumbs__item">
-      <Link
-        aria-label={translate({
-          id: 'theme.docs.breadcrumbs.home',
-          message: 'Home page',
-          description: 'The ARIA label for the home page in the breadcrumbs',
-        })}
-        className="breadcrumbs__link"
-        href={homeHref}>
-        Home
+      <Link className="breadcrumbs__link breadcrumbs__product" to={product.route}>
+        <ProductMark product={product} size={16} />
+        {product.name}
       </Link>
     </li>
   );

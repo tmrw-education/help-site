@@ -64,7 +64,7 @@
   align-items: center;
   min-height: 30px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: var(--tmrw-h6); /* designguide H6: Plex Sans 600 */
   color: var(--ifm-heading-color);
 }
 /* When the title is an auto-lifted markdown paragraph, strip its block margins
