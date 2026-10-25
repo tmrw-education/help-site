@@ -52,13 +52,13 @@
   border: 1px solid transparent;
 }
 .navbar .field:focus-within { border-color: var(--tmrw-hd-blue); }
-.navbar .icon { color: #8d8d8d; }
+.navbar .icon { color: var(--tmrw-hd-muted); }
 .navbar .input { height: 100%; font-size: 0.875rem; color: var(--tmrw-hd-link-active); }
-.navbar .input::placeholder { color: #8d8d8d; }
+.navbar .input::placeholder { color: var(--tmrw-hd-muted); }
 .kbd {
   flex: none;
   padding: 3px 6px;
-  border: 1px solid #4d5358;
+  border: 1px solid var(--tmrw-hd-border);
   border-radius: 5px;
   background: transparent;
   box-shadow: none;

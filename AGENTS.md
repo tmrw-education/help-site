@@ -53,8 +53,9 @@ Public help site for the **tmrw education platform**. Docusaurus static site →
 
 ## Brand Source of Truth
 
-- Brand system: the **`tmrw-theme` skill** (Carbon-based, blue `#0f62fe` accent, 8pt grid) plus the brand guide at `~/Documents/GitHub/tmrw/designguide/` (`typography*.md`, `iconography.md`, `layout.md`). Where they disagree, the designguide is newer. Some asset **paths in the skill are stale**.
-- Type (2026-09 decision): **IBM Plex Serif Light 300** for display (hero, page titles, section headings ≥ ~24px); **IBM Plex Sans** for everything else; Plex Mono for code only. Mona Sans is retired. Fluid scale from `typography-digital.md`; nothing below 12.8px.
+- Brand system: the **`tmrw-theme` skill** (Carbon-based, blue `#0f62fe` accent, 8pt grid) plus the brand guide at `~/Documents/GitHub/tmrw/designguide/` (`color.md`, `typography*.md`, `iconography.md`, `layout.md`). Where they disagree, the designguide is newer. Some asset **paths in the skill are stale**.
+- Neutrals (surfaces, text, borders) are the shared ramp in `color.md` §1–2, which comes from the master product design system, `TMRW-Chat.UI/DESIGN.md`. The old Carbon Cool Gray values (`#121619` page, `#f2f4f8`, `#c1c7cd`…) are retired.
+- Type (2026-09 decision): **IBM Plex Serif Light 300** for display (hero, page titles, section headings ≥ ~24px); **IBM Plex Sans** for everything else; Plex Mono for code only. The designguide's other display voice, Mona Sans ExtraBold, is for campaigns; a help site is a guide, so it uses the editorial voice (Serif) and no Mona. Fluid scale from `typography-digital.md`; nothing below 12.8px.
 - Icons: Carbon only, 16/20/24/32px, colour by text role. XP "x" app logos are retired (tmrwX launch). Dynamics 365 apps (F&O, HR, SCM) use Microsoft's official icons, unmodified, in admin contexts only.
 - Real logos live at `~/Documents/GitHub/tmrw/slide-examples/{light-mode,dark-mode}-logo.svg` (4:1 ratio). Header uses `static/img/tmrw-logo-icon-light.svg`.
 - Fonts load from Google Fonts (CDN) for now; self-hosting is still a TODO.

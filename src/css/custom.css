@@ -1,7 +1,8 @@
 /**
  * tmrw Help — Carbon-styled Docusaurus theme.
  * Shell restyle: brand tokens, always-dark Carbon header, Carbon doc sidebar.
- * Brand source: tmrw-theme skill (Carbon foundation, Cool Gray ramp, blue signal).
+ * Brand source: tmrw designguide (color.md) + the master DESIGN.md (TMRW-Chat.UI) for the
+ * shared neutral ramp; blue is a signal. Decisions: src/AGENTS.md (2026-10-25 lab).
  * Type: IBM Plex Serif Light = display (hero, page titles, section headings >= ~24px);
  * IBM Plex Sans = everything else. Scale = tmrw designguide typography-digital.md (fluid).
  * Fonts via CDN for now (self-host later).
@@ -40,25 +41,27 @@
   --ifm-global-spacing: 1rem;
 
   /* blue accent — signal */
-  --ifm-color-primary: #0f62fe;
-  --ifm-color-primary-dark: #0b54de;
-  --ifm-color-primary-darker: #0a4fd1;
-  --ifm-color-primary-darkest: #0840ac;
-  --ifm-color-primary-light: #3a7dff;
-  --ifm-color-primary-lighter: #4f89ff;
-  --ifm-color-primary-lightest: #7aa6ff;
+  /* links and coloured words, light: #095EFA (color.md §2); Blue 60 stays the brand shape colour */
+  --ifm-color-primary: #095efa;
+  --ifm-color-primary-dark: #0554e4;
+  --ifm-color-primary-darker: #044fd8;
+  --ifm-color-primary-darkest: #0441b2;
+  --ifm-color-primary-light: #226efb;
+  --ifm-color-primary-lighter: #2e76fb;
+  --ifm-color-primary-lightest: #538efc;
 
-  /* neutrals (tmrw / Carbon Cool Gray) */
-  --ifm-background-color: #ffffff;
-  --ifm-background-surface-color: #ffffff;
+  /* neutrals — the shared ramp (color.md §1–2). Page is the near-white raised step for reading;
+     sidebar and panels sit one step down on the card. */
+  --ifm-background-color: #fdfeff;
+  --ifm-background-surface-color: #f5f8fd;
   --ifm-font-color-base: #121619;
   --ifm-heading-color: #121619;
   --ifm-color-content-secondary: #4d5358;
-  --ifm-toc-border-color: #e0e0e0;
-  --ifm-hr-border-color: #e0e0e0;
+  --ifm-toc-border-color: #e1e3e8;
+  --ifm-hr-border-color: #e1e3e8;
 
   --ifm-code-font-size: 95%;
-  --ifm-code-background: #ECF0F1;
+  --ifm-code-background: #f5f8fd;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.08);
 
   /* navbar height (Carbon = 48px; nudged to 56px) */
@@ -79,53 +82,56 @@
   --tmrw-section-weight: 400;
 
   /* tmrw brand role tokens for our own rules */
-  --tmrw-surface: #f2f4f8;
-  --tmrw-rule: #c1c7cd;
-  --tmrw-surface-2: #dde1e6;
+  --tmrw-surface: #f5f8fd;   /* card */
+  --tmrw-rule: #afb1b6;      /* strong border: chips, placeholders (master --border-strong) */
+  --tmrw-surface-2: #e5e7ec; /* well: hover */
   --tmrw-text-2: #4d5358;
 
-  /* note / blockquote layer (brand blue-light) */
-  --tmrw-note-bg: #edf4ff;
-  --tmrw-note-border: #a6c8ff;
+  /* note / Quick answer layer: the brand panel, Blue 10, no border (color.md §3.4) */
+  --tmrw-note-bg: #edf5ff;
+  --tmrw-note-border: #edf5ff;
 
-  /* always-dark header (Cool Gray ramp) */
-  --tmrw-hd-bg: #121619;
-  --tmrw-hd-border: #343a3f;
-  --tmrw-hd-link: #c1c7cd;
-  --tmrw-hd-link-active: #f2f4f8;
-  --tmrw-hd-hover-bg: #21272a;
-  --tmrw-hd-blue: #4589ff;
+  /* always-dark header, on the dark ramp */
+  --tmrw-hd-bg: #0e1013;
+  --tmrw-hd-border: #2b2d31;
+  --tmrw-hd-link: #b1b3b8;
+  --tmrw-hd-link-active: #ffffff;
+  --tmrw-hd-hover-bg: #181a1d;
+  --tmrw-hd-muted: #8b8d92;
+  --tmrw-hd-blue: #78a9ff;
 }
 
 /* =====================================================================
-   Brand tokens (DARK) — Carbon g100 Cool Gray layering
+   Brand tokens (DARK) — the shared dark ramp (color.md §1–2)
    ===================================================================== */
 [data-theme='dark'] {
   --tmrw-section-weight: 300;
-  --ifm-color-primary: #4589ff;
-  --ifm-color-primary-dark: #2272ff;
-  --ifm-color-primary-darker: #1267ff;
-  --ifm-color-primary-darkest: #0048d6;
-  --ifm-color-primary-light: #68a0ff;
-  --ifm-color-primary-lighter: #79abff;
-  --ifm-color-primary-lightest: #a9c8ff;
+  /* links, dark: Blue 40 */
+  --ifm-color-primary: #78a9ff;
+  --ifm-color-primary-dark: #5391ff;
+  --ifm-color-primary-darker: #4085ff;
+  --ifm-color-primary-darkest: #0861ff;
+  --ifm-color-primary-light: #86b2ff;
+  --ifm-color-primary-lighter: #8cb6ff;
+  --ifm-color-primary-lightest: #a0c3ff;
 
-  --ifm-background-color: #121619;        /* CG100 — same as header */
-  --ifm-background-surface-color: #21272a; /* CG90 card */
-  --ifm-font-color-base: #f2f4f8;
-  --ifm-heading-color: #f2f4f8;
-  --ifm-color-content-secondary: #c1c7cd;
-  --ifm-toc-border-color: #343a3f;
-  --ifm-hr-border-color: #343a3f;
-  --ifm-code-background: #21272a;
+  --ifm-background-color: #0e1013;         /* page — same as header */
+  --ifm-background-surface-color: #181a1d; /* card */
+  --ifm-font-color-base: #ffffff;
+  --ifm-heading-color: #ffffff;
+  --ifm-color-content-secondary: #b1b3b8;
+  --ifm-toc-border-color: #2b2d31;
+  --ifm-hr-border-color: #2b2d31;
+  --ifm-code-background: #181a1d;
   --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
 
-  --tmrw-surface: #21272a;
-  --tmrw-rule: #4d5358;
-  --tmrw-surface-2: #343a3f;
-  --tmrw-text-2: #c1c7cd;
-  --tmrw-note-bg: #001d6c;
-  --tmrw-note-border: #4589ff;
+  --tmrw-surface: #181a1d;
+  --tmrw-rule: #55575b;      /* master --border-strong */
+  --tmrw-surface-2: #222427;
+  --tmrw-text-2: #b1b3b8;
+  /* dark shows a panel by lift, not tint: Blue 90 read as the heaviest block on the page */
+  --tmrw-note-bg: #222427;
+  --tmrw-note-border: #2b2d31;
 }
 
 /* Display face: IBM Plex Serif Light. Presence comes from size, never weight (designguide). */
@@ -234,7 +240,7 @@ input[class*='searchQueryInput']::-webkit-search-cancel-button {
 /* =====================================================================
    DOC SIDEBAR — Carbon SideNav
    ===================================================================== */
-.theme-doc-sidebar-container { border-right: 1px solid var(--ifm-toc-border-color); }
+.theme-doc-sidebar-container { border-right: 1px solid var(--ifm-toc-border-color); background: var(--ifm-background-surface-color); }
 .menu { padding: 16px 0; font-size: 14px; font-weight: 400; }
 .menu__list { margin: 0; }
 .menu__list-item:not(:first-child) { margin-top: 0; }

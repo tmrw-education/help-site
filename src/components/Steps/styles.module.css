@@ -54,7 +54,7 @@
   top: 15px;          /* this circle's center */
   bottom: -15px;      /* next circle's center */
   width: 2px;
-  background: var(--ifm-color-emphasis-300);
+  background: var(--ifm-toc-border-color); /* the border/rule step, both themes */
   z-index: 0;
 }
 .step:last-child::after { display: none; }

@@ -30,6 +30,10 @@ All site-chrome code: the homepage, global brand CSS, and any custom React pages
 - `/search` page is still the plugin's `SearchPage`, restyled in `custom.css` (product label per result via `a[href^=…]::before`).
 - Fonts via Google Fonts CDN for now; self-host via `static/` + `@font-face` is still owed.
 - Map brand tokens to both `:root` (light) and `[data-theme='dark']` — never mix light/dark tokens in one block.
+- Colour (decided in a live lab, 2026-10-25): light page `#FDFEFF` (the ramp's raised step, for reading) with sidebar, panels and code on the card `#F5F8FD`; dark page `#0E1013`, card `#181A1D`. Text and links per `color.md` §2: light links `#095EFA`; dark text `#FFFFFF` / `#B1B3B8`, links Blue 40 `#78A9FF`. Borders `#E1E3E8` / `#2B2D31`; `--tmrw-rule` (chips, placeholders) is the master's `--border-strong`. The header is always on the dark ramp.
+- Note panels (Quick answer, blockquotes) share `--tmrw-note-*`: light is the brand panel, Blue 10 `#EDF5FF`, no border; dark is the raised step `#222427` with a `#2B2D31` hairline, because a dark panel shows by lift, and Blue 90 read as the heaviest block on the page. Blue appears only in the icon.
+- Step rail = the border/rule token. The number rings still use Infima's `--ifm-color-emphasis-400` (left open).
+- Screenshot mats (ZoomImage) keep their hand-picked per-product pastel gradients: a deliberate exception to the palette (user's call, 2026-10-25). Do not "fix" them to `color.md` values.
 
 ## Work Guidance
 
