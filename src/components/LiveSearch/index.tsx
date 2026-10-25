@@ -137,7 +137,10 @@ export default function LiveSearch({ variant }: { variant: 'hero' | 'navbar' }):
     }
   };
 
-  const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform);
+  // Decided after mount: the server can't know the platform, so rendering it during hydration
+  // gave "Ctrl K" on the server and "⌘K" on a Mac (React error #418).
+  const [shortcut, setShortcut] = useState<string | null>(null);
+  useEffect(() => setShortcut(/Mac|iPhone|iPad/.test(navigator.platform) ? '⌘K' : 'Ctrl K'), []);
 
   return (
     <div ref={root} className={clsx(styles.root, styles[variant], `live-search--${variant}`)} role="search">
@@ -170,9 +173,11 @@ export default function LiveSearch({ variant }: { variant: 'hero' | 'navbar' }):
             <ArrowRight size={16} />
           </button>
         ) : (
-          <kbd className={styles.kbd} aria-hidden>
-            {isMac ? '⌘K' : 'Ctrl K'}
-          </kbd>
+          shortcut && (
+            <kbd className={styles.kbd} aria-hidden>
+              {shortcut}
+            </kbd>
+          )
         )}
       </div>
 
