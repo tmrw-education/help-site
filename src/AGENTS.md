@@ -17,7 +17,8 @@ All site-chrome code: the homepage, global brand CSS, and any custom React pages
 - `src/components/ZoomImage/` — click-to-zoom screenshots on the per-app gradient mat; shows a "Screenshot coming soon" placeholder when an image fails.
 - `src/components/Steps/` — numbered step rail for articles.
 - `src/theme/` swizzles: `DocBreadcrumbs/Items/Home` (first crumb = product), `DocSidebar/Desktop/Content` (product header + article count), `NotFound/Content` (404 with search, popular tasks, products), `SearchBar` (navbar → LiveSearch), `Root.tsx` (hides non-zoom broken images), `Icon/*`.
-- `src/css/custom.css` — global theme: Infima overrides, brand + type-scale tokens (`--tmrw-serif`, `--tmrw-h1/h3/h4/h6`, `--tmrw-surface`), navbar, sidebar, search-page restyle (incl. product label per result via `a[href^=…]::before`), footer, 404.
+- No footer (removed 2026-10-25): a footer holding only the tmrw logo repeated the navbar's brand. Open follow-up: the site runs Microsoft Clarity, so when a public privacy policy URL exists, bring back a one-link footer ("Privacy") in `docusaurus.config.ts` `themeConfig.footer`.
+- `src/css/custom.css` — global theme: Infima overrides, brand + type-scale tokens (`--tmrw-serif`, `--tmrw-h1/h3/h4/h6`, `--tmrw-surface`), navbar, sidebar, search-page restyle (incl. product label per result via `a[href^=…]::before`), 404.
 
 ## Local Contracts
 

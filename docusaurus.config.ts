@@ -217,15 +217,8 @@ const config: Config = {
       // One product switcher (grouped menu) instead of seven links — see src/components/ProductSwitcher.
       items: [{ type: 'custom-productSwitcher', position: 'left' }],
     },
-    footer: {
-      style: 'light',
-      links: [
-        { label: 'All help', to: '/' },
-        { label: 'Dynamics 365 admin guides', to: '/admin' },
-        { label: 'tmrw.education', href: 'https://tmrw.education' },
-      ],
-      copyright: 'Help for every tmrw product',
-    },
+    // No footer: the navbar carries the brand on every page, and a footer holding only a logo
+    // repeated it. It comes back when there is a public privacy policy to link (Clarity runs here).
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,

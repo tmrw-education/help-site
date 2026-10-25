@@ -419,7 +419,7 @@ input[class*='searchQueryInput']::-webkit-search-cancel-button {
 [class*='docItemCol'] { padding-left: 2rem; padding-right: 2rem; }
 
 /* =====================================================================
-   REDESIGN (concept C) — product wayfinding, article extras, search, 404, footer
+   REDESIGN (concept C) — product wayfinding, article extras, search, 404
    ===================================================================== */
 
 /* breadcrumb: product first, with its mark; all crumbs share one centre line */
@@ -503,14 +503,6 @@ html article[class*='searchResultItem'] > h2 > a[href^='/scm']::before { content
 .not-found__mark { display: grid; place-items: center; width: 20px; height: 20px; flex: none; }
 @media (max-width: 996px) { .not-found { padding: 2.5rem 1rem 4rem; } .not-found__cols { grid-template-columns: 1fr; } }
 
-/* footer: one quiet line — tagline left, links right */
-.footer { --ifm-footer-background-color: var(--ifm-background-color); border-top: 1px solid var(--ifm-toc-border-color); padding: 1.5rem 2rem; }
-.footer > .container { max-width: none; padding: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 2rem; }
-.footer .footer__links { margin: 0; order: 2; text-align: left; }
-.footer .footer__bottom { order: 1; text-align: left; }
-.footer .footer__link-item, .footer .footer__copyright { color: var(--ifm-color-content-secondary); font-size: 0.8125rem; }
-.footer .footer__link-item:hover { color: var(--ifm-font-color-base); text-decoration: none; }
-@media (max-width: 996px) { .footer { padding: 1.5rem 1rem; } }
 
 /* mobile menu: keep the always-dark header bar, so the light logo + "Help" stay visible */
 .navbar-sidebar__brand { background: var(--tmrw-hd-bg); box-shadow: none; }
