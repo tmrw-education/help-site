@@ -37,12 +37,20 @@ const AUDIENCES = [
     title: 'Students',
     products: 'LearnerXP',
     Icon: Education,
+    // LearnerXP has one page so far; no "coming soon" filler on the homepage
     links: [{ label: 'Getting started with LearnerXP', to: '/lxp' }],
-    soon: 'More guides coming soon',
   },
 ];
 
-const POPULAR = ['Reset password', 'Request leave', 'View payslip', 'Take the daily roll', 'Pay fees'];
+// Each chip opens its article directly: a chip that runs a search can land on nothing
+// ("Reset password" and "View payslip" had no article) or on the wrong one first.
+const POPULAR = [
+  { label: 'Request leave', to: '/ess/Leave/submit-a-leave-request' },
+  { label: 'Take the daily roll', to: '/sxp/Attendance/take-attendance-roll' },
+  { label: 'Pay fees', to: '/pxp/Fees/pay-outstanding-fees' },
+  { label: 'Exam timetable', to: '/pxp/Timetable/view-exam-timetable-pxp' },
+  { label: 'Payment details', to: '/ess/Profile/update-payment-information' },
+];
 
 export default function Home(): ReactNode {
   const { siteConfig } = useDocusaurusContext();
@@ -59,18 +67,18 @@ export default function Home(): ReactNode {
           <h1 className={styles.title}>How can we help?</h1>
           <p className={styles.subtitle}>Search across every tmrw product.</p>
           <LiveSearch variant="hero" />
-          <div className={styles.popular}>
-            <span className={styles.popularLabel}>Popular:</span>
-            {POPULAR.map((term) => (
-              <Link key={term} to={`/search?q=${encodeURIComponent(term)}`} className={styles.chip}>
-                {term}
+          {/* no visible label: it pushed the chips off the field's axis; the nav names them for screen readers */}
+          <nav className={styles.popular} aria-label="Popular tasks">
+            {POPULAR.map(({ label, to }) => (
+              <Link key={to} to={to} className={styles.chip}>
+                {label}
               </Link>
             ))}
-          </div>
+          </nav>
         </div>
 
         <div className={styles.audiences}>
-          {AUDIENCES.map(({ title, products, Icon, links, all, soon }) => (
+          {AUDIENCES.map(({ title, products, Icon, links, all }) => (
             <section key={title} className={styles.audience}>
               <Icon size={32} aria-hidden />
               <h2 className={styles.audienceTitle}>{title}</h2>
@@ -86,7 +94,6 @@ export default function Home(): ReactNode {
                     <Link to={all.to}>{all.label} →</Link>
                   </li>
                 )}
-                {soon && <li className={styles.soon}>{soon}</li>}
               </ul>
             </section>
           ))}
