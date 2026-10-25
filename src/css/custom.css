@@ -136,6 +136,10 @@
   --tmrw-note-border: #2b2d31;
 }
 
+/* Nothing may widen the page sideways: an element past the right edge made the whole centred
+   column sit off-centre. `clip`, not `hidden`, so the sticky navbar keeps working. */
+html { overflow-x: clip; }
+
 /* Display face: IBM Plex Serif Light. Presence comes from size, never weight (designguide). */
 h1, .hero__title {
   font-family: var(--tmrw-serif);

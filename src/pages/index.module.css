@@ -46,10 +46,12 @@
 /* ----- audiences ----- */
 .audiences {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* each column as wide as its content, spread edge to edge: the first column's text starts on the
+     frame's left edge and the last one's ends on its right, so the left-aligned lists sit balanced */
+  grid-template-columns: repeat(3, max-content);
+  justify-content: space-between;
   gap: 2rem 3rem;
-  /* narrower than the hero's 992px: the columns' text then fills them and centres on the page axis */
-  max-width: 880px;
+  max-width: 880px; /* narrower than the hero's 992px, the same frame as the Dynamics band */
   margin: 5.5rem auto 0;
 }
 .audience > svg { display: block; }
