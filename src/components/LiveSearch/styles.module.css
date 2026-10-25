@@ -21,7 +21,7 @@
   height: 56px;
   padding: 0 8px 0 20px;
   border-radius: 999px;
-  background: var(--tmrw-surface-2);
+  background: var(--tmrw-field);
 }
 .hero .field:focus-within { background: var(--ifm-background-color); box-shadow: inset 0 0 0 2px var(--ifm-color-primary); }
 .hero .input { height: 100%; font-size: 1.125rem; color: var(--ifm-font-color-base); }

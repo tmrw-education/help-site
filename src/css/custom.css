@@ -84,7 +84,8 @@
   /* tmrw brand role tokens for our own rules */
   --tmrw-surface: #f5f8fd;   /* card */
   --tmrw-rule: #afb1b6;      /* strong border: chips, placeholders (master --border-strong) */
-  --tmrw-surface-2: #e5e7ec; /* well: hover, the hero search field, chips */
+  --tmrw-surface-2: #e5e7ec; /* well: hover */
+  --tmrw-field: #edf0f5;     /* hero search field + chips: the page step, between card and well */
   --tmrw-text-2: #4d5358;
 
   /* note / Quick answer layer: the brand panel, Blue 10, no border (color.md §3.4) */
@@ -128,6 +129,7 @@
   --tmrw-surface: #181a1d;
   --tmrw-rule: #55575b;      /* master --border-strong */
   --tmrw-surface-2: #222427;
+  --tmrw-field: #222427;
   --tmrw-text-2: #b1b3b8;
   /* dark shows a panel by lift, not tint: Blue 90 read as the heaviest block on the page */
   --tmrw-note-bg: #222427;
