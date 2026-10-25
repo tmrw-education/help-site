@@ -84,7 +84,7 @@
   /* tmrw brand role tokens for our own rules */
   --tmrw-surface: #f5f8fd;   /* card */
   --tmrw-rule: #afb1b6;      /* strong border: chips, placeholders (master --border-strong) */
-  --tmrw-surface-2: #e5e7ec; /* well: hover */
+  --tmrw-surface-2: #e5e7ec; /* well: hover, the hero search field, chips */
   --tmrw-text-2: #4d5358;
 
   /* note / Quick answer layer: the brand panel, Blue 10, no border (color.md §3.4) */
