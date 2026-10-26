@@ -9,11 +9,13 @@ const CONTENT = process.env.CONTENT_DIR ?? '../help';
 const MARKER = /VERIFY BEFORE PUBLISHING/i;
 const SKIP_DIRS = new Set(['.git', '.github', 'node_modules', 'build']);
 
+// Files at the content root (README, CONTRIBUTING, the authoring rationale) aren't published, and the
+// guide quotes the marker as an example, so only the product folders are checked.
 function* markdownFiles(dir) {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     if (entry.isDirectory()) {
       if (!SKIP_DIRS.has(entry.name)) yield* markdownFiles(join(dir, entry.name));
-    } else if (/\.mdx?$/.test(entry.name) && entry.name.toLowerCase() !== 'readme.md') {
+    } else if (dir !== CONTENT && /\.mdx?$/.test(entry.name) && entry.name.toLowerCase() !== 'readme.md') {
       yield join(dir, entry.name);
     }
   }

@@ -49,7 +49,7 @@ Public help site for the **tmrw education platform**. Docusaurus static site →
 
 - Note: source dir name ≠ route only for `finops→fo` now. Keep config and nav in sync.
 - Site chrome (nav, switcher, homepage, search labels) uses the XP names: EmployeeXP for `ess` (formerly Employee Self-Service) and GrowthXP for `gxp` (the Growth Experience Platform, the TMRW LMS). Article text in the content repo may still use the old names (ESS, GXP); that is the content owners' call.
-- Troubleshooting is one page per problem, grouped by audience, with an `index.md` listing them (search shows one result per article, so a long page hid every problem behind one "Troubleshooting" result). Reference: `gxp/15-Troubleshooting/` (its index keeps the old URL via `slug: /gxp-troubleshooting`). Rules for authors: `_internal/AUTHORING_FOR_FELIX.md` §2. StaffXP and the other products still use one long page.
+- Troubleshooting is one page per problem, grouped by audience, with an `index.md` listing them (search shows one result per article, so a long page hid every problem behind one "Troubleshooting" result). Reference: `gxp/15-Troubleshooting/` (its index keeps the old URL via `slug: /gxp-troubleshooting`). Rules for authors: `../help/CONTRIBUTING.md` §2. StaffXP and the other products still use one long page.
 - Glossaries are one page, but each term is its own `### Term` heading with the definition below, under `## A`-style letters, with `toc_max_heading_level: 2` so the contents list on the right shows letters only; that list is the jump bar (no A–Z links at the top; on narrow screens it folds into "On this page"). Tables gave terms no anchors (search landed on the letter, Felix got letter-sized chunks, phones squeezed the definitions). Reference: `gxp/16-Glossary.md`; the other products' glossaries are still tables.
 - `gxp` sits in the "Your employment" group beside `ess`. Its page ids are prefixed `gxp-` so they stay unique across products.
 - `ce/` exists but is **not** wired as a plugin (no route, not in nav). Leave alone unless asked.
@@ -68,7 +68,7 @@ Public help site for the **tmrw education platform**. Docusaurus static site →
 ## Internal Docs (not published)
 
 - `_internal/HELP_STRATEGY.md` — help system strategy/direction.
-- `_internal/AUTHORING_FOR_FELIX.md` — content authoring conventions.
+- Authoring rules are **published in the content repo**: `../help/CONTRIBUTING.md` (everyone follows it; the README sends authors there) and `../help/DOC_FORMAT_RATIONALE.md`. Edit those, not the old local copies `_internal/AUTHORING_FOR_FELIX.md` / `_internal/DOC_FORMAT_RATIONALE.md`, which are superseded. Keep CONTRIBUTING.md in step with the build checks (`scripts/check-content.mjs` skips files at the content root, since the guide quotes the marker).
 - `_internal/RELEASE_NOTES.md` — release log.
 
 ## Work Guidance
