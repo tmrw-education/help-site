@@ -3,6 +3,8 @@ import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 import remarkSteps from './src/remark/steps';
+// old page address → new one, for pages whose id or folder changed (see the file's header in AGENTS.md)
+import redirects from './src/data/redirects.json';
 
 // Content lives in the sibling `help` repo. Locally we read it directly from
 // ../help (real dir → live reload, and avoids the symlink build break).
@@ -94,6 +96,7 @@ const config: Config = {
   ],
 
   plugins: [
+    ['@docusaurus/plugin-client-redirects', { redirects }],
     [
       '@docusaurus/plugin-content-docs',
       {

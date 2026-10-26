@@ -1,0 +1,946 @@
+[
+  {
+    "from": "/ess/Navigating/find-your-way-around-ess",
+    "to": "/ess/Navigating/find-your-way-around"
+  },
+  {
+    "from": "/ess/Navigating/sign-in-ess",
+    "to": "/ess/Navigating/sign-in"
+  },
+  {
+    "from": "/fo/Navigating/fo-overview",
+    "to": "/fo/Navigating/overview"
+  },
+  {
+    "from": "/gxp/Access-and-permissions/gxp-change-someones-access",
+    "to": "/gxp/Access-and-permissions/change-someones-access"
+  },
+  {
+    "from": "/gxp/Access-and-permissions/gxp-check-line-manager-access",
+    "to": "/gxp/Access-and-permissions/check-line-manager-access"
+  },
+  {
+    "from": "/gxp/Access-and-permissions/gxp-disable-or-re-enable-an-account",
+    "to": "/gxp/Access-and-permissions/disable-or-re-enable-an-account"
+  },
+  {
+    "from": "/gxp/Access-and-permissions/gxp-give-someone-access",
+    "to": "/gxp/Access-and-permissions/give-someone-access"
+  },
+  {
+    "from": "/gxp/Access-and-permissions/gxp-manage-staff-categories",
+    "to": "/gxp/Access-and-permissions/manage-staff-categories"
+  },
+  {
+    "from": "/gxp/Access-and-permissions/gxp-remove-someones-access",
+    "to": "/gxp/Access-and-permissions/remove-someones-access"
+  },
+  {
+    "from": "/gxp/Access-and-permissions/gxp-replace-an-old-report-viewer-grant",
+    "to": "/gxp/Access-and-permissions/replace-an-old-report-viewer-grant"
+  },
+  {
+    "from": "/gxp/Access-and-permissions/gxp-see-who-has-access",
+    "to": "/gxp/Access-and-permissions/see-who-has-access"
+  },
+  {
+    "from": "/gxp/Access-and-permissions/gxp-set-a-line-manager",
+    "to": "/gxp/Access-and-permissions/set-a-line-manager"
+  },
+  {
+    "from": "/gxp/Access-and-permissions/gxp-understand-the-roles",
+    "to": "/gxp/Access-and-permissions/understand-the-roles"
+  },
+  {
+    "from": "/gxp/Calendar/gxp-filter-your-calendar",
+    "to": "/gxp/Calendar/filter-your-calendar"
+  },
+  {
+    "from": "/gxp/Calendar/gxp-see-your-learning-deadlines",
+    "to": "/gxp/Calendar/see-your-learning-deadlines"
+  },
+  {
+    "from": "/gxp/Calendar/gxp-use-the-agenda-view",
+    "to": "/gxp/Calendar/use-the-agenda-view"
+  },
+  {
+    "from": "/gxp/Certificates/gxp-download-a-certificate",
+    "to": "/gxp/Certificates/download-a-certificate"
+  },
+  {
+    "from": "/gxp/Certificates/gxp-print-a-certificate",
+    "to": "/gxp/Certificates/print-a-certificate"
+  },
+  {
+    "from": "/gxp/Certificates/gxp-share-a-certificate-link",
+    "to": "/gxp/Certificates/share-a-certificate-link"
+  },
+  {
+    "from": "/gxp/Certificates/gxp-view-your-certificates",
+    "to": "/gxp/Certificates/view-your-certificates"
+  },
+  {
+    "from": "/gxp/Certificates/gxp-when-you-get-a-certificate",
+    "to": "/gxp/Certificates/when-you-get-a-certificate"
+  },
+  {
+    "from": "/gxp/Channels-pathways-and-certificates/gxp-add-courses-to-a-channel",
+    "to": "/gxp/Channels-pathways-and-certificates/add-courses-to-a-channel"
+  },
+  {
+    "from": "/gxp/Channels-pathways-and-certificates/gxp-build-a-learning-pathway",
+    "to": "/gxp/Channels-pathways-and-certificates/build-a-learning-pathway"
+  },
+  {
+    "from": "/gxp/Channels-pathways-and-certificates/gxp-create-a-certificate-template",
+    "to": "/gxp/Channels-pathways-and-certificates/create-a-certificate-template"
+  },
+  {
+    "from": "/gxp/Channels-pathways-and-certificates/gxp-create-a-channel",
+    "to": "/gxp/Channels-pathways-and-certificates/create-a-channel"
+  },
+  {
+    "from": "/gxp/Channels-pathways-and-certificates/gxp-create-a-learning-pathway",
+    "to": "/gxp/Channels-pathways-and-certificates/create-a-learning-pathway"
+  },
+  {
+    "from": "/gxp/Channels-pathways-and-certificates/gxp-delete-a-channel",
+    "to": "/gxp/Channels-pathways-and-certificates/delete-a-channel"
+  },
+  {
+    "from": "/gxp/Channels-pathways-and-certificates/gxp-edit-a-certificate-template",
+    "to": "/gxp/Channels-pathways-and-certificates/edit-a-certificate-template"
+  },
+  {
+    "from": "/gxp/Channels-pathways-and-certificates/gxp-edit-a-channel",
+    "to": "/gxp/Channels-pathways-and-certificates/edit-a-channel"
+  },
+  {
+    "from": "/gxp/Channels-pathways-and-certificates/gxp-edit-or-delete-a-learning-pathway",
+    "to": "/gxp/Channels-pathways-and-certificates/edit-or-delete-a-learning-pathway"
+  },
+  {
+    "from": "/gxp/Channels-pathways-and-certificates/gxp-view-awarded-certificates",
+    "to": "/gxp/Channels-pathways-and-certificates/view-awarded-certificates"
+  },
+  {
+    "from": "/gxp/Courses/gxp-add-a-course",
+    "to": "/gxp/Courses/add-a-course"
+  },
+  {
+    "from": "/gxp/Courses/gxp-add-course-materials",
+    "to": "/gxp/Courses/add-course-materials"
+  },
+  {
+    "from": "/gxp/Courses/gxp-allow-self-enrolment",
+    "to": "/gxp/Courses/allow-self-enrolment"
+  },
+  {
+    "from": "/gxp/Courses/gxp-attach-a-certificate-to-a-course",
+    "to": "/gxp/Courses/attach-a-certificate-to-a-course"
+  },
+  {
+    "from": "/gxp/Courses/gxp-check-a-course-upload",
+    "to": "/gxp/Courses/check-a-course-upload"
+  },
+  {
+    "from": "/gxp/Courses/gxp-choose-who-can-see-a-course",
+    "to": "/gxp/Courses/choose-who-can-see-a-course"
+  },
+  {
+    "from": "/gxp/Courses/gxp-delete-a-course",
+    "to": "/gxp/Courses/delete-a-course"
+  },
+  {
+    "from": "/gxp/Courses/gxp-edit-course-details",
+    "to": "/gxp/Courses/edit-course-details"
+  },
+  {
+    "from": "/gxp/Courses/gxp-find-a-course-to-manage",
+    "to": "/gxp/Courses/find-a-course-to-manage"
+  },
+  {
+    "from": "/gxp/Courses/gxp-publish-or-unpublish-a-course",
+    "to": "/gxp/Courses/publish-or-unpublish-a-course"
+  },
+  {
+    "from": "/gxp/Courses/gxp-replace-or-add-a-course-version",
+    "to": "/gxp/Courses/replace-or-add-a-course-version"
+  },
+  {
+    "from": "/gxp/Courses/gxp-require-feedback-before-a-certificate",
+    "to": "/gxp/Courses/require-feedback-before-a-certificate"
+  },
+  {
+    "from": "/gxp/Courses/gxp-set-a-course-expiry-date",
+    "to": "/gxp/Courses/set-a-course-expiry-date"
+  },
+  {
+    "from": "/gxp/Courses/gxp-set-course-offering-dates",
+    "to": "/gxp/Courses/set-course-offering-dates"
+  },
+  {
+    "from": "/gxp/Courses/gxp-set-how-long-a-completion-is-valid",
+    "to": "/gxp/Courses/set-how-long-a-completion-is-valid"
+  },
+  {
+    "from": "/gxp/Courses/gxp-work-with-courses-from-hr",
+    "to": "/gxp/Courses/work-with-courses-from-hr"
+  },
+  {
+    "from": "/gxp/Getting-started/gxp-change-the-theme",
+    "to": "/gxp/Getting-started/change-the-theme"
+  },
+  {
+    "from": "/gxp/Getting-started/gxp-check-your-notifications",
+    "to": "/gxp/Getting-started/check-your-notifications"
+  },
+  {
+    "from": "/gxp/Getting-started/gxp-find-your-way-around",
+    "to": "/gxp/Getting-started/find-your-way-around"
+  },
+  {
+    "from": "/gxp/Getting-started/gxp-sign-in",
+    "to": "/gxp/Getting-started/sign-in"
+  },
+  {
+    "from": "/gxp/Getting-started/gxp-sign-out",
+    "to": "/gxp/Getting-started/sign-out"
+  },
+  {
+    "from": "/gxp/Getting-started/gxp-understand-learning-emails",
+    "to": "/gxp/Getting-started/understand-learning-emails"
+  },
+  {
+    "from": "/gxp/Getting-started/gxp-understand-your-role",
+    "to": "/gxp/Getting-started/understand-your-role"
+  },
+  {
+    "from": "/gxp/Getting-started/gxp-what-is-gxp",
+    "to": "/gxp/Getting-started/what-is"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-check-sync-history",
+    "to": "/gxp/HR-integration/check-sync-history"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-connect-to-dynamics-365",
+    "to": "/gxp/HR-integration/connect-to-dynamics-365"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-how-the-hr-integration-works",
+    "to": "/gxp/HR-integration/how-the-hr-integration-works"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-import-completions-from-hr",
+    "to": "/gxp/HR-integration/import-completions-from-hr"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-import-legal-entities",
+    "to": "/gxp/HR-integration/import-legal-entities"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-look-up-a-person-in-hr",
+    "to": "/gxp/HR-integration/look-up-a-person-in-hr"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-map-hr-course-titles",
+    "to": "/gxp/HR-integration/map-hr-course-titles"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-replace-the-connection-certificate",
+    "to": "/gxp/HR-integration/replace-the-connection-certificate"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-review-people-before-they-are-disabled",
+    "to": "/gxp/HR-integration/review-people-before-they-are-disabled"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-run-a-user-sync",
+    "to": "/gxp/HR-integration/run-a-user-sync"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-send-learner-status-to-hr",
+    "to": "/gxp/HR-integration/send-learner-status-to-hr"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-switch-on-each-hr-sync",
+    "to": "/gxp/HR-integration/switch-on-each-hr-sync"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-sync-course-participants",
+    "to": "/gxp/HR-integration/sync-course-participants"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-sync-courses-with-hr",
+    "to": "/gxp/HR-integration/sync-courses-with-hr"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-what-you-need-to-connect-dynamics-365",
+    "to": "/gxp/HR-integration/what-you-need-to-connect-dynamics-365"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-when-hr-syncs-run",
+    "to": "/gxp/HR-integration/when-hr-syncs-run"
+  },
+  {
+    "from": "/gxp/HR-integration/gxp-who-the-user-sync-imports",
+    "to": "/gxp/HR-integration/who-the-user-sync-imports"
+  },
+  {
+    "from": "/gxp/Learning-pathways/gxp-follow-a-learning-pathway",
+    "to": "/gxp/Learning-pathways/follow-a-learning-pathway"
+  },
+  {
+    "from": "/gxp/Learning-pathways/gxp-track-your-pathway-progress",
+    "to": "/gxp/Learning-pathways/track-your-pathway-progress"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-backfill-existing-people",
+    "to": "/gxp/Learning-rules/backfill-existing-people"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-change-assignment-settings",
+    "to": "/gxp/Learning-rules/change-assignment-settings"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-change-or-deactivate-a-rule",
+    "to": "/gxp/Learning-rules/change-or-deactivate-a-rule"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-choose-courses-by-tag-or-hr-course-type",
+    "to": "/gxp/Learning-rules/choose-courses-by-tag-or-hr-course-type"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-choose-who-a-rule-applies-to",
+    "to": "/gxp/Learning-rules/choose-who-a-rule-applies-to"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-create-a-learning-rule",
+    "to": "/gxp/Learning-rules/create-a-learning-rule"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-how-learning-rules-work",
+    "to": "/gxp/Learning-rules/how-learning-rules-work"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-preview-and-activate-a-rule",
+    "to": "/gxp/Learning-rules/preview-and-activate-a-rule"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-review-people-changes",
+    "to": "/gxp/Learning-rules/review-people-changes"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-run-a-renewal-check",
+    "to": "/gxp/Learning-rules/run-a-renewal-check"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-set-due-dates-and-renewals-on-a-rule",
+    "to": "/gxp/Learning-rules/set-due-dates-and-renewals-on-a-rule"
+  },
+  {
+    "from": "/gxp/Learning-rules/gxp-view-rule-history",
+    "to": "/gxp/Learning-rules/view-rule-history"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-browse-the-course-catalogue",
+    "to": "/gxp/My-learning/browse-the-course-catalogue"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-check-due-dates-and-overdue-learning",
+    "to": "/gxp/My-learning/check-due-dates-and-overdue-learning"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-check-when-your-learning-expires",
+    "to": "/gxp/My-learning/check-when-your-learning-expires"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-complete-a-course",
+    "to": "/gxp/My-learning/complete-a-course"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-download-course-materials",
+    "to": "/gxp/My-learning/download-course-materials"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-enrol-in-a-course",
+    "to": "/gxp/My-learning/enrol-in-a-course"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-give-feedback-on-a-course",
+    "to": "/gxp/My-learning/give-feedback-on-a-course"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-mandatory-and-recommended-learning",
+    "to": "/gxp/My-learning/mandatory-and-recommended-learning"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-read-a-course-card",
+    "to": "/gxp/My-learning/read-a-course-card"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-renew-your-learning",
+    "to": "/gxp/My-learning/renew-your-learning"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-see-your-skills-earned",
+    "to": "/gxp/My-learning/see-your-skills-earned"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-start-or-resume-a-course",
+    "to": "/gxp/My-learning/start-or-resume-a-course"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-understand-recorded-in-hr",
+    "to": "/gxp/My-learning/understand-recorded-in-hr"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-view-course-details",
+    "to": "/gxp/My-learning/view-course-details"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-view-your-courses",
+    "to": "/gxp/My-learning/view-your-courses"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-view-your-training-history",
+    "to": "/gxp/My-learning/view-your-training-history"
+  },
+  {
+    "from": "/gxp/My-learning/gxp-withdraw-from-a-course",
+    "to": "/gxp/My-learning/withdraw-from-a-course"
+  },
+  {
+    "from": "/gxp/My-team/gxp-export-your-teams-learning",
+    "to": "/gxp/My-team/export-your-teams-learning"
+  },
+  {
+    "from": "/gxp/My-team/gxp-how-line-manager-access-works",
+    "to": "/gxp/My-team/how-line-manager-access-works"
+  },
+  {
+    "from": "/gxp/My-team/gxp-report-on-your-team",
+    "to": "/gxp/My-team/report-on-your-team"
+  },
+  {
+    "from": "/gxp/My-team/gxp-respond-to-an-overdue-learning-email",
+    "to": "/gxp/My-team/respond-to-an-overdue-learning-email"
+  },
+  {
+    "from": "/gxp/My-team/gxp-see-your-teams-deadlines",
+    "to": "/gxp/My-team/see-your-teams-deadlines"
+  },
+  {
+    "from": "/gxp/My-team/gxp-view-a-team-members-learning",
+    "to": "/gxp/My-team/view-a-team-members-learning"
+  },
+  {
+    "from": "/gxp/My-team/gxp-view-your-teams-learning",
+    "to": "/gxp/My-team/view-your-teams-learning"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-add-an-organisation",
+    "to": "/gxp/Organisation-settings/add-an-organisation"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-choose-learner-emails",
+    "to": "/gxp/Organisation-settings/choose-learner-emails"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-edit-an-email-template",
+    "to": "/gxp/Organisation-settings/edit-an-email-template"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-link-legal-entities-to-an-organisation",
+    "to": "/gxp/Organisation-settings/link-legal-entities-to-an-organisation"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-manage-the-organisation-structure",
+    "to": "/gxp/Organisation-settings/manage-the-organisation-structure"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-send-a-test-email",
+    "to": "/gxp/Organisation-settings/send-a-test-email"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-set-course-feedback-rules",
+    "to": "/gxp/Organisation-settings/set-course-feedback-rules"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-set-feedback-reminders",
+    "to": "/gxp/Organisation-settings/set-feedback-reminders"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-set-the-email-sender-and-logo",
+    "to": "/gxp/Organisation-settings/set-the-email-sender-and-logo"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-set-up-learning-reminders",
+    "to": "/gxp/Organisation-settings/set-up-learning-reminders"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-turn-on-manager-escalation",
+    "to": "/gxp/Organisation-settings/turn-on-manager-escalation"
+  },
+  {
+    "from": "/gxp/Organisation-settings/gxp-view-the-audit-log",
+    "to": "/gxp/Organisation-settings/view-the-audit-log"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-add-someone-to-an-organisation",
+    "to": "/gxp/People-and-assignments/add-someone-to-an-organisation"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-assign-a-renewal-early",
+    "to": "/gxp/People-and-assignments/assign-a-renewal-early"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-assign-learning-to-organisations",
+    "to": "/gxp/People-and-assignments/assign-learning-to-organisations"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-assign-learning-to-people",
+    "to": "/gxp/People-and-assignments/assign-learning-to-people"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-change-a-due-date",
+    "to": "/gxp/People-and-assignments/change-a-due-date"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-check-bulk-assignment-history",
+    "to": "/gxp/People-and-assignments/check-bulk-assignment-history"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-end-an-organisation-membership",
+    "to": "/gxp/People-and-assignments/end-an-organisation-membership"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-filter-assignments-with-the-summary",
+    "to": "/gxp/People-and-assignments/filter-assignments-with-the-summary"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-filter-the-deadlines-calendar",
+    "to": "/gxp/People-and-assignments/filter-the-deadlines-calendar"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-find-a-person",
+    "to": "/gxp/People-and-assignments/find-a-person"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-remove-an-assignment",
+    "to": "/gxp/People-and-assignments/remove-an-assignment"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-see-who-is-due-for-a-course",
+    "to": "/gxp/People-and-assignments/see-who-is-due-for-a-course"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-understand-mandatory-and-recommended",
+    "to": "/gxp/People-and-assignments/understand-mandatory-and-recommended"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-use-the-deadlines-calendar",
+    "to": "/gxp/People-and-assignments/use-the-deadlines-calendar"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-view-a-persons-details",
+    "to": "/gxp/People-and-assignments/view-a-persons-details"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-view-assignment-details",
+    "to": "/gxp/People-and-assignments/view-assignment-details"
+  },
+  {
+    "from": "/gxp/People-and-assignments/gxp-view-learning-assignments",
+    "to": "/gxp/People-and-assignments/view-learning-assignments"
+  },
+  {
+    "from": "/gxp/Reports/gxp-break-down-report-totals",
+    "to": "/gxp/Reports/break-down-report-totals"
+  },
+  {
+    "from": "/gxp/Reports/gxp-export-a-learning-report",
+    "to": "/gxp/Reports/export-a-learning-report"
+  },
+  {
+    "from": "/gxp/Reports/gxp-filter-a-learning-report",
+    "to": "/gxp/Reports/filter-a-learning-report"
+  },
+  {
+    "from": "/gxp/Reports/gxp-open-learning-reports",
+    "to": "/gxp/Reports/open-learning-reports"
+  },
+  {
+    "from": "/gxp/Reports/gxp-read-the-manage-overview",
+    "to": "/gxp/Reports/read-the-manage-overview"
+  },
+  {
+    "from": "/gxp/Reports/gxp-view-compliance-on-the-overview",
+    "to": "/gxp/Reports/view-compliance-on-the-overview"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-everyone/gxp-ts-account-disabled",
+    "to": "/gxp/Troubleshooting/For-everyone/fix-account-disabled"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-everyone/gxp-ts-cant-see-course",
+    "to": "/gxp/Troubleshooting/For-everyone/fix-cant-see-course"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-everyone/gxp-ts-certificate-not-issued",
+    "to": "/gxp/Troubleshooting/For-everyone/fix-certificate-not-issued"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-everyone/gxp-ts-course-no-due-date",
+    "to": "/gxp/Troubleshooting/For-everyone/fix-course-no-due-date"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-everyone/gxp-ts-manage-not-showing",
+    "to": "/gxp/Troubleshooting/For-everyone/fix-manage-not-showing"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-everyone/gxp-ts-new-role-not-showing",
+    "to": "/gxp/Troubleshooting/For-everyone/fix-new-role-not-showing"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-everyone/gxp-ts-organisation-not-licensed",
+    "to": "/gxp/Troubleshooting/For-everyone/fix-organisation-not-licensed"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-everyone/gxp-ts-recorded-in-hr-no-certificate",
+    "to": "/gxp/Troubleshooting/For-everyone/fix-recorded-in-hr-no-certificate"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-access-changes-not-enabled",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-access-changes-not-enabled"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-calendar-or-report-empty",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-calendar-or-report-empty"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-cant-change-due-date-or-export",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-cant-change-due-date-or-export"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-cant-change-line-manager",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-cant-change-line-manager"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-cant-find-someone-give-access",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-cant-find-someone-give-access"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-cant-remove-assignment",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-cant-remove-assignment"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-escalation-not-sent",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-escalation-not-sent"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-feedback-reminders-not-sent",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-feedback-reminders-not-sent"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-missing-from-my-team",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-missing-from-my-team"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-no-emails-sent",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-no-emails-sent"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-old-report-viewer",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-old-report-viewer"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-page-missing-from-manage",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-page-missing-from-manage"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-reminders-not-sent",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-reminders-not-sent"
+  },
+  {
+    "from": "/gxp/Troubleshooting/For-managers-and-administrators/gxp-ts-role-not-offered",
+    "to": "/gxp/Troubleshooting/For-managers-and-administrators/fix-role-not-offered"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-completion-not-imported",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-completion-not-imported"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-course-not-sent-to-hr",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-course-not-sent-to-hr"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-disabled-but-still-employed",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-disabled-but-still-employed"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-enrolments-not-going-to-hr",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-enrolments-not-going-to-hr"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-learner-status-skipped",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-learner-status-skipped"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-pending-missing-email",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-pending-missing-email"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-people-needing-review",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-people-needing-review"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-someone-not-imported",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-someone-not-imported"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-sync-details-removed",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-sync-details-removed"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-sync-failed",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-sync-failed"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-sync-not-activated",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-sync-not-activated"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-syncing-stopped-after-connection-change",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-syncing-stopped-after-connection-change"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-test-connection-fails",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-test-connection-fails"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-user-sync-paused",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-user-sync-paused"
+  },
+  {
+    "from": "/gxp/Troubleshooting/HR-integration/gxp-ts-wrong-school",
+    "to": "/gxp/Troubleshooting/HR-integration/fix-wrong-school"
+  },
+  {
+    "from": "/gxp/gxp-glossary",
+    "to": "/gxp/Glossary"
+  },
+  {
+    "from": "/gxp/gxp-troubleshooting",
+    "to": "/gxp/Troubleshooting"
+  },
+  {
+    "from": "/pxp/Attendance/absentee-percentage-pxp",
+    "to": "/pxp/Attendance/absentee-percentage"
+  },
+  {
+    "from": "/pxp/Attendance/attendance-notice-pxp",
+    "to": "/pxp/Attendance/attendance-notice"
+  },
+  {
+    "from": "/pxp/Attendance/days-absent-pxp",
+    "to": "/pxp/Attendance/days-absent"
+  },
+  {
+    "from": "/pxp/Attendance/unexpected-absence-pxp",
+    "to": "/pxp/Attendance/unexpected-absence"
+  },
+  {
+    "from": "/pxp/Events and Activities/activity-cost-pxp",
+    "to": "/pxp/Events and Activities/activity-cost"
+  },
+  {
+    "from": "/pxp/Events and Activities/activity-day-and-time-pxp",
+    "to": "/pxp/Events and Activities/activity-day-and-time"
+  },
+  {
+    "from": "/pxp/Events and Activities/becoming-activity-volunteer-pxp",
+    "to": "/pxp/Events and Activities/becoming-activity-volunteer"
+  },
+  {
+    "from": "/pxp/Events and Activities/cancel-event-activity-registration-pxp",
+    "to": "/pxp/Events and Activities/cancel-event-activity-registration"
+  },
+  {
+    "from": "/pxp/Events and Activities/contact-person-for-an-activity-pxp",
+    "to": "/pxp/Events and Activities/contact-person-for-an-activity"
+  },
+  {
+    "from": "/pxp/Events and Activities/event-refund-policy-pxp",
+    "to": "/pxp/Events and Activities/event-refund-policy"
+  },
+  {
+    "from": "/pxp/Events and Activities/registered-activities-pxp",
+    "to": "/pxp/Events and Activities/registered-activities"
+  },
+  {
+    "from": "/pxp/Events and Activities/view-activities-pxp",
+    "to": "/pxp/Events and Activities/view-activities"
+  },
+  {
+    "from": "/pxp/Events and Activities/view-consented-camps-pxp",
+    "to": "/pxp/Events and Activities/view-consented-camps"
+  },
+  {
+    "from": "/pxp/Events and Activities/view-consented-excursions-pxp",
+    "to": "/pxp/Events and Activities/view-consented-excursions"
+  },
+  {
+    "from": "/pxp/Events and Activities/view-event-pxp",
+    "to": "/pxp/Events and Activities/view-event"
+  },
+  {
+    "from": "/pxp/Events and Activities/view-events-with-rsvps-pxp",
+    "to": "/pxp/Events and Activities/view-events-with-rsvps"
+  },
+  {
+    "from": "/pxp/Events and Activities/view-withdrawn-activities-pxp",
+    "to": "/pxp/Events and Activities/view-withdrawn-activities"
+  },
+  {
+    "from": "/pxp/Fees/early-payment-discount-pxp",
+    "to": "/pxp/Fees/early-payment-discount"
+  },
+  {
+    "from": "/pxp/Fees/fee-due-pxp",
+    "to": "/pxp/Fees/fee-due"
+  },
+  {
+    "from": "/pxp/Fees/fee-schedule-pxp",
+    "to": "/pxp/Fees/fee-schedule"
+  },
+  {
+    "from": "/pxp/Fees/sibling-discount-pxp",
+    "to": "/pxp/Fees/sibling-discount"
+  },
+  {
+    "from": "/pxp/Fees/supported-payment-methods-pxp",
+    "to": "/pxp/Fees/supported-payment-methods"
+  },
+  {
+    "from": "/pxp/Fees/view-outstanding-fees-pxp",
+    "to": "/pxp/Fees/view-outstanding-fees"
+  },
+  {
+    "from": "/pxp/Fees/view-statement-account-pxp",
+    "to": "/pxp/Fees/view-statement-account"
+  },
+  {
+    "from": "/pxp/Fees/view-upcoming-tuition-fees-pxp",
+    "to": "/pxp/Fees/view-upcoming-tuition-fees"
+  },
+  {
+    "from": "/pxp/Navigating/check-notifications-pxp",
+    "to": "/pxp/Navigating/check-notifications"
+  },
+  {
+    "from": "/pxp/Navigating/log-out-pxp",
+    "to": "/pxp/Navigating/log-out"
+  },
+  {
+    "from": "/pxp/Navigating/navigation-pxp",
+    "to": "/pxp/Navigating/navigation"
+  },
+  {
+    "from": "/pxp/Navigating/welcome-screen-pxp",
+    "to": "/pxp/Navigating/welcome-screen"
+  },
+  {
+    "from": "/pxp/Parent/update-my-profile-pxp",
+    "to": "/pxp/Parent/update-my-profile"
+  },
+  {
+    "from": "/pxp/Parent/view-my-profile-pxp",
+    "to": "/pxp/Parent/view-my-profile"
+  },
+  {
+    "from": "/pxp/School Information/extra-support-pxp",
+    "to": "/pxp/School Information/extra-support"
+  },
+  {
+    "from": "/pxp/School Information/it-help-pxp",
+    "to": "/pxp/School Information/it-help"
+  },
+  {
+    "from": "/pxp/School Information/newsletters-circulars-pxp",
+    "to": "/pxp/School Information/newsletters-circulars"
+  },
+  {
+    "from": "/pxp/School Information/school-calendar-pxp",
+    "to": "/pxp/School Information/school-calendar"
+  },
+  {
+    "from": "/pxp/School Information/school-policy-pxp",
+    "to": "/pxp/School Information/school-policy"
+  },
+  {
+    "from": "/pxp/School Information/school-time-pxp",
+    "to": "/pxp/School Information/school-time"
+  },
+  {
+    "from": "/pxp/School Information/transfer-certificate-pxp",
+    "to": "/pxp/School Information/transfer-certificate"
+  },
+  {
+    "from": "/pxp/School Information/uniform-requirement-pxp",
+    "to": "/pxp/School Information/uniform-requirement"
+  },
+  {
+    "from": "/pxp/School Information/view-notices-pxp",
+    "to": "/pxp/School Information/view-notices"
+  },
+  {
+    "from": "/pxp/Student/create-medical-information-pxp",
+    "to": "/pxp/Student/create-medical-information"
+  },
+  {
+    "from": "/pxp/Student/request-iep-copy-pxp",
+    "to": "/pxp/Student/request-iep-copy"
+  },
+  {
+    "from": "/pxp/Student/request-transfer-certificate-pxp",
+    "to": "/pxp/Student/request-transfer-certificate"
+  },
+  {
+    "from": "/pxp/Student/student-documents-pxp",
+    "to": "/pxp/Student/student-documents"
+  },
+  {
+    "from": "/pxp/Student/update-medical-information-pxp",
+    "to": "/pxp/Student/update-medical-information"
+  },
+  {
+    "from": "/pxp/Student/update-student-profile-pxp",
+    "to": "/pxp/Student/update-student-profile"
+  },
+  {
+    "from": "/pxp/Student/view-medical-information-pxp",
+    "to": "/pxp/Student/view-medical-information"
+  },
+  {
+    "from": "/pxp/Student/view-student-profile-pxp",
+    "to": "/pxp/Student/view-student-profile"
+  },
+  {
+    "from": "/pxp/Timetable/class-timetable-pxp",
+    "to": "/pxp/Timetable/class-timetable"
+  },
+  {
+    "from": "/pxp/Timetable/pe-today-pxp",
+    "to": "/pxp/Timetable/pe-today"
+  },
+  {
+    "from": "/pxp/Timetable/teacher-list-pxp",
+    "to": "/pxp/Timetable/teacher-list"
+  },
+  {
+    "from": "/pxp/Timetable/view-exam-timetable-pxp",
+    "to": "/pxp/Timetable/view-exam-timetable"
+  }
+]

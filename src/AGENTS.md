@@ -8,6 +8,7 @@ All site-chrome code: the homepage, global brand CSS, and any custom React pages
 
 ## Ownership
 
+- `src/data/redirects.json` — old page address → new one (see parent AGENTS.md, Content Map notes).
 - `src/data/products.tsx` — **single source of truth** for the seven live products (id, name, route, group, Carbon icon or official D365 icon) + `ProductMark`, `productFromPath`. Everything product-aware reads from here.
 - `src/pages/index.tsx` + `index.module.css` — homepage (concept C): serif hero + search, two audience sections (staff / parents; Students returns with LearnerXP) with hand-picked task links (staff includes one GrowthXP link and ends with one "All guides: StaffXP · EmployeeXP · GrowthXP" row, since a single "all" link can't serve three products), Dynamics 365 band → `/admin`.
 - `src/pages/admin.tsx` + `admin.module.css` — Dynamics 365 admin guides landing (F&O, HR, SCM).
