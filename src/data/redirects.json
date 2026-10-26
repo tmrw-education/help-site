@@ -217,7 +217,11 @@
   },
   {
     "from": "/gxp/Getting-started/gxp-what-is-gxp",
-    "to": "/gxp/Getting-started/what-is"
+    "to": "/gxp/Getting-started/what-is-growthxp"
+  },
+  {
+    "from": "/gxp/Getting-started/what-is",
+    "to": "/gxp/Getting-started/what-is-growthxp"
   },
   {
     "from": "/gxp/HR-integration/gxp-check-sync-history",
