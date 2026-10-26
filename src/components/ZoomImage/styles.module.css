@@ -21,6 +21,10 @@
 /* Employee Self-Service — teal → green */
 .ess { background: linear-gradient(135deg, #e3f2ef, #e8f7ed); }
 [data-theme='dark'] .ess { background: linear-gradient(135deg, #182d2e, #1f342b); }
+/* Growth Experience Platform — teal → green. The GXP mark uses the ESS mark's
+   gradient (LMS LoginPage.tsx), so its wash leans greener to tell the two apart. */
+.gxp { background: linear-gradient(135deg, #e3f4f1, #e9f8e4); }
+[data-theme='dark'] .gxp { background: linear-gradient(135deg, #172e2b, #213622); }
 /* Parent Experience — cyan → blue */
 .pxp { background: linear-gradient(135deg, #e0f4f9, #e2edff); }
 [data-theme='dark'] .pxp { background: linear-gradient(135deg, #14313c, #162643); }

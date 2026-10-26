@@ -8,11 +8,12 @@ import {
   Money,
   UserAdmin,
   DeliveryTruck,
+  Growth,
 } from '@carbon/icons-react';
 
-// Single source of truth for the seven product surfaces. Keep in sync with the
+// Single source of truth for the eight product surfaces. Keep in sync with the
 // docs plugin ids/routes in docusaurus.config.ts (root AGENTS.md Content Map).
-export type ProductId = 'sxp' | 'pxp' | 'lxp' | 'ess' | 'fo' | 'hr' | 'scm';
+export type ProductId = 'sxp' | 'pxp' | 'lxp' | 'ess' | 'gxp' | 'fo' | 'hr' | 'scm';
 export type ProductGroup = 'school' | 'employment' | 'admin';
 
 export type Product = {
@@ -33,6 +34,7 @@ export const PRODUCTS: Product[] = [
   { id: 'pxp', name: 'ParentXP', audience: 'Parents and guardians', route: '/pxp', group: 'school', Icon: Chat },
   { id: 'lxp', name: 'LearnerXP', audience: 'Students', route: '/lxp', group: 'school', Icon: Education },
   { id: 'ess', name: 'Employee Self-Service', audience: 'Leave, payslips, benefits', route: '/ess', group: 'employment', Icon: UserProfile },
+  { id: 'gxp', name: 'Growth Experience Platform', audience: 'Your learning and training', route: '/gxp', group: 'employment', Icon: Growth },
   { id: 'fo', name: 'Finance & Operations', audience: 'Billing and collections', route: '/fo', group: 'admin', d365Icon: '/img/d365/finance-operations.svg' },
   { id: 'hr', name: 'Human Resources', audience: 'HR administration', route: '/hr', group: 'admin', d365Icon: '/img/d365/human-resources.svg' },
   { id: 'scm', name: 'Supply Chain Management', audience: 'Vendors and sourcing', route: '/scm', group: 'admin', d365Icon: '/img/d365/supply-chain-management.svg' },

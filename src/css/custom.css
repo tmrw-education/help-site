@@ -483,6 +483,7 @@ html article[class*='searchResultItem'] > h2 > a[href^='/sxp']::before { content
 html article[class*='searchResultItem'] > h2 > a[href^='/pxp']::before { content: 'ParentXP'; }
 html article[class*='searchResultItem'] > h2 > a[href^='/lxp']::before { content: 'LearnerXP'; }
 html article[class*='searchResultItem'] > h2 > a[href^='/ess']::before { content: 'Employee Self-Service'; }
+html article[class*='searchResultItem'] > h2 > a[href^='/gxp']::before { content: 'Growth Experience Platform'; }
 html article[class*='searchResultItem'] > h2 > a[href^='/fo']::before { content: 'Finance & Operations'; }
 html article[class*='searchResultItem'] > h2 > a[href^='/hr']::before { content: 'Human Resources'; }
 html article[class*='searchResultItem'] > h2 > a[href^='/scm']::before { content: 'Supply Chain Management'; }
