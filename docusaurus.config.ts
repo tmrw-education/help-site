@@ -176,6 +176,19 @@ const config: Config = {
         editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        // Growth Experience Platform (the LMS). Needs `help/gxp/` to exist, or the build fails.
+        id: 'gxp',
+        path: `${CONTENT}/gxp`,
+        routeBasePath: 'gxp',
+        sidebarPath: './sidebars.ts',
+        remarkPlugins: [remarkSteps],
+        exclude: ['**/README.md', '**/readme.md', '**/.DS_Store', '**/*.pdf'],
+        editUrl: 'https://github.com/tmrw-education/help/edit/main/',
+      },
+    ],
   ],
 
   themes: [
@@ -185,7 +198,7 @@ const config: Config = {
         hashed: true,
         indexDocs: true,
         indexBlog: false,
-        docsRouteBasePath: ['sxp', 'ess', 'fo', 'pxp', 'lxp', 'hr', 'scm'],
+        docsRouteBasePath: ['sxp', 'ess', 'fo', 'pxp', 'lxp', 'hr', 'scm', 'gxp'],
         docsDir: [
           `${CONTENT}/sxp`,
           `${CONTENT}/ess`,
@@ -194,6 +207,7 @@ const config: Config = {
           `${CONTENT}/lxp`,
           `${CONTENT}/hr`,
           `${CONTENT}/scm`,
+          `${CONTENT}/gxp`,
         ],
         highlightSearchTermsOnTargetPage: true,
         searchResultLimits: 8,
