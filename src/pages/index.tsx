@@ -13,12 +13,14 @@ import styles from './index.module.css';
 const AUDIENCES = [
   {
     title: 'School staff',
+    // GXP is linked below but not named here: the full name would widen this max-content column past the 880px frame.
     products: 'StaffXP and Employee Self-Service',
     Icon: UserMultiple,
     links: [
       { label: 'Take the daily roll', to: '/sxp/Attendance/take-attendance-roll' },
       { label: 'Submit a leave request', to: '/ess/Leave/submit-a-leave-request' },
       { label: 'Send a notice to parents', to: '/sxp/Notices/create-notice' },
+      { label: 'Start or resume a course', to: '/gxp/My-learning/gxp-start-or-resume-a-course' },
     ],
     all: { label: 'All staff guides', to: '/sxp' },
   },
