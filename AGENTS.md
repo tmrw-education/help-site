@@ -49,9 +49,10 @@ Public help site for the **tmrw education platform**. Docusaurus static site →
 
 - Note: source dir name ≠ route only for `finops→fo` now. Keep config and nav in sync.
 - Site chrome (nav, switcher, homepage, search labels) uses the XP names: EmployeeXP for `ess` (formerly Employee Self-Service) and GrowthXP for `gxp` (the Growth Experience Platform, the TMRW LMS). Article text in the content repo may still use the old names (ESS, GXP); that is the content owners' call.
-- Troubleshooting is one page per problem, grouped by audience, with an `index.md` listing them (search shows one result per article, so a long page hid every problem behind one "Troubleshooting" result). Reference: `gxp/15-Troubleshooting/` (its index keeps the old URL via `slug: /gxp-troubleshooting`). Rules for authors: `../help/CONTRIBUTING.md` §2. StaffXP and the other products still use one long page.
+- Troubleshooting is one page per problem, grouped by audience, with an `index.md` listing them (search shows one result per article, so a long page hid every problem behind one "Troubleshooting" result). Reference: `gxp/15-Troubleshooting/`. Rules for authors: `../help/CONTRIBUTING.md` §2. StaffXP and the other products still use one long page.
 - Glossaries are one page, but each term is its own `### Term` heading with the definition below, under `## A`-style letters, with `toc_max_heading_level: 2` so the contents list on the right shows letters only; that list is the jump bar (no A–Z links at the top; on narrow screens it folds into "On this page"). Tables gave terms no anchors (search landed on the letter, Felix got letter-sized chunks, phones squeezed the definitions). Reference: `gxp/16-Glossary.md`; the other products' glossaries are still tables.
-- `gxp` sits in the "Your employment" group beside `ess`. Its page ids are prefixed `gxp-` so they stay unique across products.
+- `gxp` sits in the "Your employment" group beside `ess`.
+- Page ids (owner's decision, 2026-10-26): flat kebab-case, verb-first, **no product code**, unique within the product. Felix and agents key a page as `<product folder>/<id>`; the product is data (the folder), never part of the id. Ids are part of each page's URL, so renaming one moves the page: update any hand-picked links in `src/` (the build catches missed ones). Index, Glossary and Troubleshooting landing pages have no id; troubleshooting problem pages are `fix-<problem>`.
 - `ce/` exists but is **not** wired as a plugin (no route, not in nav). Leave alone unless asked.
 - `lxp/` (LearnerXP) is **unwired** too, since 2026-10-26: its only page said "coming soon". Rewire it (plugin block + search paths in `docusaurus.config.ts`, entry in `src/data/products.tsx`, Students column on the homepage) once it has real articles.
 - Each content dir holds `.md`/`.mdx` articles; `README.md`, `.pdf`, `.DS_Store`, `99-Images/README.md` are excluded from the build.
@@ -68,7 +69,7 @@ Public help site for the **tmrw education platform**. Docusaurus static site →
 ## Internal Docs (not published)
 
 - `_internal/HELP_STRATEGY.md` — help system strategy/direction.
-- Authoring rules are **published in the content repo**: `../help/CONTRIBUTING.md` (everyone follows it; the README sends authors there) and `../help/DOC_FORMAT_RATIONALE.md`. Edit those, not the old local copies `_internal/AUTHORING_FOR_FELIX.md` / `_internal/DOC_FORMAT_RATIONALE.md`, which are superseded. Keep CONTRIBUTING.md in step with the build checks (`scripts/check-content.mjs` skips files at the content root, since the guide quotes the marker).
+- Authoring rules are **published in the content repo**: `../help/CONTRIBUTING.md` (everyone follows it; the README sends authors there) and `../help/DOC_FORMAT_RATIONALE.md`. The old local copies are deleted. Keep CONTRIBUTING.md (§3 ids, §10 checks, §11 how to publish) in step with `scripts/check-content.mjs`. Nobody but the site owners changes `help-site`; the guide says so.
 - `_internal/RELEASE_NOTES.md` — release log.
 
 ## Work Guidance
@@ -80,7 +81,7 @@ Public help site for the **tmrw education platform**. Docusaurus static site →
 
 - `npm run typecheck` — TS check.
 - `npm run build` — must pass. Broken links fail it (`onBrokenLinks` and `markdown.hooks.onBrokenMarkdownLinks` are `'throw'`), and that is the publish gate: `deploy.yml` deploys only after a passing build, and also builds (without deploying) on PRs to `help`. A link to a `draft: true` page counts as broken in production. Broken images stay a warning (ZoomImage placeholder).
-- `prebuild` runs `scripts/check-content.mjs`: a published (non-draft) page that still contains an author's "VERIFY BEFORE PUBLISHING" note fails the build. Fix by verifying and deleting the note, or by adding `draft: true`.
+- `prebuild` runs `scripts/check-content.mjs`, which fails the build when a published (non-draft) page has no content, still says "VERIFY BEFORE PUBLISHING", or (task pages) has no `id` or an id containing its product code. It skips the content root and hidden folders (`help/.claude/`). After renaming ids, run `npm run clear` before building locally: the cached compiled pages keep old URLs.
 - Parking content: content `.md` files compile as MDX, so hide text with `{/* Hidden until … */}`, never `<!-- -->` (fails the build). Start the comment with "Hidden until" (the check skips those blocks) and never nest comments (turn inner ones into `[note: …]`). Tables can't hold a comment: move hidden rows below the table inside one. Currently parked: Academic reporting (sxp/11, all drafts) and the Felix agent pages 10-AI/02–09 and 11–15 (drafts) — their links, Troubleshooting entries and glossary rows.
 
 ## User Preferences

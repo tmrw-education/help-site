@@ -19,7 +19,7 @@ const AUDIENCES = [
       { label: 'Take the daily roll', to: '/sxp/Attendance/take-attendance-roll' },
       { label: 'Submit a leave request', to: '/ess/Leave/submit-a-leave-request' },
       { label: 'Send a notice to parents', to: '/sxp/Notices/create-notice' },
-      { label: 'Start or resume a course', to: '/gxp/My-learning/gxp-start-or-resume-a-course' },
+      { label: 'Start or resume a course', to: '/gxp/My-learning/start-or-resume-a-course' },
     ],
     // three products, so one "all" link can't serve them: link each product's guides instead
     guides: [
@@ -34,7 +34,7 @@ const AUDIENCES = [
     Icon: Chat,
     links: [
       { label: 'Pay outstanding fees', to: '/pxp/Fees/pay-outstanding-fees' },
-      { label: 'Report an unexpected absence', to: '/pxp/Attendance/unexpected-absence-pxp' },
+      { label: 'Report an unexpected absence', to: '/pxp/Attendance/unexpected-absence' },
       { label: 'Let someone else collect my child', to: '/pxp/Attendance/someone-else-collects-my-child' },
     ],
     all: { label: 'All parent guides', to: '/pxp' },
@@ -47,7 +47,7 @@ const POPULAR = [
   { label: 'Request leave', to: '/ess/Leave/submit-a-leave-request' },
   { label: 'Take the daily roll', to: '/sxp/Attendance/take-attendance-roll' },
   { label: 'Pay fees', to: '/pxp/Fees/pay-outstanding-fees' },
-  { label: 'Exam timetable', to: '/pxp/Timetable/view-exam-timetable-pxp' },
+  { label: 'Exam timetable', to: '/pxp/Timetable/view-exam-timetable' },
   { label: 'Payment details', to: '/ess/Profile/update-payment-information' },
 ];
 
