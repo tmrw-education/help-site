@@ -298,9 +298,6 @@ input[class*='searchQueryInput']::-webkit-search-cancel-button {
   text-underline-offset: 5px;
 }
 
-/* remove the contributor "Edit this page" link (not for end users) */
-.theme-edit-this-page { display: none; }
-
 /* pagination — neutral text (the card already signals navigation), single arrow by the Prev/Next label */
 .pagination-nav__link { color: var(--ifm-font-color-base); }
 .pagination-nav__link:hover { border-color: var(--ifm-color-primary); }

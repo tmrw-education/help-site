@@ -10,7 +10,7 @@ import {
   Growth,
 } from '@carbon/icons-react';
 
-// Single source of truth for the eight product surfaces. Keep in sync with the
+// Single source of truth for the seven live product surfaces. Keep in sync with the
 // docs plugin ids/routes in docusaurus.config.ts (root AGENTS.md Content Map).
 export type ProductId = 'sxp' | 'pxp' | 'ess' | 'gxp' | 'fo' | 'hr' | 'scm';
 export type ProductGroup = 'school' | 'employment' | 'admin';

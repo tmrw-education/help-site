@@ -57,6 +57,7 @@ const config: Config = {
 
   future: {
     v4: true,
+    faster: true, // Rspack + SWC via @docusaurus/faster
   },
 
   url: 'https://help.tmrw.education',
@@ -107,7 +108,6 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/readme.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
-        editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
     ],
     [
@@ -119,7 +119,6 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/readme.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
-        editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
     ],
     [
@@ -131,7 +130,6 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/readme.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
-        editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
     ],
     [
@@ -143,7 +141,6 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/readme.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
-        editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
     ],
     [
@@ -155,7 +152,6 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/readme.md', '**/.DS_Store', '**/*.pdf', '**/99-Images/README.md'],
-        editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
     ],
     [
@@ -167,7 +163,6 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/readme.md', '**/.DS_Store', '**/*.pdf'],
-        editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
     ],
     // LearnerXP (`help/lxp/`) is unwired until it has real articles: its only page said "coming soon".
@@ -182,7 +177,6 @@ const config: Config = {
         sidebarPath: './sidebars.ts',
         remarkPlugins: [remarkSteps],
         exclude: ['**/README.md', '**/readme.md', '**/.DS_Store', '**/*.pdf'],
-        editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
     ],
   ],

@@ -24,7 +24,7 @@ Every meaningful change requires a DOX pass before the task is done. Update the 
 
 ## Purpose
 
-Public help site for the **tmrw education platform**. Docusaurus static site → GitHub Pages at `https://tmrw-education.github.io/help/`. One knowledge base, multiple product surfaces. See `_internal/HELP_STRATEGY.md` for the layered-help vision (tooltips + KB site + Felix AI).
+Public help site for the **tmrw education platform**. Docusaurus static site on GitHub Pages, live at `https://help.tmrw.education` (the old `tmrw-education.github.io/help/` address redirects there). One knowledge base, multiple product surfaces. See `_internal/HELP_STRATEGY.md` for the layered-help vision (tooltips + KB site + Felix AI).
 
 ## Stack
 

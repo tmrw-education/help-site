@@ -65,7 +65,7 @@ export default function LiveSearch({ variant }: { variant: 'hero' | 'navbar' }):
   const root = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const [q, setQ] = useState('');
-  const [hits, setHits] = useState<Hit[] | null>(null);
+  const [found, setFound] = useState<{ query: string; hits: Hit[] } | null>(null);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
 
@@ -78,14 +78,15 @@ export default function LiveSearch({ variant }: { variant: 'hero' | 'navbar' }):
   useEffect(() => {
     const query = q.trim();
     if (!query) {
-      setHits(null);
+      setFound(null);
       return;
     }
     let live = true;
     const t = setTimeout(async () => {
-      const results = await searchByWorker(siteConfig.baseUrl, '', query, 40);
+      // a missing or failed index reads as "no articles", not a silent dead field
+      const results = await searchByWorker(siteConfig.baseUrl, '', query, 40).catch((): SearchResult[] => []);
       if (live) {
-        setHits(toHits(results));
+        setFound({ query, hits: toHits(results) });
         setActive(0);
       }
     }, 120);
@@ -116,8 +117,11 @@ export default function LiveSearch({ variant }: { variant: 'hero' | 'navbar' }):
     return () => document.removeEventListener('keydown', onKey);
   }, [variant]);
 
-  const rows = hits?.slice(0, MAX_ROWS) ?? [];
-  const showPanel = open && q.trim() !== '' && hits !== null;
+  // While the next search runs, the panel keeps showing the last results (no flicker per keystroke);
+  // `fresh` says whether they answer what's typed now.
+  const rows = found?.hits.slice(0, MAX_ROWS) ?? [];
+  const showPanel = open && q.trim() !== '' && found !== null;
+  const fresh = found?.query === q.trim();
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
@@ -126,7 +130,8 @@ export default function LiveSearch({ variant }: { variant: 'hero' | 'navbar' }):
       if (rows.length) setActive((i) => (i + (e.key === 'ArrowDown' ? 1 : rows.length - 1)) % rows.length);
     } else if (e.key === 'Enter') {
       e.preventDefault();
-      const hit = showPanel ? rows[active] : undefined;
+      // Enter acts on the typed text: open the top row only if it answers it, else search for it
+      const hit = showPanel && fresh ? rows[active] : undefined;
       if (hit) history.push(hitHref(hit));
       else seeAll();
       setOpen(false);
@@ -155,7 +160,7 @@ export default function LiveSearch({ variant }: { variant: 'hero' | 'navbar' }):
             setOpen(true);
           }}
           onFocus={() => {
-            fetchIndexesByWorker(siteConfig.baseUrl, '');
+            fetchIndexesByWorker(siteConfig.baseUrl, '').catch(() => {}); // a failure surfaces as no results
             setOpen(true);
           }}
           onKeyDown={onKeyDown}
@@ -218,7 +223,7 @@ export default function LiveSearch({ variant }: { variant: 'hero' | 'navbar' }):
               </ul>
             </>
           ) : (
-            <p className={styles.empty}>No articles match “{q.trim()}”. Try fewer or different words.</p>
+            <p className={styles.empty}>No articles match “{found?.query}”. Try fewer or different words.</p>
           )}
           <div className={styles.foot}>
             <span className={styles.hints}>
