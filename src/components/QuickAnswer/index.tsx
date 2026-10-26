@@ -16,7 +16,11 @@ function inline(text: string): ReactNode[] {
 }
 
 function Box(): ReactNode {
-  const summary = (useDoc().frontMatter as { summary?: unknown }).summary;
+  const { frontMatter, metadata } = useDoc();
+  // Troubleshooting pages (one problem each, in a Troubleshooting/ folder) are just Cause and Fix:
+  // the box would repeat them. Their summary is still there for Felix.
+  if (metadata.permalink.includes('/Troubleshooting/')) return null;
+  const summary = (frontMatter as { summary?: unknown }).summary;
   const lines = (Array.isArray(summary) ? summary : [summary]).filter(
     (s): s is string => typeof s === 'string' && s.trim() !== '',
   );

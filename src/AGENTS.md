@@ -13,7 +13,7 @@ All site-chrome code: the homepage, global brand CSS, and any custom React pages
 - `src/pages/admin.tsx` + `admin.module.css` — Dynamics 365 admin guides landing (F&O, HR, SCM).
 - `src/components/LiveSearch/` — live search dropdown (see Local Contracts).
 - `src/components/ProductSwitcher/` — navbar item `type: 'custom-productSwitcher'` (registered in `src/theme/NavbarItem/ComponentTypes.tsx`): grouped dropdown on desktop, grouped list in the mobile drawer. Replaces the old seven navbar links.
-- `src/components/QuickAnswer/` — renders a doc's `summary:` front matter under its H1 (wired via the `h1` override in `src/theme/MDXComponents.tsx`).
+- `src/components/QuickAnswer/` — renders a doc's `summary:` front matter under its H1 (wired via the `h1` override in `src/theme/MDXComponents.tsx`). Skipped for any doc whose URL contains `/Troubleshooting/` (one-problem pages are only Cause and Fix, so the box would repeat them); their summary is still written, for Felix.
 - `src/components/ZoomImage/` — click-to-zoom screenshots on the per-app gradient mat (one class per product, chosen by route in `appFromPath`; unknown routes fall back to StaffXP's); shows a "Screenshot coming soon" placeholder when an image fails.
 - `src/components/Steps/` — numbered step rail for articles.
 - `src/theme/` swizzles: `DocBreadcrumbs/Items/Home` (first crumb = product), `DocSidebar/Desktop/Content` (product header + article count), `NotFound/Content` (404 with search, popular tasks, products), `SearchBar` (navbar → LiveSearch), `Root.tsx` (hides non-zoom broken images), `Icon/*`.
