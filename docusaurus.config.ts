@@ -63,11 +63,14 @@ const config: Config = {
   projectName: 'help',
   trailingSlash: false,
 
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  // A broken link fails the build, and deploy.yml publishes only after a successful build, so a
+  // page linking to a missing or `draft: true` page never reaches the live site.
+  onBrokenLinks: 'throw',
 
   markdown: {
     hooks: {
+      onBrokenMarkdownLinks: 'throw',
+      // images stay a warning: ZoomImage shows "Screenshot coming soon" for a missing one by design
       onBrokenMarkdownImages: 'warn',
     },
   },
@@ -164,22 +167,12 @@ const config: Config = {
         editUrl: 'https://github.com/tmrw-education/help/edit/main/',
       },
     ],
+    // LearnerXP (`help/lxp/`) is unwired until it has real articles: its only page said "coming soon".
+    // To restore: add its plugin block back here, its search paths below, and its entry in src/data/products.tsx.
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'lxp',
-        path: `${CONTENT}/lxp`,
-        routeBasePath: 'lxp',
-        sidebarPath: './sidebars.ts',
-        remarkPlugins: [remarkSteps],
-        exclude: ['**/README.md', '**/readme.md', '**/.DS_Store', '**/*.pdf'],
-        editUrl: 'https://github.com/tmrw-education/help/edit/main/',
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        // Growth Experience Platform (the LMS). Needs `help/gxp/` to exist, or the build fails.
+        // GrowthXP (Growth Experience Platform, the LMS). Needs `help/gxp/` to exist, or the build fails.
         id: 'gxp',
         path: `${CONTENT}/gxp`,
         routeBasePath: 'gxp',
@@ -198,13 +191,12 @@ const config: Config = {
         hashed: true,
         indexDocs: true,
         indexBlog: false,
-        docsRouteBasePath: ['sxp', 'ess', 'fo', 'pxp', 'lxp', 'hr', 'scm', 'gxp'],
+        docsRouteBasePath: ['sxp', 'ess', 'fo', 'pxp', 'hr', 'scm', 'gxp'],
         docsDir: [
           `${CONTENT}/sxp`,
           `${CONTENT}/ess`,
           `${CONTENT}/finops`,
           `${CONTENT}/pxp`,
-          `${CONTENT}/lxp`,
           `${CONTENT}/hr`,
           `${CONTENT}/scm`,
           `${CONTENT}/gxp`,

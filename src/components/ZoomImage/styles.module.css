@@ -18,7 +18,7 @@
 /* StaffXP — blue → purple */
 .sxp { background: linear-gradient(135deg, #eaebff, #f1e8ff); }
 [data-theme='dark'] .sxp { background: linear-gradient(135deg, #202443, #2a2043); }
-/* Employee Self-Service — teal → green */
+/* EmployeeXP — teal → green */
 .ess { background: linear-gradient(135deg, #e3f2ef, #e8f7ed); }
 [data-theme='dark'] .ess { background: linear-gradient(135deg, #182d2e, #1f342b); }
 /* Growth Experience Platform — teal → green. The GXP mark uses the ESS mark's

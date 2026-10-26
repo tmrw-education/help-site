@@ -5,16 +5,15 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import LiveSearch from '@site/src/components/LiveSearch';
-import { ArrowRight, UserMultiple, Chat, Education } from '@carbon/icons-react';
+import { ArrowRight, UserMultiple, Chat } from '@carbon/icons-react';
 import styles from './index.module.css';
 
-// Concept C: search-led homepage for the three everyday audiences. Dynamics 365
+// Concept C: search-led homepage for the everyday audiences (Students returns with LearnerXP's first real articles). Dynamics 365
 // admin guides (F&O, HR, SCM) sit behind one band → /admin, and in the navbar switcher.
 const AUDIENCES = [
   {
     title: 'School staff',
-    // GXP is linked below but not named here: the full name would widen this max-content column past the 880px frame.
-    products: 'StaffXP and Employee Self-Service',
+    products: 'StaffXP, EmployeeXP and GrowthXP',
     Icon: UserMultiple,
     links: [
       { label: 'Take the daily roll', to: '/sxp/Attendance/take-attendance-roll' },
@@ -22,7 +21,12 @@ const AUDIENCES = [
       { label: 'Send a notice to parents', to: '/sxp/Notices/create-notice' },
       { label: 'Start or resume a course', to: '/gxp/My-learning/gxp-start-or-resume-a-course' },
     ],
-    all: { label: 'All staff guides', to: '/sxp' },
+    // three products, so one "all" link can't serve them: link each product's guides instead
+    guides: [
+      { label: 'StaffXP', to: '/sxp' },
+      { label: 'EmployeeXP', to: '/ess' },
+      { label: 'GrowthXP', to: '/gxp' },
+    ],
   },
   {
     title: 'Parents',
@@ -34,13 +38,6 @@ const AUDIENCES = [
       { label: 'Let someone else collect my child', to: '/pxp/Attendance/someone-else-collects-my-child' },
     ],
     all: { label: 'All parent guides', to: '/pxp' },
-  },
-  {
-    title: 'Students',
-    products: 'LearnerXP',
-    Icon: Education,
-    // LearnerXP has one page so far; no "coming soon" filler on the homepage
-    links: [{ label: 'Getting started with LearnerXP', to: '/lxp' }],
   },
 ];
 
@@ -80,7 +77,7 @@ export default function Home(): ReactNode {
         </div>
 
         <div className={styles.audiences}>
-          {AUDIENCES.map(({ title, products, Icon, links, all }) => (
+          {AUDIENCES.map(({ title, products, Icon, links, all, guides }) => (
             <section key={title} className={styles.audience}>
               <Icon size={32} aria-hidden />
               <h2 className={styles.audienceTitle}>{title}</h2>
@@ -94,6 +91,16 @@ export default function Home(): ReactNode {
                 {all && (
                   <li>
                     <Link to={all.to}>{all.label} →</Link>
+                  </li>
+                )}
+                {guides && (
+                  <li className={styles.guides}>
+                    All guides:
+                    {guides.map((g) => (
+                      <Link key={g.to} to={g.to}>
+                        {g.label}
+                      </Link>
+                    ))}
                   </li>
                 )}
               </ul>

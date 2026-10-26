@@ -19,7 +19,7 @@ export default function Admin(): ReactNode {
         <h1 className={styles.title}>Dynamics 365 admin guides</h1>
         <p className={styles.lede}>
           For HR, finance and procurement teams who run the school in Microsoft Dynamics 365.
-          Looking for your own leave or payslips? That’s in <Link to="/ess">Employee Self-Service</Link>.
+          Looking for your own leave or payslips? That’s in <Link to="/ess">EmployeeXP</Link>.
         </p>
         <ul className={styles.list}>
           {PRODUCTS.filter((p) => p.group === 'admin').map((p) => (

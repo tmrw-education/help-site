@@ -46,10 +46,10 @@
 /* ----- audiences ----- */
 .audiences {
   display: grid;
-  /* each column as wide as its content, spread edge to edge: the first column's text starts on the
-     frame's left edge and the last one's ends on its right, so the left-aligned lists sit balanced */
-  grid-template-columns: repeat(3, max-content);
-  justify-content: space-between;
+  /* two audiences (Students returns with LearnerXP): equal halves. Spread edge to edge as
+     max-content columns, two left a hole in the middle; with three again, go back to
+     repeat(3, max-content) + justify-content: space-between */
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem 3rem;
   max-width: 880px; /* narrower than the hero's 992px, the same frame as the Dynamics band */
   margin: 5.5rem auto 0;
@@ -67,6 +67,10 @@
 .links li { border-bottom: 1px solid var(--ifm-toc-border-color); font-size: 0.875rem; }
 .links a { display: block; padding: 0.5625rem 0; color: var(--ifm-font-color-base); }
 .links a:hover { color: var(--ifm-color-primary); text-decoration: none; }
+/* one row of per-product links: "All guides: StaffXP · EmployeeXP · GrowthXP" */
+.guides { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 0.5rem; padding: 0.5625rem 0; color: var(--ifm-color-content-secondary); }
+.links .guides a { display: inline; padding: 0; }
+.guides a + a::before { content: '·'; margin-right: 0.5rem; color: var(--ifm-color-content-secondary); }
 
 /* ----- Dynamics 365 band ----- */
 .admin {
