@@ -37,7 +37,7 @@
 /* Human Resources — amber → orange */
 .hr { background: linear-gradient(135deg, #fdf3e3, #fdece3); }
 [data-theme='dark'] .hr { background: linear-gradient(135deg, #3a2e18, #3a2318); }
-/* Supply Chain Management — slate → steel blue */
+/* Procurement XP — slate → steel blue */
 .scm { background: linear-gradient(135deg, #eef1f5, #e6eef5); }
 [data-theme='dark'] .scm { background: linear-gradient(135deg, #232830, #1e2a35); }
 

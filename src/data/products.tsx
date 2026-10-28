@@ -35,7 +35,7 @@ export const PRODUCTS: Product[] = [
   { id: 'gxp', name: 'GrowthXP', audience: 'Your learning and training', route: '/gxp', group: 'employment', Icon: Growth },
   { id: 'fo', name: 'Finance & Operations', audience: 'Billing and collections', route: '/fo', group: 'admin', d365Icon: '/img/d365/finance-operations.svg' },
   { id: 'hr', name: 'Human Resources', audience: 'HR administration', route: '/hr', group: 'admin', d365Icon: '/img/d365/human-resources.svg' },
-  { id: 'scm', name: 'Supply Chain Management', audience: 'Vendors and sourcing', route: '/scm', group: 'admin', d365Icon: '/img/d365/supply-chain-management.svg' },
+  { id: 'scm', name: 'Procurement XP', audience: 'Vendors and sourcing', route: '/scm', group: 'admin', Icon: DeliveryTruck },
 ];
 
 export const GROUPS: { id: ProductGroup; label: string }[] = [

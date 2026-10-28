@@ -113,7 +113,7 @@ export default function Home(): ReactNode {
           <div>
             <p className={styles.adminTitle}>Running the school in Dynamics 365?</p>
             <p className={styles.adminText}>
-              Admin guides for Finance &amp; Operations, Human Resources and Supply Chain live in their own section.
+              Admin guides for Finance &amp; Operations, Human Resources and Procurement XP live in their own section.
             </p>
           </div>
           <Link to="/admin" className={styles.adminButton}>
